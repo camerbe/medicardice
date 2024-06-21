@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\VerifyApiEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -45,5 +47,22 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roles():BelongsToMany{
+        return $this->belongsToMany(Role::class);
+    }
+    public function hasRole($role):bool
+    {
+        return $this->roles()->where('role', $role)->exists();
+    }
+    public function hasPermission($permission):bool
+    {
+        return $this->roles()->whereHas('permissions', function ($query) use ($permission) {
+            $query->where('permission_name', $permission);
+        })->exists();
+    }
+    public function sendApiEmailVerificationNotification():void{
+        $this->notify(new VerifyApiEmail());
     }
 }
