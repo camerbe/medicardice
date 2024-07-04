@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rolepermissions', function (Blueprint $table) {
+        Schema::create('permission_role', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')
                 ->references('id')
