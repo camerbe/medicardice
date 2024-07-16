@@ -1,0 +1,26 @@
+<div class="min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gradient-to-tr from-blue-800 to-purple-700 text-white flex-shrink-0">
+
+    <nav class="mt-5">
+      <a [routerLink]="['/dashboard/user/add']" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Administrateurs</a>
+      <a [routerLink]="['/dashboard/profile']"  (click)="handleProfile()" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Profile</a>
+      <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
+      <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Content area -->
+  <div class="flex-1 flex flex-col">
+    <!-- Header -->
+    <app-nav/>
+
+    <!-- Main Content -->
+    <main class="p-4 flex-1">
+      <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+        <router-outlet></router-outlet>
+        <!-- More cards as needed -->
+      </div>
+    </main>
+  </div>
+</div>

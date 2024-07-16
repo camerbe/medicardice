@@ -19,7 +19,7 @@ class PatientRepository extends BaseRepository
 
     }
 
-    public function findById(int $id)
+    public function findById($id)
     {
         $patient=Patient::with(['user'])
             ->where('id',$id)
