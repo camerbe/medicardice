@@ -14,7 +14,7 @@ import {ExpiresAtService} from "../../shared/services/expires-at.service";
 export class UserComponent implements OnInit{
   frmGroupUser!:FormGroup;
   insertedUser!:User;
-  name!:string;;
+  name!:string;
   isExpired!:boolean
 
   constructor(
@@ -49,15 +49,18 @@ export class UserComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.expireService.updateState(true);
+      this.expireService.updateState(this.authService.isExpired());
       this.expireService.state$.subscribe(res=>this.isExpired=res);
       if(this.isExpired){
-        const token =`Bearer `+localStorage.getItem('token');
+        /*const token =`Bearer `+localStorage.getItem('token');
         this.authService.logout(token)
-          .subscribe(res=>console.log(res))
+          .subscribe(res=>console.log(res))*/
         localStorage.removeItem('token');
         localStorage.removeItem('expires_at');
-        this.router.navigate(['login'])
+        this.router.navigateByUrl('login',{replaceUrl:true})
+          .then(()=>{
+            this.router.navigate([this.router.url])
+          })
       }
       this.name=this.route.snapshot.params['name']!
   }

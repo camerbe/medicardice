@@ -1,11 +1,9 @@
-import {afterNextRender, Component, OnDestroy, OnInit} from '@angular/core';
+import { Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
 import {ObservableService} from "../../shared/services/observable.service";
 import {UserLogin} from "../../shared/models/user.response.login";
-import {Subscription} from "rxjs";
-import {ProfileObservableService} from "../../shared/services/profile-observable.service";
 import {ExpiresAtService} from "../../shared/services/expires-at.service";
 
 @Component({
@@ -37,7 +35,7 @@ export class LoginComponent {
     return this.frmGroupLogin.get('password');
   }
   onSubmit() {
-    const date=new Date();
+
     this.authService.login(this.frmGroupLogin.value)
       .subscribe({
         next:(res)=>{
@@ -45,7 +43,7 @@ export class LoginComponent {
           localStorage.setItem('token',res.token)
           localStorage.setItem('expires_at',res.expires_at)
           this.beheviorService.updateState(this.authService.isExpired())
-          this.observableService.setExpiredToken();
+          //this.observableService.setExpiredToken();
           this.router.navigate(['dashboard'])
         },
         error:err=>{

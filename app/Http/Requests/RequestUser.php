@@ -38,6 +38,6 @@ class RequestUser extends FormRequest
             'email.required' => 'Le mail est requis',
             'email.email' => "Le mail n'est pas valide",
 
-        ]; 
+        ];
     }
 }

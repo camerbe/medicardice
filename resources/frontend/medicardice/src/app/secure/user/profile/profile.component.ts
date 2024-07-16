@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Profile, UserProfile} from "../../../shared/models/user.response.login";
-import {combineAll, Subscription} from "rxjs";
-import {ObservableService} from "../../../shared/services/observable.service";
+import {Profile} from "../../../shared/models/user.response.login";
+import {Subscription} from "rxjs";
 import {ProfileObservableService} from "../../../shared/services/profile-observable.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {AuthService} from "../../../public/auth.service";
 import {ExpiresAtService} from "../../../shared/services/expires-at.service";
 
@@ -29,15 +28,19 @@ export class ProfileComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit(): void {
-    this.expireService.updateState(true);
+    this.expireService.updateState(this.authService.isExpired());
     this.expireService.state$.subscribe(res=>this.isExpired=res);
     if(this.isExpired){
-      const token =`Bearer `+localStorage.getItem('token');
+      /*const token =`Bearer `+localStorage.getItem('token');
       this.authService.logout(token)
-        .subscribe(res=>console.log(res))
+        .subscribe(res=>console.log(res))*/
       localStorage.removeItem('token');
       localStorage.removeItem('expires_at');
-      this.router.navigate(['login'])
+      this.router.navigateByUrl('login',{replaceUrl:true})
+        .then(()=>{
+          this.router.navigate([this.router.url])
+        })
+
     }
     this.subscription.add(
       this.observableService.subjectProfile.subscribe(res=>{

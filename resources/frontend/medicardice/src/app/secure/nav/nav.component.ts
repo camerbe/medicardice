@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../public/auth.service";
-import {UserLogin, UserProfile ,Profile} from "../../shared/models/user.response.login";
+import {Profile} from "../../shared/models/user.response.login";
 import {Router} from "@angular/router";
-import {ObservableService} from "../../shared/services/observable.service";
 import {Subscription} from "rxjs";
 import {ProfileObservableService} from "../../shared/services/profile-observable.service";
 import {ExpiresAtService} from "../../shared/services/expires-at.service";
@@ -28,13 +27,17 @@ export class NavComponent implements OnInit,OnDestroy{
     this.expiredService.updateState(this.authService.isExpired())
     this.expiredService.state$.subscribe(res=>this.isExpired=res)
     if(this.isExpired){
-      const token =`Bearer `+localStorage.getItem('token');
+      //const token =`Bearer `+localStorage.getItem('token');
       //
-      this.authService.logout(token)
-        .subscribe(res=>console.log(res))
+      /*this.authService.logout(token)
+        .subscribe(res=>console.log(res))*/
       localStorage.removeItem('token');
       localStorage.removeItem('expires_at');
-      this.router.navigate(['login'])
+      this.router.navigateByUrl('login',{replaceUrl:true})
+        .then(()=>{
+          this.router.navigate([this.router.url])
+        })
+      //this.router.navigate(['login'])
     }
     this.observableService.subjectProfile.subscribe(res=>{
       this.userProfile=res

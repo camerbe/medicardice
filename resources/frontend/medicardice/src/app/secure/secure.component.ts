@@ -34,13 +34,17 @@ export class SecureComponent implements OnInit,OnDestroy{
       })
     )
     if (this.isExpired){
-      const token =`Bearer `+localStorage.getItem('token');
+      /*const token =`Bearer `+localStorage.getItem('token');
       //
       this.authService.logout(token)
-        .subscribe(res=>console.log(res))
+        .subscribe(res=>console.log(res))*/
       localStorage.removeItem('token');
       localStorage.removeItem('expires_at');
-      this.router.navigate(['login'])
+      this.router.navigateByUrl('login',{skipLocationChange:true})
+        .then(()=>{
+          this.router.navigate([this.router.url])
+        })
+      //this.router.navigate(['login'])
     }
 
     this.subscription.add(
