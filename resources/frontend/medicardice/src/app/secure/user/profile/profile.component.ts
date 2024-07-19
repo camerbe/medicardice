@@ -34,8 +34,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
       /*const token =`Bearer `+localStorage.getItem('token');
       this.authService.logout(token)
         .subscribe(res=>console.log(res))*/
-      localStorage.removeItem('token');
-      localStorage.removeItem('expires_at');
+      localStorage.clear()
       this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])
@@ -45,6 +44,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
     this.subscription.add(
       this.observableService.subjectProfile.subscribe(res=>{
         this.currentUser=res
+        localStorage.setItem('role',this.currentUser.role)
         //console.log(this.currentUser)
       })
     )

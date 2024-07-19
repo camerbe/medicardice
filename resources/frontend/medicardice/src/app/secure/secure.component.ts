@@ -34,13 +34,9 @@ export class SecureComponent implements OnInit,OnDestroy{
       })
     )
     if (this.isExpired){
-      /*const token =`Bearer `+localStorage.getItem('token');
-      //
-      this.authService.logout(token)
-        .subscribe(res=>console.log(res))*/
-      localStorage.removeItem('token');
-      localStorage.removeItem('expires_at');
-      this.router.navigateByUrl('login',{skipLocationChange:true})
+
+      localStorage.clear();
+      this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])
         })
@@ -56,8 +52,11 @@ export class SecureComponent implements OnInit,OnDestroy{
     this.currentUser=res
  })
 
-
-  this.router.navigate(['/dashboard/profile'])
+  this.router.navigateByUrl('dashboard/profile')
+    .then(()=>{
+      this.router.navigate([this.router.url])
+    })
+  //this.router.navigate(['/dashboard/profile'])
   }
 
   ngOnDestroy(): void {
@@ -66,7 +65,7 @@ export class SecureComponent implements OnInit,OnDestroy{
 
   handleProfile() {
     this.observableService.setProfileObs(this.currentUser)
-    console.log(`Is Expired : ${this.isExpired}`)
+    //console.log(`Is Expired : ${this.isExpired}`)
     //this.observableService.subjectProfile.subscribe(res=>console.log(res))
   }
 }

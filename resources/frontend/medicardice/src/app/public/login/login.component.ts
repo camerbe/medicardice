@@ -13,7 +13,7 @@ import {ExpiresAtService} from "../../shared/services/expires-at.service";
 })
 export class LoginComponent {
   frmGroupLogin!:FormGroup;
-
+  error!:string;
   currentUser!:UserLogin;
   constructor(
     private fb:FormBuilder,
@@ -23,7 +23,7 @@ export class LoginComponent {
     private beheviorService:ExpiresAtService
   ) {
     this.frmGroupLogin=this.fb.group({
-      email:['',[Validators.email]],
+      email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required]]
     })
 
@@ -39,7 +39,8 @@ export class LoginComponent {
     this.authService.login(this.frmGroupLogin.value)
       .subscribe({
         next:(res)=>{
-          //console.log(res)
+          // @ts-ignore
+
           localStorage.setItem('token',res.token)
           localStorage.setItem('expires_at',res.expires_at)
           this.beheviorService.updateState(this.authService.isExpired())
@@ -52,6 +53,9 @@ export class LoginComponent {
             this.router.navigate(
               ['activation',`${fullName}`]
             )
+          }
+          else{
+            this.error=err.error.message
           }
         }
       })

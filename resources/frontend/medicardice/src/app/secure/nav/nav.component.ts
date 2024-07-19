@@ -31,8 +31,7 @@ export class NavComponent implements OnInit,OnDestroy{
       //
       /*this.authService.logout(token)
         .subscribe(res=>console.log(res))*/
-      localStorage.removeItem('token');
-      localStorage.removeItem('expires_at');
+      localStorage.clear()
       this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])
@@ -51,8 +50,7 @@ export class NavComponent implements OnInit,OnDestroy{
     //
     this.authService.logout(token)
       .subscribe(res=>console.log(res))
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
+    localStorage.clear()
     this.observableService.setProfileObs(this.userProfile)
   }
 

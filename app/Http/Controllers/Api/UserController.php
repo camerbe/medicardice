@@ -91,7 +91,8 @@ class UserController extends Controller
     public function show(int $id)
     {
         //
-        $user=$this->userRepository->findById($id);
+        $user=$this->userRepository->findWithId($id);
+        //dd($user);
         if($user){
             return response()->json([
                 "success"=>true,
@@ -119,14 +120,38 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $user=$this->userRepository->update($request->all(),$id);
+
+        if ($user){
+            return response()->json([
+                'success'=>true,
+                'data'=>$user,
+                'message'=>"Patient mis à jour",
+            ],Response::HTTP_CREATED);
+        }
+        return response()->json([
+            "sucess"=>false,
+            "message"=>"Erreur lors de la mise à jour d'un patient"
+        ],Response::HTTP_NOT_FOUND);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
         //
+        $user=$this->userRepository->delete($id);
+        if($user>0){
+            return response()->json([
+                "success"=>true,
+                "message"=>"Suppression réussie"
+            ],Response::HTTP_OK);
+        }
+        return response()->json([
+            "success"=>false,
+            "message"=>"Une erreur s'est produite..."
+        ],Response::HTTP_NOT_FOUND);
     }
 
     /**

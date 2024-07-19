@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../shared/environments/environment";
-import {Profile, UserLogin, UserProfile, UserResponseLogin} from "../shared/models/user.response.login";
+import {Profile, UserLogin} from "../shared/models/user.response.login";
+
+
 
 interface Credentials{
   email:string,
@@ -18,6 +20,7 @@ export class AuthService {
   ) { }
   login(credential:Credentials){
     return this.httpClient.post<UserLogin>(this.baseUrl+`auth/login`,credential)
+      //.pipe(catchError(this.errorHandler()))
 
   }
   profile(){
@@ -32,5 +35,12 @@ export class AuthService {
     const expires_at=localStorage.getItem('expires_at')!
     //console.log(formattedDate);
     return !(expires_at > currentDate)
+  }
+  private errorHandler(errorRes:HttpErrorResponse){
+    let errorMessage='An unknow error occured!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return new Error(errorMessage)
+    }
+    return new Error(errorRes.error.message);
   }
 }

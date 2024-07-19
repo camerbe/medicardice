@@ -1,4 +1,3 @@
-import {Patient} from "./patient.model";
 
 export interface UserResponseLogin {
   success:boolean,
@@ -43,7 +42,7 @@ export interface Profile {
 
 export interface User{
   'success':boolean,
-  'data':UserData[],
+  'data':UserData,
   'message':string
 }
 export interface UserData{

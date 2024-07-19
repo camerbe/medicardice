@@ -7,6 +7,9 @@
   <div class="flex md:w-1/2 justify-center py-8 items-center bg-white">
     <form class="bg-white" [formGroup]="frmGroupLogin" (ngSubmit)="onSubmit()">
       <h1 class="uppercase py-5 font-bold text-2xl mb-5 text-transparent bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text">login</h1>
+      <div *ngIf="error" class="my-1 px-1 py-1 text-red-600">
+        <span>* {{error}}</span>
+      </div>
       <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
              viewBox="0 0 24 24" stroke="currentColor">
@@ -20,8 +23,17 @@
           name="email"
           autocomplete="username"
           placeholder="Email" />
-      </div>
 
+      </div>
+      <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="my-1 px-1 py-1 text-red-600">
+        <div *ngIf="email.errors?.['required']">
+          <span>* L'adresse mail est requise </span>
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          <span>* L'adresse mail est invalide </span>
+        </div>
+
+      </div>
       <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
              fill="currentColor">
@@ -36,8 +48,12 @@
           name="password"
           autocomplete="current-password"
           placeholder="Mot de passe" />
+
       </div>
-      <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
+      <div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="my-1 px-1 py-1 text-red-600">
+        <span>* Le mot de passe est requis </span>
+      </div>
+      <button [disabled]="!frmGroupLogin.valid"  type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
     </form>
   </div>
 </div>

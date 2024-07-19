@@ -7,6 +7,9 @@ import {PublicModule} from "./public/public.module";
 import {SecureModule} from "./secure/secure.module";
 import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/auth.interceptor";
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {authGuard} from "./shared/services/guards/auth-guard.guard";
+
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import {authInterceptor} from "./shared/interceptors/auth.interceptor";
     BrowserModule,
     AppRoutingModule,
     PublicModule,
-    SecureModule
+    SecureModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     provideClientHydration(),

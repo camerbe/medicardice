@@ -15,17 +15,20 @@ class UserRepository extends BaseRepository
     {
         $this->model=$user;
     }
-
-    public function findById($id)
-    {
-        //$user=parent::findById($id);
+    public function findWithId($id){
         $user=User::with(['roles','patients'])
             ->where('id',$id)
             ->orderBy('first_name')
             ->orderBy('last_name')
             ->get();
 
-        return  new UserResource($user) ;
+        return UserResource::collection($user);
+
+    }
+    public function findById($id)
+    {
+        return parent::findById($id);
+
     }
 
     public function delete($id)
@@ -60,8 +63,8 @@ class UserRepository extends BaseRepository
     }
     public function findAll(){
         $users= User::with(['roles','patients'])
-                ->orderBy('first_name')
                 ->orderBy('last_name')
+                ->orderBy('first_name')
                 ->get();
         return UserResource::collection($users);
     }
