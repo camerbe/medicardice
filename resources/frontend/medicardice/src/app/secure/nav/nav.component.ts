@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {AuthService} from "../../public/auth.service";
 import {Profile} from "../../shared/models/user.response.login";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {ProfileObservableService} from "../../shared/services/profile-observable.service";
 import {ExpiresAtService} from "../../shared/services/expires-at.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,8 @@ export class NavComponent implements OnInit,OnDestroy{
     private authService:AuthService,
     private router:Router,
     private observableService:ProfileObservableService,
-    private expiredService:ExpiresAtService
+    private expiredService:ExpiresAtService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
   }
 
@@ -31,7 +33,8 @@ export class NavComponent implements OnInit,OnDestroy{
       //
       /*this.authService.logout(token)
         .subscribe(res=>console.log(res))*/
-      localStorage.clear()
+      if(isPlatformBrowser(this.platformId)) localStorage.clear()
+
       this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])

@@ -26,10 +26,10 @@
 
       </div>
       <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="my-1 px-1 py-1 text-red-600">
-        <div *ngIf="email.errors?.['required']">
+        <div *ngIf="email?.errors?.['required']">
           <span>* L'adresse mail est requise </span>
         </div>
-        <div *ngIf="email.errors?.['email']">
+        <div *ngIf="email?.errors?.['email']">
           <span>* L'adresse mail est invalide </span>
         </div>
 

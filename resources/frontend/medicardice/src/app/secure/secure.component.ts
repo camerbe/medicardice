@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {Subscription} from "rxjs";
 import {ObservableService} from "../shared/services/observable.service";
 import {Profile} from "../shared/models/user.response.login";
@@ -6,6 +6,7 @@ import {ProfileObservableService} from "../shared/services/profile-observable.se
 import {AuthService} from "../public/auth.service";
 import {Router} from "@angular/router";
 import {ExpiresAtService} from "../shared/services/expires-at.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-secure',
@@ -21,8 +22,8 @@ export class SecureComponent implements OnInit,OnDestroy{
     private obs:ObservableService,
     private beheviorService:ExpiresAtService,
     private authService:AuthService,
-    private router :Router
-
+    private router :Router,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
   }
 
@@ -34,17 +35,14 @@ export class SecureComponent implements OnInit,OnDestroy{
       })
     )
     if (this.isExpired){
-
-      localStorage.clear();
+      if(isPlatformBrowser(this.platformId)) localStorage.clear();
       this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])
         })
       //this.router.navigate(['login'])
     }
-
     this.subscription.add(
-
       this.authService.profile()
        .subscribe(res=>this.observableService.setProfileObs(res))
     )
@@ -52,7 +50,7 @@ export class SecureComponent implements OnInit,OnDestroy{
     this.currentUser=res
  })
 
-  this.router.navigateByUrl('dashboard/profile')
+  this.router.navigateByUrl('dashboard/menu')
     .then(()=>{
       this.router.navigate([this.router.url])
     })

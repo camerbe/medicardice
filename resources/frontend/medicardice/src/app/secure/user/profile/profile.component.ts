@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, PLATFORM_ID} from '@angular/core';
 import {Profile} from "../../../shared/models/user.response.login";
 import {Subscription} from "rxjs";
 import {ProfileObservableService} from "../../../shared/services/profile-observable.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../public/auth.service";
 import {ExpiresAtService} from "../../../shared/services/expires-at.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit,OnDestroy{
     private observableService:ProfileObservableService,
     private router:Router,
     private authService:AuthService,
-    private expireService:ExpiresAtService
+    private expireService:ExpiresAtService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
   }
 
@@ -31,10 +33,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
     this.expireService.updateState(this.authService.isExpired());
     this.expireService.state$.subscribe(res=>this.isExpired=res);
     if(this.isExpired){
-      /*const token =`Bearer `+localStorage.getItem('token');
-      this.authService.logout(token)
-        .subscribe(res=>console.log(res))*/
-      localStorage.clear()
+      if(isPlatformBrowser(this.platformId)) localStorage.clear()
       this.router.navigateByUrl('login',{replaceUrl:true})
         .then(()=>{
           this.router.navigate([this.router.url])
@@ -44,7 +43,7 @@ export class ProfileComponent implements OnInit,OnDestroy{
     this.subscription.add(
       this.observableService.subjectProfile.subscribe(res=>{
         this.currentUser=res
-        localStorage.setItem('role',this.currentUser.role)
+        //if(isPlatformBrowser(this.platformId)) localStorage.setItem('role',this.currentUser.role)
         //console.log(this.currentUser)
       })
     )

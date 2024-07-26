@@ -2,18 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PatientResource extends JsonResource
+class DoctorResource extends JsonResource
 {
-    /**
-     * Use resource into an array.
-     *
-     * @property User $resource
-     */
-
     /**
      * Transform the resource into an array.
      *
@@ -23,15 +16,14 @@ class PatientResource extends JsonResource
     {
         return [
             'id'=>$this->resource->id,
-            'prenom'=>$this->first_name,
-            'nom'=>$this->last_name,
-            'tel'=>$this->phone_number ,
+            'first_name'=>$this->first_name,
+            'last_name'=>$this->last_name,
             'user_id'=>$this->user_id,
-            'dob'=>$this->dob,
+            'specialite_id'=>$this->specialite_id,
             'created_by'=>$this->created_by,
             'updated_by'=>$this->updated_by,
             'user'=>new UserResource($this->user),
-
+            'specialite'=>new SpecialiteResource($this->specialite),
 
         ];
     }

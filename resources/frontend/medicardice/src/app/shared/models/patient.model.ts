@@ -1,4 +1,4 @@
-import {User} from "./user.response.login";
+import {Specialite, User} from "./user.response.login";
 
 export interface Patient {
   'id':number,
@@ -10,4 +10,23 @@ export interface Patient {
   'created_by':string,
   'updated_by':string,
   'user':User
+}
+export interface Doctor {
+  'id':number,
+  'first_name':string,
+  'last_name':string,
+  'user_id':number,
+  'specialite_id':number,
+  'created_by':string,
+  'updated_by':string,
+  'user':Administrator,
+  'specialite':Specialite
+}
+
+export interface Administrator{
+  'id':number,
+  'nom':string,
+  'prenom':string ,
+  'active':boolean,
+  "email": string
 }

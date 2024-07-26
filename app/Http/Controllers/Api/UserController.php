@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestUser;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -167,6 +168,13 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)){
             $user = Auth::user();
+            if( is_null($user->password_changed_at) ){
+                return response()->json([
+                    'success'=>false,
+                    'user' => $user,
+                    'message' => 'change_password'
+                ],Response::HTTP_UNAUTHORIZED);
+            }
             if( is_null($user->email_verified_at) ){
                 return response()->json([
                     'success'=>false,
@@ -189,17 +197,26 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function changePassword(Request $request): JsonResponse
+    public function changePassword(Request $request, int $id): JsonResponse
     {
-        $user = Auth::user();
-        $user->password = bcrypt($request->password);
-        //$user->first_login = false; // Mettre à jour l'indicateur de première connexion
-        $user->save();
 
+        $user = User::find($id);
+        //dd($user);
+        if(is_null($user->password_changed_at)){
+            $user->password = bcrypt($request->password);
+            $user->password_changed_at = now();
+            $user->email_verified_at = now();
+            $user->save();
+
+            return response()->json([
+                'success'=>true,
+                'message' => 'Le mot de passe a été changé avec succès'
+            ],Response::HTTP_OK);
+        }
         return response()->json([
-            'success'=>true,
-            'message' => 'Password changed successfully'
-        ],Response::HTTP_OK);
+            'success'=>false,
+            'message' => 'La mise à jour a déjà été faite'
+        ],Response::HTTP_NOT_MODIFIED);
     }
 
 

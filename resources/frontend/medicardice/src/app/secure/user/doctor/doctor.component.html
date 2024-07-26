@@ -1,0 +1,92 @@
+<!-- component -->
+<div class="flex justify-end mr-5">
+  <app-form-menu class="mr-3" [routerLink]="'/dashboard/doctor/list'" [label]="label"></app-form-menu>
+</div>
+
+<div class="bg-white shadow-md border border-gray-200 rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+
+  <form [formGroup]="frmGroupDoctor" (ngSubmit)="onSubmit()" class="mt-4">
+    <app-form-header [title]="childTitle"></app-form-header>
+    <div class="mx-3 md:flex mb-6">
+      <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+          Nom
+        </label>
+        <input
+          class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+          type="text"
+          formControlName="last_name"
+          placeholder="Nom...">
+        <div *ngIf="last_name?.invalid && last_name?.touched" class="my-1 px-1 py-1 text-red-600">
+          <span>* Le nom est requis </span>
+        </div>
+      </div>
+      <div class="md:w-1/3 px-3">
+        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+          Prénom
+        </label>
+        <input
+          class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+          type="text"
+          formControlName="first_name"
+          placeholder="Prénom...">
+        <div *ngIf="first_name?.invalid && first_name?.touched" class="my-1 px-1 py-1 text-red-600">
+          <span>* Le Prénom est requis </span>
+        </div>
+      </div>
+      <div class="md:w-1/3 px-3">
+        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+          Email
+        </label>
+        <input
+          class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+          type="email"
+          formControlName="email"
+          autocomplete="username"
+          placeholder="Email...">
+        <div *ngIf="email?.invalid && email?.touched" class="my-1 px-1 py-1 text-red-600">
+          <span>* L'adresse mail est requise </span>
+        </div>
+      </div>
+    </div>
+    <div class="mx-3 md:flex mb-6">
+      <div class="md:w-1/3 px-3 mb-6 md:mb-0">
+        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
+          Tel/Gsm
+        </label>
+        <input
+          class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+          type="text"
+          formControlName="phone_number"
+          placeholder="Téléphone...">
+      </div>
+      <div class="md:w-1/3 px-3">
+        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+          Spécialité
+        </label>
+        <select
+          class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+          (change)="onChange($event)"
+          formControlName="specialite_id"
+          placeholder="Spécialité...">
+          <option value="0" selected>Votre Choix</option>
+          <option *ngFor="let specialite of specialites" value="{{specialite.id }}">{{ specialite.specialty_name}}</option>
+        </select>
+        <div *ngIf="selectedSpecialiteId===0 || specialite_id?.invalid && specialite_id?.touched" class="my-1 px-1 py-1 text-red-600">
+          <span>* La spécialité est requise </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="mx-3 flex item-center mb-6 w-64">
+      <!--<button [disabled]="!frmGroupDoctor.valid" type="submit" class="flex bg-gradient-to-r from-blue-400 to-blue-700 mt-3 p-3  rounded-lg text-gray-200 font-semibold mb-2 capitalize">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        <span>ajouter</span>
+      </button>-->
+      <app-button *ngIf="isAddMode"   [label]="labelAdd" [svgPath]="svgAddPath" [disabled]="!frmGroupDoctor.valid"></app-button>
+      <app-button *ngIf="!isAddMode"   [label]="labelUpd" [svgPath]="svgUpdPath" [disabled]="!frmGroupDoctor.valid"></app-button>
+    </div>
+  </form>
+</div>

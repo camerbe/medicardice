@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 import {environment} from "../shared/environments/environment";
 import {Profile, UserLogin} from "../shared/models/user.response.login";
+import {isPlatformBrowser} from "@angular/common";
+import {ExpiresAtService} from "../shared/services/expires-at.service";
+import {Router} from "@angular/router";
 
 
 
@@ -16,12 +19,12 @@ interface Credentials{
 export class AuthService {
   private baseUrl=environment.url
   constructor(
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
   login(credential:Credentials){
     return this.httpClient.post<UserLogin>(this.baseUrl+`auth/login`,credential)
       //.pipe(catchError(this.errorHandler()))
-
   }
   profile(){
     return this.httpClient.get<Profile>(this.baseUrl+`auth/profile`)
@@ -32,15 +35,27 @@ export class AuthService {
   isExpired(){
     const date=new Date();
     const currentDate=date.toISOString().slice(0,10)+ date.toLocaleString().slice(10);
-    const expires_at=localStorage.getItem('expires_at')!
-    //console.log(formattedDate);
-    return !(expires_at > currentDate)
-  }
-  private errorHandler(errorRes:HttpErrorResponse){
-    let errorMessage='An unknow error occured!';
-    if (!errorRes.error || !errorRes.error.error) {
-      return new Error(errorMessage)
+    if(isPlatformBrowser(this.platformId)){
+      const expires_at=localStorage.getItem('expires_at')!
+      //console.log(formattedDate);
+      return !(expires_at > currentDate)
     }
-    return new Error(errorRes.error.message);
+    return true
   }
+
+  checkExpires(authS:AuthService,exService:ExpiresAtService,isExpired:boolean,router:Router){
+    exService.updateState(authS.isExpired());
+    exService.state$.subscribe(res=>isExpired=res);
+    if(isExpired){
+      if(isPlatformBrowser(this.platformId)){
+        localStorage.clear();
+      }
+
+      router.navigateByUrl('login',{replaceUrl:true})
+        .then(()=>{
+          router.navigate([router.url])
+        })
+    }
+  }
+
 }

@@ -52,19 +52,36 @@ class AuthController extends Controller
         $user=User::with('roles')
                     ->where('id',$userId)
                     ->get();
-        if(!is_null(Auth::user()->email_verified_at)){
-            $token=Auth::user()->createToken('user',['*'],Carbon::now()->addMinute(5))->plainTextToken;
+        if(!is_null(Auth::user()->email_verified_at) && !is_null(Auth::user()->password_changed_at)){
+            $token=Auth::user()->createToken('user',['*'],Carbon::now()->addMinute(15))->plainTextToken;
             $varArray=explode("|",$token);
             $id=$varArray[0];
             $personalAccessTokens= DB::table('personal_access_tokens')->where('id', $id)->first();
+            /*$roles=$user->roles;*/
+            $poste=null;
+            foreach ($user as $usr){
+                foreach ($usr->roles as $rol){
+                    $poste=$rol->role;
+                }
+            }
             return response()->json([
 
                 'success'=>true,
                 'user'=>$user,
                 'token'=>$token,
                 'expires_at'=>$personalAccessTokens->expires_at,
+                'role'=>$poste,
                 'message'=>"Login OK"
             ],Response::HTTP_OK);
+        }
+
+        if( is_null(Auth::user()->password_changed_at) ){
+            return response()->json([
+                'success'=>false,
+                'user' => $user,
+                'token'=>null,
+                'message' => 'change_password'
+            ],Response::HTTP_UNAUTHORIZED);
         }
         return response()->json([
             'success'=>false,
@@ -72,6 +89,7 @@ class AuthController extends Controller
             'token'=>null,
             'message' => 'verify_mail'
         ],Response::HTTP_UNAUTHORIZED);
+
     }
     public function profile(): JsonResponse
     {

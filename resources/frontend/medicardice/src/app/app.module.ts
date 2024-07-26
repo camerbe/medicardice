@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PublicModule} from "./public/public.module";
@@ -8,27 +7,34 @@ import {SecureModule} from "./secure/secure.module";
 import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/auth.interceptor";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import {authGuard} from "./shared/services/guards/auth-guard.guard";
+
+
 
 
 @NgModule({
-  declarations: [
-    AppComponent
+    declarations: [
+        AppComponent,
+
+
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        PublicModule,
+        SecureModule,
+        SweetAlert2Module.forRoot()
+    ],
+    providers: [
+        provideClientHydration(),
+        provideHttpClient(),
+        provideHttpClient(withInterceptors([
+            authInterceptor
+        ]), withFetch())
+    ],
+  exports: [
+
+
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    PublicModule,
-    SecureModule,
-    SweetAlert2Module.forRoot()
-  ],
-  providers: [
-    provideClientHydration(),
-    provideHttpClient(),
-    provideHttpClient(withInterceptors([
-      authInterceptor
-    ]),withFetch())
-  ],
-  bootstrap: [AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

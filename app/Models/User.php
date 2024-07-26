@@ -47,6 +47,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'password_changed_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -69,5 +70,8 @@ class User extends Authenticatable
     }
     public function patients():HasMany{
         return $this->hasMany(Patient::class);
+    }
+    public function doctors():HasMany{
+        return $this->hasMany(Doctor::class);
     }
 }
