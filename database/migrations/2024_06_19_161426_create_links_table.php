@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('link_titre_fr');
             $table->text('link_titre_en');
             $table->text('link_msg_fr');

@@ -29,10 +29,7 @@ export class NavComponent implements OnInit,OnDestroy{
     this.expiredService.updateState(this.authService.isExpired())
     this.expiredService.state$.subscribe(res=>this.isExpired=res)
     if(this.isExpired){
-      //const token =`Bearer `+localStorage.getItem('token');
-      //
-      /*this.authService.logout(token)
-        .subscribe(res=>console.log(res))*/
+
       if(isPlatformBrowser(this.platformId)) localStorage.clear()
 
       this.router.navigateByUrl('login',{replaceUrl:true})

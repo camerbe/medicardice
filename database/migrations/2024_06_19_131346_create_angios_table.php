@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('angios', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('angio_titre_fr');
             $table->text('angio_titre_en');
             $table->text('angio_msg_fr');

@@ -19,6 +19,7 @@ export interface Doctor {
   'specialite_id':number,
   'created_by':string,
   'updated_by':string,
+  'phone_number':string,
   'user':Administrator,
   'specialite':Specialite
 }

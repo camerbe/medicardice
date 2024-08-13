@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('electrocardiographies', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('electrocardiography_titre_fr');
             $table->text('electrocardiography_titre_en');
             $table->text('electrocardiography_msg_fr');

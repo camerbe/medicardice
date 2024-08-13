@@ -71,10 +71,10 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //
-        $doctor=$this->doctorRepository->findById($id);
+        $doctor=$this->doctorRepository->findWithId($id);
         if($doctor){
             return response()->json([
                 "success"=>true,
@@ -103,7 +103,6 @@ class DoctorController extends Controller
     {
         //
         $doctor=$this->doctorRepository->update($request->all(),$id);
-
         if ($doctor){
             return response()->json([
                 'success'=>true,
@@ -123,7 +122,7 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         //
-        $doctor=$this->patientRepository->delete($id);
+        $doctor=$this->doctorRepository->delete($id);
         if($doctor>0){
             return response()->json([
                 "success"=>true,

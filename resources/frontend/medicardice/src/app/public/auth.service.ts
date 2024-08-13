@@ -51,7 +51,7 @@ export class AuthService {
         localStorage.clear();
       }
 
-      router.navigateByUrl('login',{replaceUrl:true})
+      router.navigateByUrl('login')
         .then(()=>{
           router.navigate([router.url])
         })

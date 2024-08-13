@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('monitorings', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('monitoring_titre_fr');
             $table->text('monitoring_titre_en');
             $table->text('monitoring_msg_fr');

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('catheterizations', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('catheterization_titre_fr');
             $table->text('catheterization_titre_en');
             $table->text('catheterization_msg_fr');

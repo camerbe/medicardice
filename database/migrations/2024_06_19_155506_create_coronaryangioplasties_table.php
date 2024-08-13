@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('coronaryangioplasties', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('coronaryangioplasty_titre_fr');
             $table->text('coronaryangioplasty_titre_en');
             $table->text('coronaryangioplasty_msg_fr');

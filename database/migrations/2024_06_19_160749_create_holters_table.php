@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('holters', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('holter_titre_fr');
             $table->text('holter_titre_en');
             $table->text('holter_msg_fr');

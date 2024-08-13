@@ -42,8 +42,18 @@ export class DataService<T> {
       errorMessage = `${error.error}`;
     }
     //console.error(errorMessage);
-    console.log(errorMessage);
+    //console.log(errorMessage);
    // return errorMessage
     return throwError(() => new Error(JSON.stringify("Quelque chose d'horrible est arrivé; Veuillez réessayer plus tard.")));
+  }
+  fileToJSON(file: File) {
+    return {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+      lastModified: file.lastModified,
+      webkitRelativePath: file.webkitRelativePath,
+      content:file
+    };
   }
 }

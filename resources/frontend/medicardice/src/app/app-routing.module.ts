@@ -13,6 +13,17 @@ import {ChangePasswordComponent} from "./public/change-password/change-password.
 import {MenuComponent} from "./secure/user/menu/menu.component";
 import {DoctorComponent} from "./secure/user/doctor/doctor.component";
 import {DoctorListComponent} from "./secure/user/doctor/doctor-list/doctor-list.component";
+import {HomeComponent} from "./public/home/home.component";
+import {LayoutComponent} from "./public/layout/layout.component";
+import {ModalLoginComponent} from "./public/modal-login/modal-login.component";
+import {WelcomeComponent} from "./secure/welcome/welcome.component";
+import {WelcomeListComponent} from "./secure/welcome/welcome-list/welcome-list.component";
+import {MedecinComponent} from "./secure/medecin/medecin.component";
+import {MedecinListComponent} from "./secure/medecin/medecin-list/medecin-list.component";
+import {FrontEndMedecinComponent} from "./public/home/front-end-medecin/front-end-medecin.component";
+import {ConsultationComponent} from "./secure/examens/consultation/consultation.component";
+import {ConsultationListComponent} from "./secure/examens/consultation/consultation-list/consultation-list.component";
+import {FrontEndConsultationComponent} from "./public/examens/front-end-consultation/front-end-consultation.component";
 
 const routes: Routes = [
   {
@@ -64,24 +75,134 @@ const routes: Routes = [
 
       {
         path:'user/delete/:id',
+        canActivate:[authGuard],
         title: 'Suppression des Administrateurs',
         component: UserListComponent
       },
 
       {
         path:'profile',
+        canActivate:[authGuard],
         component: ProfileComponent
+      },
+      {
+        path:'welcome/add',
+        canActivate:[authGuard],
+        component: WelcomeComponent
+      },
+      {
+        path:'welcome/list',
+        canActivate:[authGuard],
+        component: WelcomeListComponent
+      },
+      {
+        path:'welcome/delete/:id',
+        canActivate:[authGuard],
+        title: 'Suppression des welcomes',
+        component: WelcomeListComponent
+      },
+      {
+        path:'welcome/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer des welcomes',
+        component: WelcomeComponent
+      },
+      {
+        path:'medecin/add',
+        canActivate:[authGuard],
+        title: 'Ajout de médecin',
+        component: MedecinComponent
+      },
+      {
+        path:'medecin/list',
+        canActivate:[authGuard],
+        title: 'Lise de médecins',
+        component: MedecinListComponent
+      },
+      {
+        path:'medecin/delete/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de médecin',
+        component: MedecinListComponent
+      },
+      {
+        path:'medecin/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer un médecin',
+        component: MedecinComponent
+      },
+      {
+        path:'consultation/add',
+        canActivate:[authGuard],
+        title: "Ajout d'une consultation",
+        component: ConsultationComponent
+      },
+      {
+        path:'consultation/list',
+        canActivate:[authGuard],
+        title: 'Liste des consultations',
+        component: ConsultationListComponent
       }
-
+      ,
+      {
+        path:'consultation/delete/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de consultation',
+        component: ConsultationListComponent
+      },
+      {
+        path:'consultation/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer une consultation',
+        component: ConsultationComponent
+      },
+      {
+        path:'electrocardiographie/add',
+        canActivate:[authGuard],
+        title: "Ajout d'une electrocardiographie",
+        component: ConsultationComponent
+      },
+      {
+        path:'electrocardiographie/list',
+        canActivate:[authGuard],
+        title: 'Liste des electrocardiographies',
+        component: ConsultationListComponent
+      },
+      {
+        path:'electrocardiographie/delete/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de electrocardiographie',
+        component: ConsultationListComponent
+      },
+      {
+        path:'electrocardiographie/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer une electrocardiographie',
+        component: ConsultationComponent
+      }
     ],
   },
+
   {
     path:'',
-    component:PublicComponent,
+    component:LayoutComponent,
     children:[
+      {
+        path:'',
+        redirectTo:'home',
+        pathMatch:"full"
+      },
+      {
+        path: 'home/:locale',
+        component: HomeComponent
+      },
       {
         path:'login',
         component:LoginComponent
+      },
+      {
+        path:'modal/login',
+        component:ModalLoginComponent
       },
       {
         path:'activation/:name',
@@ -96,8 +217,19 @@ const routes: Routes = [
         title: 'Modification du mot de passe',
         component: ChangePasswordComponent
       },
+      {
+        path: 'medecin/:locale',
+        component: FrontEndMedecinComponent
+
+      },
+      {
+        path: 'consultation/:locale',
+        component: FrontEndConsultationComponent
+
+      }
     ]
-  }
+  },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

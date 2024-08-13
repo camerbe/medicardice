@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ethics', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('ethic_titre_fr');
             $table->text('ethic_titre_en');
             $table->text('ethic_msg_fr');

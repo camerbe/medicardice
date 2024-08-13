@@ -46,6 +46,8 @@ export class LoginComponent {
             localStorage.setItem('token',res.token)
             localStorage.setItem('expires_at',res.expires_at)
             localStorage.setItem('role',res.role)
+            // @ts-ignore
+            localStorage.setItem('authUser',res.user.last_name+' '+res.user.first_name)
           }
 
           this.beheviorService.updateState(this.authService.isExpired())

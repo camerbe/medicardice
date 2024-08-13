@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('insuffisances', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('insuffisance_titre_fr');
             $table->text('insuffisance_titre_en');
             $table->text('insuffisance_msg_fr');

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('location_titre_fr');
             $table->text('location_titre_en');
             $table->text('location_msg_fr');

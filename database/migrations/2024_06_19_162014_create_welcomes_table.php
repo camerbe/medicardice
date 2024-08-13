@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('welcome_titre_en');
             $table->text('welcome_msg_fr');
             $table->text('welcome_msg_en');
+            //$table->string('photo');
             $table->string('welcome_keyword_en');
             $table->string('welcome_keyword_fr');
             $table->string('welcome_description_en');

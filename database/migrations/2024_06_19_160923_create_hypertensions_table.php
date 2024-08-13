@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('hypertensions', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('hypertension_titre_fr');
             $table->text('hypertension_titre_en');
             $table->text('hypertension_msg_fr');

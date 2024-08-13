@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('hearts', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('heart_titre_fr');
             $table->text('heart_titre_en');
             $table->text('heart_msg_fr');

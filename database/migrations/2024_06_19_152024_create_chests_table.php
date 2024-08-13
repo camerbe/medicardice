@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('chests', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('chest_titre_fr');
             $table->text('chest_titre_en');
             $table->text('chest_msg_fr');

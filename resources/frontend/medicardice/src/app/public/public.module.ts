@@ -3,10 +3,31 @@ import { CommonModule } from '@angular/common';
 import { PublicComponent } from './public.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ActivateMailComponent } from './activate-mail/activate-mail.component';
+import { HomeComponent } from './home/home.component';
+import { ModalLoginComponent } from './modal-login/modal-login.component';
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import { LayoutComponent } from './layout/layout.component';
+import { SiteFooterComponent } from './layout/site-footer/site-footer.component';
+import { SiteHeaderComponent } from './layout/site-header/site-header.component';
+import { BannerComponent } from './layout/banner/banner.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
+import { WelcomeImageComponent } from './home/welcome-image/welcome-image.component';
+import { WelcomeTitleComponent } from './home/welcome-title/welcome-title.component';
+import { WelcomeArticleComponent } from './home/welcome-article/welcome-article.component';
+import { CallToActionComponent } from './layout/call-to-action/call-to-action.component';
+import { ImageComponent } from './layout/components/image/image.component';
+import { ArticleComponent } from './layout/components/article/article.component';
+import { TitreComponent } from './layout/components/titre/titre.component';
+import { FrontEndMedecinComponent } from './home/front-end-medecin/front-end-medecin.component';
+import { BienvenuComponent } from './home/welcome/bienvenu/bienvenu.component';
+import { FrontEndConsultationComponent } from './examens/front-end-consultation/front-end-consultation.component';
+import { LanguageSwitchComponent } from './layout/language-switch/language-switch/language-switch.component';
+import { HeaderFrComponent } from './layout/header-fr/header-fr.component';
+import { HeaderEnComponent } from './layout/header-en/header-en.component';
 
 
 
@@ -15,7 +36,27 @@ import { ActivateMailComponent } from './activate-mail/activate-mail.component';
     PublicComponent,
     LoginComponent,
     RegisterComponent,
-    ActivateMailComponent
+    ActivateMailComponent,
+    HomeComponent,
+    ModalLoginComponent,
+    LayoutComponent,
+    SiteFooterComponent,
+    SiteHeaderComponent,
+    BannerComponent,
+    WelcomeComponent,
+    WelcomeImageComponent,
+    WelcomeTitleComponent,
+    WelcomeArticleComponent,
+    CallToActionComponent,
+    ImageComponent,
+    ArticleComponent,
+    TitreComponent,
+    FrontEndMedecinComponent,
+    BienvenuComponent,
+    FrontEndConsultationComponent,
+    LanguageSwitchComponent,
+    HeaderFrComponent,
+    HeaderEnComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +64,9 @@ import { ActivateMailComponent } from './activate-mail/activate-mail.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterLink
+    RouterLink,
+    SweetAlert2Module,
+    RouterLinkActive
   ]
 })
 export class PublicModule { }

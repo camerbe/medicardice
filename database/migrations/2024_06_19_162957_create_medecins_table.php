@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('doc_titre_en');
             $table->text('doc_msg_fr');
             $table->text('doc_msg_en');
+            //$table->string('photo');
             $table->string('doc_keyword_en');
             $table->string('doc_keyword_fr');
             $table->string('doc_description_en');

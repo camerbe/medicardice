@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            //$table->string('photo');
             $table->text('cons_titre_fr');
             $table->text('cons_titre_en');
             $table->text('cons_msg_fr');

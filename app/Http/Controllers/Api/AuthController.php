@@ -11,6 +11,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -38,8 +39,60 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $credentials = $request->only('email', 'password');
-
+        $credentials = $request->only(['email', 'password']);
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password)){
+            Auth::guard('web')->login($user);
+            $usrs=User::with('roles')
+                ->where('id',Auth::guard('web')->user()->id)
+                ->get();
+            if(!is_null(Auth::guard('web')->user()->email_verified_at) && !is_null(Auth::guard('web')->user()->password_changed_at)){
+                //$request->session()->regenerate();
+                $token=Auth::guard('web')->user()->createToken('user',['*'],Carbon::now()->addMinute(30))->plainTextToken;
+                $varArray=explode("|",$token);
+                $id=$varArray[0];
+                $personalAccessTokens= DB::table('personal_access_tokens')->where('id', $id)->first();
+                /*$roles=$user->roles;*/
+                $poste=null;
+                foreach ($usrs as $usr){
+                    foreach ($usr->roles as $rol){
+                        $poste=$rol->role;
+                    }
+                }
+                return response()->json([
+                    'success'=>true,
+                    'user'=>$user,
+                    'token'=>$token,
+                    'expires_at'=>$personalAccessTokens->expires_at,
+                    'role'=>$poste,
+                    'message'=>"Login OK"
+                ],Response::HTTP_OK);
+                /****************************************************
+                 *
+                 */
+                if( is_null(Auth::guard('web')->user()->password_changed_at) ){
+                    return response()->json([
+                        'success'=>false,
+                        'user' => $user,
+                        'token'=>null,
+                        'message' => 'change_password'
+                    ],Response::HTTP_UNAUTHORIZED);
+                }
+                return response()->json([
+                    'success'=>false,
+                    'user' => $user,
+                    'token'=>null,
+                    'message' => 'verify_mail'
+                ],Response::HTTP_UNAUTHORIZED);
+            }
+        }
+        return response()->json([
+            'success'=>false,
+            'user' => null,
+            'token'=>null,
+            'message'=>"Login failed"
+        ],Response::HTTP_UNAUTHORIZED);
+        /*
         if(!Auth::guard('web')->attempt($credentials)){
             return response()->json([
                 'success'=>false,
@@ -48,6 +101,7 @@ class AuthController extends Controller
                 'message'=>"Login failed"
             ],Response::HTTP_UNAUTHORIZED);
         }
+
         $userId=Auth::id();
         $user=User::with('roles')
                     ->where('id',$userId)
@@ -57,7 +111,7 @@ class AuthController extends Controller
             $varArray=explode("|",$token);
             $id=$varArray[0];
             $personalAccessTokens= DB::table('personal_access_tokens')->where('id', $id)->first();
-            /*$roles=$user->roles;*/
+
             $poste=null;
             foreach ($user as $usr){
                 foreach ($usr->roles as $rol){
@@ -73,6 +127,7 @@ class AuthController extends Controller
                 'role'=>$poste,
                 'message'=>"Login OK"
             ],Response::HTTP_OK);
+
         }
 
         if( is_null(Auth::user()->password_changed_at) ){
@@ -88,7 +143,7 @@ class AuthController extends Controller
             'user' => $user,
             'token'=>null,
             'message' => 'verify_mail'
-        ],Response::HTTP_UNAUTHORIZED);
+        ],Response::HTTP_UNAUTHORIZED);*/
 
     }
     public function profile(): JsonResponse

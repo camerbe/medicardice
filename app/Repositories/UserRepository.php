@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Http\Resources\UserResource;
+use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -33,6 +35,9 @@ class UserRepository extends BaseRepository
 
     public function delete($id)
     {
+        Patient::where('user_id',$id)->delete();
+        Doctor::where('user_id',$id)->delete();
+
         return parent::delete($id);
     }
 

@@ -2,6 +2,7 @@
   <!-- Sidebar -->
   <aside class="w-64 bg-gradient-to-tr from-blue-800 to-purple-700 text-white flex-shrink-0">
     <nav class="mt-5 flex flex-col">
+
       <a
         routerLinkActive="bg-gray-700"
         [routerLinkActiveOptions]="{exact: true}"
@@ -13,7 +14,20 @@
         </svg>
         <span>Administrateurs</span>
       </a>
-
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/consultation/add']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Consultations
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/medecin/add']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Médecin
+      </a>
       <a
         routerLinkActive="bg-gray-700"
         [routerLinkActiveOptions]="{exact: true}"
@@ -22,10 +36,14 @@
 
         class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Profile
       </a>
-      <a href="#" class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">Settings</a>
-      <a href="#" class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
-        Logout
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/welcome/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Welcome
       </a>
+
     </nav>
     <nav class="bg-gray-800 text-white ">
       <ul class="grid grid-rows-3">

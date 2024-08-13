@@ -22,6 +22,7 @@ class DoctorResource extends JsonResource
             'specialite_id'=>$this->specialite_id,
             'created_by'=>$this->created_by,
             'updated_by'=>$this->updated_by,
+            'phone_number'=>$this->phone_number,
             'user'=>new UserResource($this->user),
             'specialite'=>new SpecialiteResource($this->specialite),
 
