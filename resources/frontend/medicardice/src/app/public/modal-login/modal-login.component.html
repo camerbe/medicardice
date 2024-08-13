@@ -1,0 +1,52 @@
+<div class="fixed pin z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto" *ngIf="modalService.showModal$ | async">
+  <div class="relative p-8 bg-gray-100 w-full max-w-md m-auto flex-col flex">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <div class="flex justify-end">
+        <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">
+          &times;
+        </button>
+      </div>
+      <h2 class="text-3xl font-bold text-blue-600 mb-6 text-center">Connexion</h2>
+      <form [formGroup]="frmGroupModalLogin"  (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
+            <i class="fas fa-user mr-2"></i>Nom d'utilisateur
+          </label>
+          <input type="email" id="email" name="email"
+                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                 formControlName="email"
+                 required
+          >
+        </div>
+        <div class="mb-6">
+          <label for="password" class="block text-gray-700 text-sm font-bold mb-2">
+            <i class="fas fa-lock mr-2"></i>Mot de passe
+          </label>
+          <input type="password" id="password" name="password"
+                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                 formControlName="password"
+                 required>
+        </div>
+        <div class="flex items-center justify-between">
+          <button type="submit"
+                  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
+            Se connecter
+          </button>
+          <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+            Mot de passe oublié ?
+          </a>
+        </div>
+      </form>
+      <div class="mt-6 text-center">
+        <p class="text-gray-600">Vous n'avez pas de compte ?</p>
+        <a href="inscription.html" class="font-bold text-blue-500 hover:text-blue-800">
+          Créer un compte
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
