@@ -17,14 +17,63 @@
       <a
         routerLinkActive="bg-gray-700"
         [routerLinkActiveOptions]="{exact: true}"
-        [routerLink]="['/dashboard/consultation/add']"
+        [routerLink]="['/dashboard/consultation/list']"
         class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
         Consultations
       </a>
       <a
         routerLinkActive="bg-gray-700"
         [routerLinkActiveOptions]="{exact: true}"
-        [routerLink]="['/dashboard/medecin/add']"
+        [routerLink]="['/dashboard/electrocardiographie/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        ElectroCardiographie
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/echocardiographie/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        EchoCardiographie
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/stress/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Stress
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/holter/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Holter
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/monitoring/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Monitoring
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/catheterization/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Cathétérisme
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/coronaryangioplastie/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Coronarographie
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/medecin/list']"
         class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
         Médecin
       </a>
@@ -45,45 +94,45 @@
       </a>
 
     </nav>
-    <nav class="bg-gray-800 text-white ">
-      <ul class="grid grid-rows-3">
-        <!-- Menu Item 1 -->
-        <li class="group relative">
-          <a href="#" class="block px-4 py-2 hover:bg-gray-700">Accueil</a>
-          <!-- Sous-menu 1 -->
-          <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-1</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-2</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-3</a></li>
-          </ul>
-        </li>
+    <!--<nav class="bg-gray-800 text-white ">-->
+    <!--<ul class="grid grid-rows-3">-->
+      <!-- Menu Item 1 -->
+    <!-- <li class="group relative">-->
+    <!-- <a href="#" class="block px-4 py-2 hover:bg-gray-700">Accueil</a>-->
+    <!-- Sous-menu 1 -->
+    <!-- <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
+      <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-1</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-2</a></li>
+      <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 1-3</a></li>
+    </ul>
+  </li>-->
 
-        <!-- Menu Item 2 -->
-        <li class="group relative">
-          <a href="#" class="block px-4 py-2 hover:bg-gray-700">Services</a>
-          <!-- Sous-menu 2 -->
-          <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-1</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-2</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-3</a></li>
-          </ul>
-        </li>
+  <!-- Menu Item 2 -->
+    <!--<li class="group relative">
+      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Services</a>-->
+      <!-- Sous-menu 2 -->
+    <!-- <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
+       <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-1</a></li>
+       <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-2</a></li>
+       <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 2-3</a></li>
+     </ul>
+   </li>-->
 
-        <!-- Menu Item 3 -->
-        <li class="group relative">
-          <a href="#" class="block px-4 py-2 hover:bg-gray-700">Contact</a>
-          <!-- Sous-menu 3 -->
-          <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-1</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-2</a></li>
-            <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-3</a></li>
-          </ul>
-        </li>
+   <!-- Menu Item 3 -->
+    <!--   <li class="group relative">-->
+    <!--     <a href="#" class="block px-4 py-2 hover:bg-gray-700">Contact</a> -->
+        <!-- Sous-menu 3 -->
+    <!--  <ul class="absolute left-0 hidden bg-gray-700 group-hover:block">
+        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-1</a></li>
+        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-2</a></li>
+        <li><a href="#" class="block px-4 py-2 hover:bg-gray-600">Sous-menu 3-3</a></li>
       </ul>
-    </nav>
-  </aside>
+    </li>
+  </ul>
+</nav>-->
+</aside>
 
-  <!-- Content area -->
+<!-- Content area -->
   <div class="flex-1 flex flex-col bg-gray-200">
     <!-- Header -->
     <app-nav/>

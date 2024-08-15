@@ -13,7 +13,7 @@ export class ElectrocardiographieService extends DataService<Electrocardiographi
   constructor(httpClient:HttpClient) {
     super(httpClient,environment.url+`electrocardiographies`);
   }
-  getMedecinBySlug(slug:string):Observable<Electrocardiographie>{
+  getElectrocardiographieBySlug(slug:string):Observable<Electrocardiographie>{
     return this.httpClient.get<Electrocardiographie>(environment.url+`electrocardiographies/slug/${slug}`)
   }
   getLastElectrocardiographieBySlug():Observable<Electrocardiographie>{

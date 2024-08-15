@@ -27,6 +27,18 @@ import { ConsultationComponent } from './examens/consultation/consultation.compo
 import { ConsultationListComponent } from './examens/consultation/consultation-list/consultation-list.component';
 import { ElectrocardiographieComponent } from './examens/electrocardiographie/electrocardiographie.component';
 import { ElectrocardiographieListComponent } from './examens/electrocardiographie/electrocardiographie-list/electrocardiographie-list.component';
+import { EchocardiographieComponent } from './examens/echocardiographie/echocardiographie.component';
+import { EchocardiographieListComponent } from './examens/echocardiographie/echocardiographie-list/echocardiographie-list.component';
+import { StressComponent } from './examens/stress/stress/stress.component';
+import { StressListComponent } from './examens/stress/stress/stress-list/stress-list.component';
+import { HolterComponent } from './examens/holter/holter/holter.component';
+import { HolterListComponent } from './examens/holter/holter-list/holter-list.component';
+import { MonitoringComponent } from './examens/monitoring/monitoring/monitoring.component';
+import { MonitoringListComponent } from './examens/monitoring/monitoring-list/monitoring-list.component';
+import { CatheterizationComponent } from './examens/catheterization/catheterization/catheterization.component';
+import { CatheterizationListComponent } from './examens/catheterization/catheterization-list/catheterization-list.component';
+import { CoronaryangioplastyComponent } from './examens/coronaryangioplasty/coronaryangioplasty/coronaryangioplasty.component';
+import { CoronaryangioplastyListComponent } from './examens/coronaryangioplasty/coronaryangioplasty-list/coronaryangioplasty-list.component';
 
 
 
@@ -55,7 +67,19 @@ import { ElectrocardiographieListComponent } from './examens/electrocardiographi
         ConsultationComponent,
         ConsultationListComponent,
         ElectrocardiographieComponent,
-        ElectrocardiographieListComponent
+        ElectrocardiographieListComponent,
+        EchocardiographieComponent,
+        EchocardiographieListComponent,
+        StressComponent,
+        StressListComponent,
+        HolterComponent,
+        HolterListComponent,
+        MonitoringComponent,
+        MonitoringListComponent,
+        CatheterizationComponent,
+        CatheterizationListComponent,
+        CoronaryangioplastyComponent,
+        CoronaryangioplastyListComponent
 
 
     ],

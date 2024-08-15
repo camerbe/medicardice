@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Consultation, Medecin, Media} from "../../../shared/models/welcome";
-import {MedecinService} from "../../../shared/services/medecins/medecin.service";
+import {Consultation, Media} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
 import {ActivatedRoute} from "@angular/router";
 import {ConsultationService} from "../../../shared/services/consultations/consultation.service";
@@ -54,12 +53,16 @@ export class FrontEndConsultationComponent implements OnInit{
               break
           }
           // @ts-ignore
-          this.currentConsultationImg=this.media[0].original_url
+          if(this.media[0].original_url){
+            // @ts-ignore
+            this.currentConsultationImg=this.media[0].original_url
+            this.metaService.updateTag({property:'og:image',content:this.currentConsultationImg});
+          }
+
           this.metaService.updateTag({name:'description',content:this.currentConsultation.cons_description_fr});
           this.metaService.updateTag({name:'keyword',content:this.currentConsultation.cons_keyword_fr});
           this.metaService.updateTag({property:'og:title',content:this.currentConsultation.cons_titre_fr});
           this.metaService.updateTag({property:'og:description',content:this.currentConsultation.cons_description_fr});
-          this.metaService.updateTag({property:'og:image',content:this.currentConsultationImg});
           this.titleService.setTitle(`Medicardice ${this.currentConsultationTitle}`)
         }
       })

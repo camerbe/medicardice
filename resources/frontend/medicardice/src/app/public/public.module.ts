@@ -28,6 +28,13 @@ import { FrontEndConsultationComponent } from './examens/front-end-consultation/
 import { LanguageSwitchComponent } from './layout/language-switch/language-switch/language-switch.component';
 import { HeaderFrComponent } from './layout/header-fr/header-fr.component';
 import { HeaderEnComponent } from './layout/header-en/header-en.component';
+import { FrontEndElectrocardiographieComponent } from './examens/front-end-electrocardiographie/front-end-electrocardiographie.component';
+import { FrontEndEchocardiographieComponent } from './examens/front-end-echocardiographie/front-end-echocardiographie.component';
+import { FrontEndStressComponent } from './examens/front-end-stress/front-end-stress.component';
+import { FrontEndHolterComponent } from './examens/front-end-holter/front-end-holter.component';
+import { FrontEndMonitoringComponent } from './examens/front-end-monitoring/front-end-monitoring.component';
+import { FrontEndCatheterizationComponent } from './examens/front-end-catheterization/front-end-catheterization.component';
+import { FrontEndCoronaryangioplastyComponent } from './examens/front-end-coronaryangioplasty/front-end-coronaryangioplasty.component';
 
 
 
@@ -56,7 +63,14 @@ import { HeaderEnComponent } from './layout/header-en/header-en.component';
     FrontEndConsultationComponent,
     LanguageSwitchComponent,
     HeaderFrComponent,
-    HeaderEnComponent
+    HeaderEnComponent,
+    FrontEndElectrocardiographieComponent,
+    FrontEndEchocardiographieComponent,
+    FrontEndStressComponent,
+    FrontEndHolterComponent,
+    FrontEndMonitoringComponent,
+    FrontEndCatheterizationComponent,
+    FrontEndCoronaryangioplastyComponent
   ],
   imports: [
     CommonModule,

@@ -7,8 +7,26 @@
       <a rel="noopener noreferrer" href="#" class="inline-block text-2xl font-semibold sm:text-3xl">
         <app-titre [titre]="currentConsultationTitle"/>
       </a>
-      <p class="text-xs text-gray-600">By
-        <a rel="noopener noreferrer" href="#" class="text-xs hover:underline">Leroy Jenkins</a>
+      <p class="text-xm text-gray-600">
+        <ng-container *ngIf="currentLocale==='fr';else lang">
+          <a
+            [routerLink]="['/general-consultation/en']"
+            [replaceUrl]="true"
+            skipLocationChange="false"
+          >
+            <span class="fi fi-gb fis"></span> English
+          </a>
+
+        </ng-container>
+        <ng-template #lang>
+          <a
+            [routerLink]="['/consultation/fr']"
+            [replaceUrl]="true"
+            skipLocationChange="false"
+          >
+            <span class="fi fi-fr fis"></span> Français
+          </a>
+        </ng-template>
       </p>
     </div>
     <div class="text-gray-800">

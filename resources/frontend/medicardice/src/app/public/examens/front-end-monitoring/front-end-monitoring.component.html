@@ -1,0 +1,42 @@
+
+<div class="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
+  <!--<img src="https://source.unsplash.com/random/480x360" alt="" class="w-full h-60 sm:h-96 bg-gray-500">-->
+  <app-image [frontEndImage]="currentMonitoringImg"></app-image>
+  <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
+    <div class="space-y-2">
+
+      <app-titre [titre]="currentMonitoringTitle"/>
+
+
+      <p class="text-xm text-gray-600">
+        <ng-container *ngIf="currentLocale==='fr';else lang">
+          <a
+            [routerLink]="['/monitoring/en']"
+            [replaceUrl]="true"
+            skipLocationChange="false"
+          >
+            <span class="fi fi-gb fis"></span> English
+          </a>
+
+        </ng-container>
+        <ng-template #lang>
+          <a
+            [routerLink]="['/monitoring/fr']"
+            [replaceUrl]="true"
+            skipLocationChange="false"
+          >
+            <span class="fi fi-fr fis"></span> Français
+          </a>
+        </ng-template>
+        <!--<a rel="noopener noreferrer" href="#" class="text-xs hover:underline">Leroy Jenkins</a>-->
+
+      </p>
+    </div>
+    <div class="text-gray-800">
+      <app-article [innerHTML]="monitoringMessage" ngSkipHydration class="prose md:prose-lg lg:prose-xl"></app-article>
+    </div>
+  </div>
+</div>
+
+
+

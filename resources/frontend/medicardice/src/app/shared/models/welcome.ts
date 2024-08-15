@@ -64,6 +64,108 @@ export interface Electrocardiographie
   meta_description_fr :string,
   meta_description_en :string,
 }
+export interface Echocardiographie
+{
+  id:number,
+  echocardiography_titre_fr:string,
+  echocardiography_titre_en:string,
+  echocardiography_msg_fr:string,
+  echocardiography_msg_en:string,
+  photo:File,
+  echocardiography_keyword_en:string,
+  echocardiography_keyword_fr:string,
+  echocardiography_description_en:string,
+  echocardiography_description_fr:string,
+  echocardiography_titre_fr_slug :string,
+  echocardiography_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Stress
+{
+  id:number,
+  stress_titre_fr:string,
+  stress_titre_en:string,
+  stress_msg_fr:string,
+  stress_msg_en:string,
+  photo:File,
+  stress_keyword_en:string,
+  stress_keyword_fr:string,
+  stress_description_en:string,
+  stress_description_fr:string,
+  stress_titre_fr_slug :string,
+  stress_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Holter
+{
+  id:number,
+  holter_titre_fr:string,
+  holter_titre_en:string,
+  holter_msg_fr:string,
+  holter_msg_en:string,
+  photo:File,
+  holter_keyword_en:string,
+  holter_keyword_fr:string,
+  holter_description_en:string,
+  holter_description_fr:string,
+  holter_titre_fr_slug :string,
+  holter_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Monitoring
+{
+  id:number,
+  monitoring_titre_fr:string,
+  monitoring_titre_en:string,
+  monitoring_msg_fr:string,
+  monitoring_msg_en:string,
+  photo:File,
+  monitoring_keyword_en:string,
+  monitoring_keyword_fr:string,
+  monitoring_description_en:string,
+  monitoring_description_fr:string,
+  monitoring_titre_fr_slug :string,
+  monitoring_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Catheterization
+{
+  id:number,
+  catheterization_titre_fr:string,
+  catheterization_titre_en:string,
+  catheterization_msg_fr:string,
+  catheterization_msg_en:string,
+  photo:File,
+  catheterization_keyword_en:string,
+  catheterization_keyword_fr:string,
+  catheterization_description_en:string,
+  catheterization_description_fr:string,
+  catheterization_titre_fr_slug :string,
+  catheterization_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Coronaryangioplasty
+{
+  id:number,
+  coronaryangioplasty_titre_fr:string,
+  coronaryangioplasty_titre_en:string,
+  coronaryangioplasty_msg_fr:string,
+  coronaryangioplasty_msg_en:string,
+  photo:File,
+  coronaryangioplasty_keyword_en:string,
+  coronaryangioplasty_keyword_fr:string,
+  coronaryangioplasty_description_en:string,
+  coronaryangioplasty_description_fr:string,
+  coronaryangioplasty_titre_fr_slug :string,
+  coronaryangioplasty_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
 
 export interface Media {
   id: number,

@@ -44,11 +44,11 @@ class Electrocardiographie extends Model implements HasMedia
     }
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('electrocardiography')
+        $this->addMediaCollection('electrocardiographie')
             ->singleFile();
 
         $this
-            ->addMediaCollection('electrocardiography')
+            ->addMediaCollection('electrocardiographie')
             ->registerMediaConversions(function (Media $media) {
                 $this
                     ->addMediaConversion('thumb')
@@ -56,7 +56,7 @@ class Electrocardiographie extends Model implements HasMedia
                     ->height(100);
             });
         $this
-            ->addMediaCollection('electrocardiography')
+            ->addMediaCollection('electrocardiographie')
             ->withResponsiveImages();
     }
     public static function last(){

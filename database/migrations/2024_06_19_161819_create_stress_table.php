@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('stress', function (Blueprint $table) {
             $table->id();
-            //$table->text('stress_titre_fr');
+            $table->text('stress_titre_fr');
             $table->text('stress_titre_en');
             $table->text('stress_msg_fr');
             $table->text('stress_msg_en');
-            $table->string('photo');
+            //$table->string('photo');
             $table->string('stress_keyword_en');
             $table->string('stress_keyword_fr');
             $table->string('stress_description_en');

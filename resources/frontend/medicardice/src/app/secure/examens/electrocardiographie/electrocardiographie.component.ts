@@ -1,19 +1,25 @@
-import {Component, signal} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {Component, OnInit, signal} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../shared/environments/environment";
+import {AuthService} from "../../../public/auth.service";
+import {ExpiresAtService} from "../../../shared/services/expires-at.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ElectrocardiographieService} from "../../../shared/services/electrocardiography/electrocardiographie.service";
+import {first} from "rxjs";
+import {Welcome} from "../../../shared/models/welcome";
 
 @Component({
   selector: 'app-electrocardiographie',
   templateUrl: './electrocardiographie.component.html',
   styleUrl: './electrocardiographie.component.css'
 })
-export class ElectrocardiographieComponent {
+export class ElectrocardiographieComponent implements OnInit{
   isAddMode!: boolean;
   strError: string = '';
   id!: number;
   isExpired!: boolean;
-  frmGroupConsultation!: FormGroup;
-  childTitle = signal('Consultation')
+  frmGroupElectrocardiographie!: FormGroup;
+  childTitle = signal('Electrocardiographie')
   label = signal('liste');
   svgAddPath = signal('M12 4.5v15m7.5-7.5h-15');
   labelAdd = signal('ajouter');
@@ -67,4 +73,156 @@ export class ElectrocardiographieComponent {
     toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table mergetags  blockquote'
 
   };
+
+  constructor(
+    private electrocardiographieService: ElectrocardiographieService,
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private expireService: ExpiresAtService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.frmGroupElectrocardiographie = this.fb.group({
+      electrocardiography_titre_fr: ['', [Validators.required]],
+      electrocardiography_titre_en: ['', [Validators.required]],
+      electrocardiography_msg_fr: ['', [Validators.required]],
+      electrocardiography_msg_en: ['', [Validators.required]],
+      photo: [null, [Validators.required]],
+      electrocardiography_keyword_en: ['', [Validators.required]],
+      electrocardiography_keyword_fr: ['', [Validators.required]],
+      electrocardiography_description_en: ['electrocardiography_description_en', [Validators.required]],
+      electrocardiography_description_fr: ['electrocardiography_description_fr', [Validators.required]],
+      electrocardiography_titre_en_slug: ['electrocardiography_titre_en_slug'],
+      electrocardiography_titre_fr_slug: ['electrocardiography_titre_fr_slug'],
+
+    })
+  }
+
+  get electrocardiography_titre_fr() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_titre_fr')
+  }
+
+  get electrocardiography_titre_en() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_titre_en')
+  }
+
+  get electrocardiography_msg_fr() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_msg_fr')
+  }
+
+  get electrocardiography_msg_en() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_msg_en')
+  }
+
+  get electrocardiography_keyword_en() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_keyword_en')
+  }
+
+  get electrocardiography_keyword_fr() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_keyword_fr')
+  }
+
+  get electrocardiography_description_en() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_description_en')
+  }
+
+  get electrocardiography_description_fr() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_description_fr')
+  }
+
+  get electrocardiography_titre_en_slug() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_titre_en_slug')
+  }
+
+  get electrocardiography_titre_fr_slug() {
+    return this.frmGroupElectrocardiographie.get('electrocardiography_titre_fr_slug')
+  }
+
+  get photo() {
+    return this.frmGroupElectrocardiographie.get('photo')
+  }
+
+  ngOnInit(): void {
+    this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router)
+    this.id=this.route.snapshot.params['id'];
+    this.isAddMode=!this.id;
+    if(!this.isAddMode){
+      const currentUser=localStorage.getItem('authUser')
+      this.electrocardiographieService.show(this.id)
+        .pipe(first())
+        .subscribe({
+          next:res=>{
+            // @ts-ignore
+            const electrocardiographie:Welcome=res['data'];
+            this.frmGroupElectrocardiographie.patchValue(electrocardiographie)
+          }
+        })
+    }
+  }
+
+
+  onSubmit() {
+    this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
+    const file=this.photo?.value
+    const formData = new FormData();
+    // @ts-ignore
+    if(this.isAddMode){
+
+      formData.append('photo',file,file.name);
+      formData.append('electrocardiography_titre_fr_slug',this.electrocardiography_titre_fr_slug?.value);
+      formData.append('electrocardiography_titre_en_slug',this.electrocardiography_titre_en_slug?.value);
+      formData.append('electrocardiography_description_fr',this.electrocardiography_description_fr?.value);
+      formData.append('electrocardiography_description_en',this.electrocardiography_description_en?.value);
+      formData.append('electrocardiography_keyword_fr',this.electrocardiography_keyword_fr?.value);
+      formData.append('electrocardiography_keyword_en',this.electrocardiography_keyword_en?.value);
+      formData.append('electrocardiography_msg_en',this.electrocardiography_msg_en?.value);
+      formData.append('electrocardiography_msg_fr',this.electrocardiography_msg_fr?.value);
+      formData.append('electrocardiography_titre_en',this.electrocardiography_titre_en?.value);
+      formData.append('electrocardiography_titre_fr',this.electrocardiography_titre_fr?.value);
+
+      this.electrocardiographieService.store(formData)
+        .subscribe({
+          next:res=>{
+            // @ts-ignore
+            this.childTitle.set(res.message)
+            // @ts-ignore
+            if (!res.success) {
+              // @ts-ignore
+              this.strError=res.message
+              return;
+            }
+            this.router.navigateByUrl('dashboard/electrocardiographie/list')
+          }
+        })
+    }
+    else{
+      formData.append('photo',file,file.name);
+      formData.append('_method', 'PUT');
+      this.electrocardiographieService.updateByFormData(this.id,formData)
+        .subscribe({
+          next:res=>{
+            // @ts-ignore
+            if (!res.success) {
+              return;
+            }
+            this.router.navigateByUrl('dashboard/electrocardiographie/list')
+          },
+          error:err=>console.log(err)
+        })
+    }
+  }
+
+  onFileSelected(event: any) {
+    const target = event.target as HTMLInputElement;
+    // @ts-ignore
+    const fileList: FileList = target.files;
+    if (fileList.length > 0) {
+      const file = fileList[0];
+      // Use file immediately or store a copy
+      const reader = new FileReader();
+      this.frmGroupElectrocardiographie.patchValue({photo: file});
+      this.photo?.updateValueAndValidity();
+      this.selectedFile = file
+    }
+  }
 }

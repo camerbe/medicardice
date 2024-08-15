@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Electrocardiographie;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
