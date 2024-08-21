@@ -22,8 +22,8 @@ export class HolterService extends DataService<Holter>{
   store(resource:FormData):Observable<Holter>{
     return this.httpClient.post<Holter>(environment.url+`holters`,resource);
   }
-  updateByFormData(id:number,resource:FormData):Observable<Stress>{
-    return this.httpClient.post<Stress>(environment.url+`holters/${id}`,resource);
+  updateByFormData(id:number,resource:FormData):Observable<Holter>{
+    return this.httpClient.post<Holter>(environment.url+`holters/${id}`,resource);
   }
 
 

@@ -178,20 +178,23 @@ export class ConsultationComponent implements OnInit {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
     const formData = new FormData();
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
+    formData.append('cons_titre_fr_slug',this.cons_titre_fr_slug?.value);
+    formData.append('cons_titre_en_slug',this.cons_titre_en_slug?.value);
+    formData.append('cons_description_fr',this.cons_description_fr?.value);
+    formData.append('cons_description_en',this.cons_description_en?.value);
+    formData.append('cons_keyword_fr',this.cons_keyword_fr?.value);
+    formData.append('cons_keyword_en',this.cons_keyword_en?.value);
+    formData.append('cons_msg_en',this.cons_msg_en?.value);
+    formData.append('cons_msg_fr',this.cons_msg_fr?.value);
+    formData.append('cons_titre_en',this.cons_titre_en?.value);
+    formData.append('cons_titre_fr',this.cons_titre_fr?.value);
+
     // @ts-ignore
     if(this.isAddMode){
 
-      formData.append('photo',file,file.name);
-      formData.append('cons_titre_fr_slug',this.cons_titre_fr_slug?.value);
-      formData.append('cons_titre_en_slug',this.cons_titre_en_slug?.value);
-      formData.append('cons_description_fr',this.cons_description_fr?.value);
-      formData.append('cons_description_en',this.cons_description_en?.value);
-      formData.append('cons_keyword_fr',this.cons_keyword_fr?.value);
-      formData.append('cons_keyword_en',this.cons_keyword_en?.value);
-      formData.append('cons_msg_en',this.cons_msg_en?.value);
-      formData.append('cons_msg_fr',this.cons_msg_fr?.value);
-      formData.append('cons_titre_en',this.cons_titre_en?.value);
-      formData.append('cons_titre_fr',this.cons_titre_fr?.value);
 
       this.consultationService.store(formData)
         .subscribe({
@@ -209,8 +212,9 @@ export class ConsultationComponent implements OnInit {
         })
     }
     else{
-      formData.append('photo',file,file.name);
-      formData.append('_method', 'PUT');
+
+      formData.append('_method', 'PUT')
+      //formData.append('_method', 'PUT');
       this.consultationService.updateByFormData(this.id,formData)
         .subscribe({
           next:res=>{

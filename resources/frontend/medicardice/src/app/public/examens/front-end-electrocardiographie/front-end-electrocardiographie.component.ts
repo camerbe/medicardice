@@ -15,7 +15,10 @@ export class FrontEndElectrocardiographieComponent implements OnInit{
   currentElectrocardiographieTitle!:string;
   electrocardiographieMessage:any;
   currentLocale:string='fr';
-
+  currentBreadCrumbCurrent=[]=[{fr: "L'électrocardiographie", en: 'Electrocardiography'}];
+  currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
   currentElectrocardiographie!:Electrocardiographie
   media!:Media
 
@@ -28,7 +31,18 @@ export class FrontEndElectrocardiographieComponent implements OnInit{
   ) {}
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'];
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    this.breadCrumbCurrent=this.getBreadCrumbCurrent(this.currentLocale);
     this.getElectrocardiographie()
+  }
+
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
+  }
+  getBreadCrumbCurrent(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbCurrent.map(item=>item.fr):this.currentBreadCrumbCurrent.map(item=>item.en);
+    return breadcrumb[0]
   }
 
   private getElectrocardiographie() {

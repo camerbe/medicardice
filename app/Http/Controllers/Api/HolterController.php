@@ -96,16 +96,17 @@ class HolterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         //
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $holter=$this->holterRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $holter=$this->holterRepository->findById($id);
         if($request->hasFile('photo')){
+            $holter->clearMediaCollection('holter');
             $holter->addMediaFromRequest('photo')
                 ->usingName($holter->holter_titre_fr)
                 ->toMediaCollection('holter');

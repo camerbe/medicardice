@@ -3,7 +3,11 @@
     <div class="flex justify-between items-center">
       <div class="flex items-center">
         <app-language-switch/>
-        <span class="text-2xl font-bold">Médicardice</span>
+        <span class="text-2xl font-bold flex">Médi<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" class="w-8 h-8 text-gray-100">
+          <path d="M27.912 7.289l-10.324-5.961c-0.455-0.268-1.002-0.425-1.588-0.425s-1.133 0.158-1.604 0.433l0.015-0.008-10.324 5.961c-0.955 0.561-1.586 1.582-1.588 2.75v11.922c0.002 1.168 0.635 2.189 1.574 2.742l0.016 0.008 10.322 5.961c0.455 0.267 1.004 0.425 1.59 0.425 0.584 0 1.131-0.158 1.602-0.433l-0.014 0.008 10.322-5.961c0.955-0.561 1.586-1.582 1.588-2.75v-11.922c-0.002-1.168-0.633-2.189-1.573-2.742zM27.383 21.961c0 0.389-0.211 0.73-0.526 0.914l-0.004 0.002-10.324 5.961c-0.152 0.088-0.334 0.142-0.53 0.142s-0.377-0.053-0.535-0.145l0.005 0.002-10.324-5.961c-0.319-0.186-0.529-0.527-0.529-0.916v-11.922c0-0.389 0.211-0.73 0.526-0.914l0.004-0.002 10.324-5.961c0.152-0.090 0.334-0.143 0.53-0.143s0.377 0.053 0.535 0.144l-0.006-0.002 10.324 5.961c0.319 0.185 0.529 0.527 0.529 0.916z"></path>
+          <path d="M22.094 19.451h-0.758c-0.188 0-0.363 0.049-0.515 0.135l0.006-0.004-4.574 2.512-5.282-3.049v-6.082l5.282-3.051 4.576 2.504c0.146 0.082 0.323 0.131 0.508 0.131h0.758c0.293 0 0.529-0.239 0.529-0.531v-0.716c0-0.2-0.11-0.373-0.271-0.463l-0.004-0.002-5.078-2.777c-0.293-0.164-0.645-0.26-1.015-0.26-0.39 0-0.756 0.106-1.070 0.289l0.010-0.006-5.281 3.049c-0.636 0.375-1.056 1.055-1.059 1.834v6.082c0 0.779 0.422 1.461 1.049 1.828l0.009 0.006 5.281 3.049c0.305 0.178 0.67 0.284 1.061 0.284 0.373 0 0.723-0.098 1.027-0.265l-0.012 0.006 5.080-2.787c0.166-0.091 0.276-0.265 0.276-0.465v-0.716c0-0.293-0.238-0.529-0.529-0.529z"></path>
+        </svg>ardice</span>
+
       </div>
       <div  class="hidden md:flex space-x-4">
         <a
@@ -11,24 +15,26 @@
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
           class="hover:text-blue-200 flex">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
+          <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
             <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-          </svg>
+          </svg>-->
           Accueil
         </a>
         <a
-          [routerLink]="['/medecin',currentLang]"
+          [routerLink]="['medecin',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
           class="hover:text-blue-200 flex">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1">
+          <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1">
             <path d="m9.653 16.915-.005-.003-.019-.01a20.759 20.759 0 0 1-1.162-.682 22.045 22.045 0 0 1-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 0 1 8-2.828A4.5 4.5 0 0 1 18 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 0 1-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 0 1-.69.001l-.002-.001Z" />
-          </svg>
+          </svg>-->
           Médecin
 
         </a>
         <div class="relative text-nowrap  group">
-          <a  href="#" class="hover:text-gray-50 flex">
+          <a
+              routerLinkActive=" text-rose-500 hover:text-rose-500"
+              class="hover:text-gray-50 flex">
             Examens
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
               <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
@@ -36,7 +42,7 @@
           </a>
           <div  class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
             <a
-              [routerLink]="['/consultation',currentLang]"
+              [routerLink]="['/examens/consultation',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class=" block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 flex capitalize">
@@ -46,7 +52,7 @@
               <span class="text-nowrap">Consultation générale</span>
             </a>
             <a
-              [routerLink]="['/electrocardiographie',currentLang]"
+              [routerLink]="['/examens/electrocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -56,7 +62,7 @@
               Electrocardiographie
             </a>
             <a
-              [routerLink]="['/echocardiographie',currentLang]"
+              [routerLink]="['/examens/echocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -66,7 +72,7 @@
               Echocardiographie
             </a>
             <a
-              [routerLink]="['/stress',currentLang]"
+              [routerLink]="['/examens/stress',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -76,7 +82,7 @@
               Epreuve d'effort
             </a>
             <a
-              [routerLink]="['/holter',currentLang]"
+              [routerLink]="['/examens/holter',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -85,8 +91,8 @@
               </svg>
               Holter
             </a>
-            <a
-              [routerLink]="['/monitoring',currentLang]"
+            <!--<a
+              [routerLink]="['/examens/monitoring',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -94,9 +100,9 @@
                 <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
               </svg>
               Monitoring
-            </a>
+            </a>-->
             <a
-              [routerLink]="['/catheterization',currentLang]"
+              [routerLink]="['/examens/catheterization',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -106,7 +112,7 @@
               Cathétérisme
             </a>
             <a
-              [routerLink]="['/coronaryangioplastie',currentLang]"
+              [routerLink]="['/examens/coronaryangioplastie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
               class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
@@ -115,64 +121,166 @@
               </svg>
               Coronarographie
             </a>
-            <a   href="#" class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
+            <a
+              [routerLink]="['/examens/angioplastie',currentLang]"
+              routerLinkActive="text-rose-500 hover:text-rose-500"
+              [routerLinkActiveOptions]="{exact: true}"
+
+                 class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                 <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
               </svg>
               Angioplastie
             </a>
             <!-- Autres examens... -->
-          </div>
-        </div>
-        <a   href="#" class="hover:text-blue-200 flex capitalize">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1">
-            <path fill-rule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clip-rule="evenodd" />
-          </svg>
-          Accès
-        </a>
-
-        <div  class="relative text-nowrap group">
-          <button   class="hover:text-blue-200 flex capitalize">
-            dossiers
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
-              <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div   class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
-            <a  href="#" class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 flex capitalize">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-              </svg>
-              Hypertension artérielle
-            </a>
-            <a   href="#" class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-              </svg>
-              Douleur thoracique
-            </a>
-            <a   href="#" class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-              </svg>
-              Insuffisance cardiaque
-            </a>
-
-            <!-- Autres examens... -->
-          </div>
-        </div>
-        <a   href="#" class="hover:text-blue-200 flex capitalize">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-            <path d="M6.5 3c-1.051 0-2.093.04-3.125.117A1.49 1.49 0 0 0 2 4.607V10.5h9V4.606c0-.771-.59-1.43-1.375-1.489A41.568 41.568 0 0 0 6.5 3ZM2 12v2.5A1.5 1.5 0 0 0 3.5 16h.041a3 3 0 0 1 5.918 0h.791a.75.75 0 0 0 .75-.75V12H2Z" />
-            <path d="M6.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM13.25 5a.75.75 0 0 0-.75.75v8.514a3.001 3.001 0 0 1 4.893 1.44c.37-.275.61-.719.595-1.227a24.905 24.905 0 0 0-1.784-8.549A1.486 1.486 0 0 0 14.823 5H13.25ZM14.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
-          </svg>
-          visite
-        </a>
-        <!-- Autres liens du menu... -->
       </div>
-      <button class="md:hidden">
-        <i class="fas fa-bars"></i>
-      </button>
+    </div>
+    <a   href="#" class="hover:text-blue-200 flex capitalize">
+    <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1">
+      <path fill-rule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clip-rule="evenodd" />
+    </svg>-->
+    Accès
+    </a>
+
+    <div  class="relative text-nowrap group">
+    <button   class="hover:text-blue-200 flex capitalize">
+      dossiers
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
+        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <div   class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
+      <a
+        [routerLink]="['/files/hypertension-arterielle',currentLang]"
+        routerLinkActive="text-rose-500 hover:text-rose-500"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 flex capitalize">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+        Hypertension artérielle
+      </a>
+      <a
+        [routerLink]="['/files/douleur-thoracique',currentLang]"
+        routerLinkActive="text-rose-500 hover:text-rose-500"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+        Douleur thoracique
+      </a>
+     <a
+       [routerLink]="['/files/insuffisance-cardiaque',currentLang]"
+       routerLinkActive="text-rose-500 hover:text-rose-500"
+       [routerLinkActiveOptions]="{exact: true}"
+        class="block p-2 hover:bg-gradient-to-r from-gray-50 to-gray-100  text-gray-700 border-t border-gray-300 flex capitalize">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+        Insuffisance cardiaque
+      </a>
+
+      <!-- Autres examens... -->
+      </div>
+    </div>
+        <!--<a   href="#" class="hover:text-blue-200 flex capitalize">
+         <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+           <path d="M6.5 3c-1.051 0-2.093.04-3.125.117A1.49 1.49 0 0 0 2 4.607V10.5h9V4.606c0-.771-.59-1.43-1.375-1.489A41.568 41.568 0 0 0 6.5 3ZM2 12v2.5A1.5 1.5 0 0 0 3.5 16h.041a3 3 0 0 1 5.918 0h.791a.75.75 0 0 0 .75-.75V12H2Z" />
+           <path d="M6.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM13.25 5a.75.75 0 0 0-.75.75v8.514a3.001 3.001 0 0 1 4.893 1.44c.37-.275.61-.719.595-1.227a24.905 24.905 0 0 0-1.784-8.549A1.486 1.486 0 0 0 14.823 5H13.25ZM14.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+         </svg>
+     visite
+    </a>-->
+    <!-- Autres liens du menu... -->
+        <div class="items-center flex-shrink-0 hidden lg:flex">
+          <button (click)="openModal()"
+            class="px-4 py-1 font-semibold rounded bg-gradient-to-r from-red-600 to-red-800 shadow-sm text-gray-100 flex"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-2">
+              <path d="M5.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H6a.75.75 0 0 1-.75-.75V12ZM6 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H6ZM7.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H8a.75.75 0 0 1-.75-.75V12ZM8 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H8ZM9.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V10ZM10 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H10ZM9.25 14a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H10a.75.75 0 0 1-.75-.75V14ZM12 9.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V10a.75.75 0 0 0-.75-.75H12ZM11.25 12a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H12a.75.75 0 0 1-.75-.75V12ZM12 13.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V14a.75.75 0 0 0-.75-.75H12ZM13.25 10a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 .75.75v.01a.75.75 0 0 1-.75.75H14a.75.75 0 0 1-.75-.75V10ZM14 11.25a.75.75 0 0 0-.75.75v.01c0 .414.336.75.75.75h.01a.75.75 0 0 0 .75-.75V12a.75.75 0 0 0-.75-.75H14Z" />
+              <path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75Z" clip-rule="evenodd" />
+            </svg>
+
+            Prendre rendez-vous
+          </button>
+        </div>
+    </div>
+
+    <button class="md:hidden">
+      <i class="fas fa-bars"></i>
+    </button>
     </div>
   </nav>
+
+<!--<app-modal-login />-->
+
+<div
+  [ngClass]="isModalOpen() ? 'block':'hidden'"
+  (click)="closeModalOnOutsideClick($event)"
+  class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center item-center">
+  <div class="bg-gray-50 p-6 rounded-lg shadow-lg max-w-md w-full relative">
+    <h2 class="text-3xl font-bold text-blue-600 mb-3 text-center">Connexion</h2>
+    <form [formGroup]="frmGroupModalLogin"  (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 flex">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" />
+          </svg>
+          Email
+        </label>
+        <input type="email" id="email" name="email"
+               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               formControlName="email"
+               required
+        >
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 flex">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+          Mot de passe
+        </label>
+        <input type="password" id="password" name="password"
+               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               formControlName="password"
+               required>
+      </div>
+      <div class="flex items-center justify-between">
+        <button type="submit"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
+          Se connecter
+        </button>
+
+        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+          Mot de passe oublié ?
+        </a>
+      </div>
+    </form>
+
+    <div class="mt-2 text-center">
+      <p class="text-gray-600">Vous n'avez pas de compte ?</p>
+      <a
+        (click)="closeModal()"
+        [routerLink]="['/register']"
+        class="font-bold text-blue-500 hover:text-blue-800">
+        Créer un compte
+      </a>
+    </div>
+    <button class="bg-red-500 text-white px-4 py-2 rounded" (click)="closeModal()">Fermer</button>
+    <button
+      (click)="closeModal()"
+      class="absolute top-2 right-2 text-gray-600 hover:text-gray-900">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-600">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+
+    </button>
+  </div>
+
+</div>
+
 </header>
+
+
+

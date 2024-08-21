@@ -13,7 +13,7 @@ export class CatheterizationService  extends DataService<Catheterization>{
   constructor(httpClient:HttpClient) {
     super(httpClient,environment.url+`catheterizations`);
   }
-  getHolterBySlug(slug:string):Observable<Catheterization>{
+  getCatheterizationBySlug(slug:string):Observable<Catheterization>{
     return this.httpClient.get<Catheterization>(environment.url+`catheterizations/slug/${slug}`)
   }
   getLastCatheterizationBySlug():Observable<Catheterization>{

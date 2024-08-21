@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -12,11 +12,18 @@ export class LanguageSwitchComponent implements OnInit{
   //@Output() langEvent = new EventEmitter<string>();
   constructor(
     private router: Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private componentFactoryResolver:ComponentFactoryResolver
   ) {}
   toggleLanguage() {
+    let newUrl:string=''
     this.currentLang = this.currentLang === 'en' ? 'fr' : 'en';
-    const newUrl = `home/${this.currentLang}`;
+    if(this.currentLang==='fr') {
+      newUrl=`accueil/${this.currentLang}`;
+    }
+    else{
+      newUrl = `home/${this.currentLang}`;
+    }
     this.router.navigateByUrl(newUrl).then(() => {
       window.location.reload();
     });

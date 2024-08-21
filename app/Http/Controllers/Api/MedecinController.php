@@ -108,9 +108,10 @@ class MedecinController extends Controller
         $requestData = $request->except('photo');
         //dd( $requestData);
         $medecin=$this->medecinRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         $medecin=$this->medecinRepository->findById($id);
         if($request->hasFile('photo')){
+            $medecin->clearMediaCollection('medecin');
             $medecin->addMediaFromRequest('photo')
                 ->usingName($medecin->doc_titre_fr)
                 ->toMediaCollection('medecin');

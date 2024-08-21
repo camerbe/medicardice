@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgClass} from '@angular/common';
 import { PublicComponent } from './public.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -35,6 +35,11 @@ import { FrontEndHolterComponent } from './examens/front-end-holter/front-end-ho
 import { FrontEndMonitoringComponent } from './examens/front-end-monitoring/front-end-monitoring.component';
 import { FrontEndCatheterizationComponent } from './examens/front-end-catheterization/front-end-catheterization.component';
 import { FrontEndCoronaryangioplastyComponent } from './examens/front-end-coronaryangioplasty/front-end-coronaryangioplasty.component';
+import { BreadcrumbComponent } from './layout/components/breadcrumb/breadcrumb.component';
+import { FrontEndAngioComponent } from './examens/front-end-angio/front-end-angio.component';
+import { FrontEndHypertensionComponent } from './examens/front-end-hypertension/front-end-hypertension.component';
+import {FrontEndChestComponent} from "./dossiers/front-end-chest/front-end-chest.component";
+import {FrontEndHeartComponent} from "./dossiers/front-end-heart/front-end-heart.component";
 
 
 
@@ -70,7 +75,12 @@ import { FrontEndCoronaryangioplastyComponent } from './examens/front-end-corona
     FrontEndHolterComponent,
     FrontEndMonitoringComponent,
     FrontEndCatheterizationComponent,
-    FrontEndCoronaryangioplastyComponent
+    FrontEndCoronaryangioplastyComponent,
+    BreadcrumbComponent,
+    FrontEndAngioComponent,
+    FrontEndHypertensionComponent,
+    FrontEndChestComponent,
+    FrontEndHeartComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +90,8 @@ import { FrontEndCoronaryangioplastyComponent } from './examens/front-end-corona
     HttpClientModule,
     RouterLink,
     SweetAlert2Module,
-    RouterLinkActive
+    RouterLinkActive,
+    NgClass
   ]
 })
 export class PublicModule { }

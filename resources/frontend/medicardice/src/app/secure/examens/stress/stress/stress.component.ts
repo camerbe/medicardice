@@ -179,21 +179,21 @@ export class StressComponent implements OnInit{
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
     const formData = new FormData();
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
+    formData.append('stress_titre_fr_slug',this.stress_titre_fr_slug?.value);
+    formData.append('stress_titre_en_slug',this.stress_titre_en_slug?.value);
+    formData.append('stress_description_fr',this.stress_description_fr?.value);
+    formData.append('stress_description_en',this.stress_description_en?.value);
+    formData.append('stress_keyword_fr',this.stress_keyword_fr?.value);
+    formData.append('stress_keyword_en',this.stress_keyword_en?.value);
+    formData.append('stress_msg_en',this.stress_msg_en?.value);
+    formData.append('stress_msg_fr',this.stress_msg_fr?.value);
+    formData.append('stress_titre_en',this.stress_titre_en?.value);
+    formData.append('stress_titre_fr',this.stress_titre_fr?.value);
     // @ts-ignore
     if(this.isAddMode){
-
-      formData.append('photo',file,file.name);
-      formData.append('stress_titre_fr_slug',this.stress_titre_fr_slug?.value);
-      formData.append('stress_titre_en_slug',this.stress_titre_en_slug?.value);
-      formData.append('stress_description_fr',this.stress_description_fr?.value);
-      formData.append('stress_description_en',this.stress_description_en?.value);
-      formData.append('stress_keyword_fr',this.stress_keyword_fr?.value);
-      formData.append('stress_keyword_en',this.stress_keyword_en?.value);
-      formData.append('stress_msg_en',this.stress_msg_en?.value);
-      formData.append('stress_msg_fr',this.stress_msg_fr?.value);
-      formData.append('stress_titre_en',this.stress_titre_en?.value);
-      formData.append('stress_titre_fr',this.stress_titre_fr?.value);
-
       this.stressService.store(formData)
         .subscribe({
           next:res=>{
@@ -210,7 +210,6 @@ export class StressComponent implements OnInit{
         })
     }
     else{
-      formData.append('photo',file,file.name);
       formData.append('_method', 'PUT');
       this.stressService.updateByFormData(this.id,formData)
         .subscribe({

@@ -178,20 +178,21 @@ export class CoronaryangioplastyComponent implements OnInit {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
     const formData = new FormData();
-    // @ts-ignore
-    if(this.isAddMode){
-
+    if (file != undefined && file != null) {
       formData.append('photo',file,file.name);
-      formData.append('coronaryangioplasty_titre_fr_slug',this.coronaryangioplasty_titre_fr_slug?.value);
-      formData.append('coronaryangioplasty_titre_en_slug',this.coronaryangioplasty_titre_en_slug?.value);
-      formData.append('coronaryangioplasty_description_fr',this.coronaryangioplasty_description_fr?.value);
-      formData.append('coronaryangioplasty_description_en',this.coronaryangioplasty_description_en?.value);
-      formData.append('coronaryangioplasty_keyword_fr',this.coronaryangioplasty_keyword_fr?.value);
-      formData.append('coronaryangioplasty_keyword_en',this.coronaryangioplasty_keyword_en?.value);
-      formData.append('coronaryangioplasty_msg_en',this.coronaryangioplasty_msg_en?.value);
-      formData.append('coronaryangioplasty_msg_fr',this.coronaryangioplasty_msg_fr?.value);
-      formData.append('coronaryangioplasty_titre_en',this.coronaryangioplasty_titre_en?.value);
-      formData.append('coronaryangioplasty_titre_fr',this.coronaryangioplasty_titre_fr?.value);
+    }
+    // @ts-ignore
+    formData.append('coronaryangioplasty_titre_fr_slug',this.coronaryangioplasty_titre_fr_slug?.value);
+    formData.append('coronaryangioplasty_titre_en_slug',this.coronaryangioplasty_titre_en_slug?.value);
+    formData.append('coronaryangioplasty_description_fr',this.coronaryangioplasty_description_fr?.value);
+    formData.append('coronaryangioplasty_description_en',this.coronaryangioplasty_description_en?.value);
+    formData.append('coronaryangioplasty_keyword_fr',this.coronaryangioplasty_keyword_fr?.value);
+    formData.append('coronaryangioplasty_keyword_en',this.coronaryangioplasty_keyword_en?.value);
+    formData.append('coronaryangioplasty_msg_en',this.coronaryangioplasty_msg_en?.value);
+    formData.append('coronaryangioplasty_msg_fr',this.coronaryangioplasty_msg_fr?.value);
+    formData.append('coronaryangioplasty_titre_en',this.coronaryangioplasty_titre_en?.value);
+    formData.append('coronaryangioplasty_titre_fr',this.coronaryangioplasty_titre_fr?.value);
+    if(this.isAddMode){
 
       this.coronarographieService.store(formData)
         .subscribe({
@@ -209,7 +210,6 @@ export class CoronaryangioplastyComponent implements OnInit {
         })
     }
     else{
-      formData.append('photo',file,file.name);
       formData.append('_method', 'PUT');
       this.coronarographieService.updateByFormData(this.id,formData)
         .subscribe({

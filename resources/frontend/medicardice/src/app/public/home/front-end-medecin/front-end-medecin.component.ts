@@ -16,7 +16,11 @@ export class FrontEndMedecinComponent implements OnInit{
   medecinMessage:any;
   currentLocale:string='fr';
   currentSlug!:string;
-
+  //currentBreadCrumbParent=['fr'=>"Médecin" ,'en'=> "Doctor"]
+  currentBreadCrumbParent= [] = [
+    { fr: 'médecin', en: 'doctor' }
+  ];
+  breadCrumbParent:string='';
   currentMedecin!:Medecin
   media!:Media
   constructor(
@@ -27,9 +31,15 @@ export class FrontEndMedecinComponent implements OnInit{
     private route:ActivatedRoute
   ) {
   }
-
+  getBreadCrumb(locale:string){
+    return locale==='fr'? this.currentBreadCrumbParent.map(item=>{return item.fr}):this.currentBreadCrumbParent.map(item=>{return item.en})
+  }
   ngOnInit(): void {
-    this.currentLocale=this.route.snapshot.params['locale'];
+    this.currentLocale=this.route.snapshot.params['locale'] || 'fr';
+    // @ts-ignore
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    // @ts-ignore
+
     this.currentSlug=this.route.snapshot.params['slug'];
     this.getMedecin()
   }

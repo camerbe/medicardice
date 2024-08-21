@@ -11,6 +11,11 @@ import {CatheterizationService} from "../../../shared/services/catheterization/c
 })
 export class FrontEndCatheterizationComponent implements OnInit {
 
+  currentBreadCrumbCurrent=[]=[{fr: "Le Cathétérisme", en: 'Catheterization'}];
+  currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
+
   currentCatheterizationImg!:string;
   currentCatheterizationTitle!:string;
   catheterizationMessage:any;
@@ -28,7 +33,17 @@ export class FrontEndCatheterizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'];
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    this.breadCrumbCurrent=this.getBreadCrumbCurrent(this.currentLocale);
     this.getCatheterization()
+  }
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
+  }
+  getBreadCrumbCurrent(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbCurrent.map(item=>item.fr):this.currentBreadCrumbCurrent.map(item=>item.en);
+    return breadcrumb[0]
   }
 
   private getCatheterization() {

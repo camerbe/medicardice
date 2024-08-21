@@ -103,10 +103,11 @@ class MonitoringController extends Controller
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $monitoring=$this->monitoringRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $monitoring=$this->monitoringRepository->findById($id);
         if($request->hasFile('photo')){
+            $monitoring->clearMediaCollection('monitoring');
             $monitoring->addMediaFromRequest('photo')
                 ->usingName($monitoring->monitoring_titre_fr)
                 ->toMediaCollection('monitoring');

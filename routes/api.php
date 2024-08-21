@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\Api\AngioController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatheterizationController;
+use App\Http\Controllers\Api\ChestController;
 use App\Http\Controllers\Api\ConsultationController;
 use App\Http\Controllers\Api\CoronaryangioplastyController;
 use App\Http\Controllers\Api\DoctorController;
 use App\Http\Controllers\Api\EchocardiographieController;
 use App\Http\Controllers\Api\ElectrocardiographieController;
+use App\Http\Controllers\Api\HeartController;
 use App\Http\Controllers\Api\HolterController;
+use App\Http\Controllers\Api\HypertensionController;
 use App\Http\Controllers\Api\MedecinController;
 use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\PatientController;
@@ -54,6 +58,18 @@ Route::get('catheterizations/last', [CatheterizationController::class, 'getLastC
 Route::get('coronaryangioplasties/slug/{coronaryangioplasties}', [CoronaryangioplastyController::class, 'getCoronaryangioplastyBySlug']);
 Route::get('coronaryangioplasties/last', [CoronaryangioplastyController::class, 'getLastCoronaryangioplastyBySlug']);
 //Route::post('users/login', [UserController::class, 'login']);
+//
+Route::get('angios/slug/{angios}', [AngioController::class, 'getAngioBySlug']);
+Route::get('angios/last', [AngioController::class, 'getLastAngioBySlug']);
+
+Route::get('hypertensions/slug/{hypertensions}', [HypertensionController::class, 'getHypertensionBySlug']);
+Route::get('hypertensions/last', [HypertensionController::class, 'getLastHypertensionBySlug']);
+
+Route::get('chests/slug/{chests}', [ChestController::class, 'getChestBySlug']);
+Route::get('chests/last', [ChestController::class, 'getLastChestBySlug']);
+
+Route::get('hearts/slug/{hearts}', [HeartController::class, 'getHeartBySlug']);
+Route::get('hearts/last', [HeartController::class, 'getLastHeartBySlug']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('auth/profile', [AuthController::class, 'profile']);
@@ -74,6 +90,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         "monitorings"=> MonitoringController::class,
         "catheterizations"=> CatheterizationController::class,
         "coronaryangioplasties"=> CoronaryangioplastyController::class,
+        "angios"=> AngioController::class,
+        "hypertensions"=> HypertensionController::class,
+        "chests"=> ChestController::class,
+        "hearts"=> HeartController::class,
     ]);
 
 });

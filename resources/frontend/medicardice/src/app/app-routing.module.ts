@@ -62,6 +62,18 @@ import {
 import {
   FrontEndCoronaryangioplastyComponent
 } from "./public/examens/front-end-coronaryangioplasty/front-end-coronaryangioplasty.component";
+import {AngioComponent} from "./secure/examens/angio/angio/angio.component";
+import {AngioListComponent} from "./secure/examens/angio/angio-list/angio-list.component";
+import {FrontEndAngioComponent} from "./public/examens/front-end-angio/front-end-angio.component";
+import {HypertensionComponent} from "./secure/dossiers/hypertension/hypertension/hypertension.component";
+import {HypertensionListComponent} from "./secure/dossiers/hypertension/hypertension-list/hypertension-list.component";
+import {FrontEndHypertensionComponent} from "./public/examens/front-end-hypertension/front-end-hypertension.component";
+import {ChestComponent} from "./secure/dossiers/chest/chest/chest.component";
+import {ChestListComponent} from "./secure/dossiers/chest/chest-list/chest-list.component";
+import {FrontEndChestComponent} from "./public/dossiers/front-end-chest/front-end-chest.component";
+import {HeartComponent} from "./secure/dossiers/heart/heart/heart.component";
+import {HeartListComponent} from "./secure/dossiers/heart/heart-list/heart-list.component";
+import {FrontEndHeartComponent} from "./public/dossiers/front-end-heart/front-end-heart.component";
 
 const routes: Routes = [
   {
@@ -117,7 +129,6 @@ const routes: Routes = [
         title: 'Suppression des Administrateurs',
         component: UserListComponent
       },
-
       {
         path:'profile',
         canActivate:[authGuard],
@@ -361,6 +372,102 @@ const routes: Routes = [
         canActivate:[authGuard],
         title: 'Editer une coronaryangioplastie',
         component: CoronaryangioplastyComponent
+      },
+      {
+        path:'angio/add',
+        canActivate:[authGuard],
+        title: "Ajout d'une angio",
+        component: AngioComponent
+      },
+      {
+        path:'angio/list',
+        canActivate:[authGuard],
+        title: 'Liste des angios',
+        component: AngioListComponent
+      },
+      {
+        path:'angio/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de coronaryangioplastie',
+        component: AngioListComponent
+      },
+      {
+        path:'angio/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer une angio',
+        component: AngioComponent
+      },
+      {
+        path:'hypertension/add',
+        canActivate:[authGuard],
+        title: "Ajout d'une hypertension",
+        component: HypertensionComponent
+      },
+      {
+        path:'hypertension/list',
+        canActivate:[authGuard],
+        title: 'Liste des hypertensions',
+        component: HypertensionListComponent
+      },
+      {
+        path:'hypertension/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de hypertension',
+        component: HypertensionListComponent
+      },
+      {
+        path:'hypertension/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer une hypertension',
+        component: HypertensionComponent
+      },
+      {
+        path:'chest/add',
+        canActivate:[authGuard],
+        title: "Ajout d'un chest",
+        component: ChestComponent
+      },
+      {
+        path:'chest/list',
+        canActivate:[authGuard],
+        title: 'Liste des chests',
+        component: ChestListComponent
+      },
+      {
+        path:'chest/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de chest',
+        component: ChestListComponent
+      },
+      {
+        path:'chest/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer un chest',
+        component: ChestComponent
+      },
+      {
+        path:'heart/add',
+        canActivate:[authGuard],
+        title: "Ajout d'un heart",
+        component: HeartComponent
+      },
+      {
+        path:'heart/list',
+        canActivate:[authGuard],
+        title: 'Liste des hearts',
+        component: HeartListComponent
+      },
+      {
+        path:'heart/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de chest',
+        component: HeartListComponent
+      },
+      {
+        path:'heart/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer un heart',
+        component: HeartComponent
       }
     ],
   },
@@ -414,83 +521,132 @@ const routes: Routes = [
 
       },
       {
-        path: 'consultation/:locale',
-        component: FrontEndConsultationComponent
-
+        path: 'files',
+        children:[
+          {
+            path: 'hypertension-arterielle/:locale',
+            component: FrontEndHypertensionComponent
+          },
+          {
+            path: 'hypertension/:locale',
+            component: FrontEndHypertensionComponent
+          },
+          {
+            path: 'douleur-thoracique/:locale',
+            component: FrontEndChestComponent
+          },
+          {
+            path: 'chest/:locale',
+            component: FrontEndChestComponent
+          },
+          {
+            path: 'insuffisance-cardiaque/:locale',
+            component: FrontEndHeartComponent
+          },
+          {
+            path: 'heart/:locale',
+            component: FrontEndHeartComponent
+          }
+        ]
       },
       {
-        path: 'general-consultation/:locale',
-        component: FrontEndConsultationComponent
+        path: 'examens',
+        children: [
+          {
+            path: 'consultation/:locale',
+            component: FrontEndConsultationComponent
+
+          },
+          {
+            path: 'general-consultation/:locale',
+            component: FrontEndConsultationComponent
+
+          },
+          {
+            path: 'electrocardiography/:locale',
+            component: FrontEndElectrocardiographieComponent
+
+          },
+          {
+            path: 'electrocardiographie/:locale',
+            component: FrontEndElectrocardiographieComponent
+
+          },
+          {
+            path: 'echocardiography/:locale',
+            component: FrontEndEchocardiographieComponent
+
+          },
+          {
+            path: 'echocardiographie/:locale',
+            component: FrontEndEchocardiographieComponent
+
+          },
+          {
+            path: 'stress-test/:locale',
+            component: FrontEndStressComponent
+
+          },
+          {
+            path: 'stress/:locale',
+            component: FrontEndStressComponent
+
+          },
+          {
+            path: 'holter/:locale',
+            component: FrontEndHolterComponent
+
+          },
+          {
+            path: 'holter-ecg/:locale',
+            component: FrontEndHolterComponent
+
+          },
+          {
+            path: 'monitoring/:locale',
+            component: FrontEndMonitoringComponent
+
+          },
+          {
+            path: 'blood-pressure/:locale',
+            component: FrontEndMonitoringComponent
+
+          },
+          {
+            path: 'catheterization/:locale',
+            component: FrontEndCatheterizationComponent
+
+          },
+          {
+            path: 'right-heart-catheterization/:locale',
+            component: FrontEndCatheterizationComponent
+
+          },
+          {
+            path: 'coronaryangioplastie/:locale',
+            component: FrontEndCoronaryangioplastyComponent
+
+          },
+          {
+            path: 'coronary-angiography/:locale',
+            component: FrontEndCoronaryangioplastyComponent
+          },
+          {
+            path: 'angioplastie/:locale',
+            component: FrontEndAngioComponent
+
+          },
+          {
+            path: 'angioplasty/:locale',
+            component: FrontEndAngioComponent
+          }
+        ]
 
       },
-      {
-        path: 'electrocardiography/:locale',
-        component: FrontEndElectrocardiographieComponent
 
-      },
-      {
-        path: 'electrocardiographie/:locale',
-        component: FrontEndElectrocardiographieComponent
-
-      },
-      {
-        path: 'echocardiography/:locale',
-        component: FrontEndEchocardiographieComponent
-
-      },
-      {
-        path: 'echocardiographie/:locale',
-        component: FrontEndEchocardiographieComponent
-
-      },
-      {
-        path: 'stress-test/:locale',
-        component: FrontEndStressComponent
-
-      },
-      {
-        path: 'stress/:locale',
-        component: FrontEndStressComponent
-
-      },
-      {
-        path: 'holter/:locale',
-        component: FrontEndHolterComponent
-
-      },
-      {
-        path: 'holter-ecg/:locale',
-        component: FrontEndHolterComponent
-
-      },
-      {
-        path: 'monitoring/:locale',
-        component: FrontEndMonitoringComponent
-
-      },
-      {
-        path: 'catheterization/:locale',
-        component: FrontEndCatheterizationComponent
-
-      },
-      {
-        path: 'right-heart-catheterization/:locale',
-        component: FrontEndCatheterizationComponent
-
-      },
-      {
-        path: 'coronaryangioplastie/:locale',
-        component: FrontEndCoronaryangioplastyComponent
-
-      },
-      {
-        path: 'coronary-angiography/:locale',
-        component: FrontEndCoronaryangioplastyComponent
-
-      }
     ]
   },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'home/:locale' }
 ];
 
 @NgModule({

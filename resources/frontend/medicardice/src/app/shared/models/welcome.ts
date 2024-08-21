@@ -166,6 +166,73 @@ export interface Coronaryangioplasty
   meta_description_fr :string,
   meta_description_en :string,
 }
+export interface Angio
+{
+  id:number,
+  angio_titre_fr:string,
+  angio_titre_en:string,
+  angio_msg_fr:string,
+  angio_msg_en:string,
+  photo:File,
+  angio_keyword_en:string,
+  angio_keyword_fr:string,
+  angio_description_en:string,
+  angio_description_fr:string,
+  angio_titre_fr_slug :string,
+  angio_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Hypertension
+{
+  id:number,
+  hypertension_titre_fr:string,
+  hypertension_titre_en:string,
+  hypertension_msg_fr:string,
+  hypertension_msg_en:string,
+  photo:File,
+  hypertension_keyword_en:string,
+  hypertension_keyword_fr:string,
+  hypertension_description_en:string,
+  hypertension_description_fr:string,
+  hypertension_titre_fr_slug :string,
+  hypertension_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}export interface Heart
+{
+  id:number,
+  heart_titre_fr:string,
+  heart_titre_en:string,
+  heart_msg_fr:string,
+  heart_msg_en:string,
+  photo:File,
+  heart_keyword_en:string,
+  heart_keyword_fr:string,
+  heart_description_en:string,
+  heart_description_fr:string,
+  heart_titre_fr_slug :string,
+  heart_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
+export interface Chest
+{
+  id:number,
+  chest_titre_fr:string,
+  chest_titre_en:string,
+  chest_msg_fr:string,
+  chest_msg_en:string,
+  photo:File,
+  chest_keyword_en:string,
+  chest_keyword_fr:string,
+  chest_description_en:string,
+  chest_description_fr:string,
+  chest_titre_fr_slug :string,
+  chest_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
 
 export interface Media {
   id: number,

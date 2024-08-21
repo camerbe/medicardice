@@ -102,10 +102,11 @@ class ElectrocardiographieController extends Controller
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $electrocardiographie=$this->electrocardiographieRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $electrocardiographie=$this->electrocardiographieRepository->findById($id);
         if($request->hasFile('photo')){
+            $electrocardiographie->clearMediaCollection('electrocardiographie');
             $electrocardiographie->addMediaFromRequest('photo')
                 ->usingName($electrocardiographie->electrocardiography_titre_fr)
                 ->toMediaCollection('electrocardiographie');

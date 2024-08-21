@@ -178,21 +178,25 @@ export class CatheterizationComponent implements OnInit{
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
     const formData = new FormData();
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
+    formData.append('catheterization_titre_fr_slug',this.catheterization_titre_fr_slug?.value);
+    formData.append('catheterization_titre_en_slug',this.catheterization_titre_en_slug?.value);
+    formData.append('catheterization_description_fr',this.catheterization_description_fr?.value);
+    formData.append('catheterization_description_en',this.catheterization_description_en?.value);
+    formData.append('catheterization_keyword_fr',this.catheterization_keyword_fr?.value);
+    formData.append('catheterization_keyword_en',this.catheterization_keyword_en?.value);
+    formData.append('catheterization_msg_en',this.catheterization_msg_en?.value);
+    formData.append('catheterization_msg_fr',this.catheterization_msg_fr?.value);
+    formData.append('catheterization_titre_en',this.catheterization_titre_en?.value);
+    formData.append('catheterization_titre_fr',this.catheterization_titre_fr?.value);
     // @ts-ignore
     if(this.isAddMode){
 
-      formData.append('photo',file,file.name);
-      formData.append('catheterization_titre_fr_slug',this.catheterization_titre_fr_slug?.value);
-      formData.append('catheterization_titre_en_slug',this.catheterization_titre_en_slug?.value);
-      formData.append('catheterization_description_fr',this.catheterization_description_fr?.value);
-      formData.append('catheterization_description_en',this.catheterization_description_en?.value);
-      formData.append('catheterization_keyword_fr',this.catheterization_keyword_fr?.value);
-      formData.append('catheterization_keyword_en',this.catheterization_keyword_en?.value);
-      formData.append('catheterization_msg_en',this.catheterization_msg_en?.value);
-      formData.append('catheterization_msg_fr',this.catheterization_msg_fr?.value);
-      formData.append('catheterization_titre_en',this.catheterization_titre_en?.value);
-      formData.append('catheterization_titre_fr',this.catheterization_titre_fr?.value);
 
+
+      formData.append('_method', 'PUT')
       this.catheterizationService.store(formData)
         .subscribe({
           next:res=>{
@@ -209,7 +213,7 @@ export class CatheterizationComponent implements OnInit{
         })
     }
     else{
-      formData.append('photo',file,file.name);
+
       formData.append('_method', 'PUT');
       this.catheterizationService.updateByFormData(this.id,formData)
         .subscribe({

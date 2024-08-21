@@ -104,10 +104,11 @@ class CoronaryangioplastyController extends Controller
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $coronaryangioplasty=$this->coronaryangioplastyRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $coronaryangioplasty=$this->coronaryangioplastyRepository->findById($id);
         if($request->hasFile('photo')){
+            $coronaryangioplasty->clearMediaCollection('coronaryangioplasty');
             $coronaryangioplasty->addMediaFromRequest('photo')
                 ->usingName($coronaryangioplasty->coronaryangioplasty_titre_fr)
                 ->toMediaCollection('coronaryangioplasty');

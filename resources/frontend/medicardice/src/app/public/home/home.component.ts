@@ -17,6 +17,11 @@ export class HomeComponent implements OnInit{
   welcomeMessage:any;
   currentLocale!:string;
 
+  currentBreadCrumbCurrent=''
+  currentBreadCrumbParent= [] = [{ fr: "Accueil", en: 'Home' }];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
+
   currentWelcome!:Welcome
   media!:Media
 
@@ -40,9 +45,7 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'] || 'fr';
-    /*this.route.params.subscribe(params=>{
-      this.currentLocale=params['lang'] || 'fr'
-    })*/
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
     this.getWelcome()
 
   }
@@ -90,6 +93,10 @@ export class HomeComponent implements OnInit{
           this.titleService.setTitle(`Medicardice ${this.currentWelcomeTitle}`)
         }
       })
+  }
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
   }
 
 }

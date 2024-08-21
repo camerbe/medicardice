@@ -1,11 +1,5 @@
-<div class="fixed pin z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto" *ngIf="modalService.showModal$ | async">
-  <div class="relative p-8 bg-gray-100 w-full max-w-md m-auto flex-col flex">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <div class="flex justify-end">
-        <button (click)="closeModal()" class="text-gray-500 hover:text-gray-700">
-          &times;
-        </button>
-      </div>
+  <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center item-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
       <h2 class="text-3xl font-bold text-blue-600 mb-6 text-center">Connexion</h2>
       <form [formGroup]="frmGroupModalLogin"  (ngSubmit)="onSubmit()">
         <div class="mb-4">
@@ -44,8 +38,8 @@
         </a>
       </div>
     </div>
+
   </div>
-</div>
 
 
 

@@ -1,0 +1,27 @@
+
+<div class="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
+  <app-breadcrumb [parent]="breadCrumbParent" [current]="breadCrumbCurrent"/>
+  <!--<img src="https://source.unsplash.com/random/480x360" alt="" class="w-full h-60 sm:h-96 bg-gray-500">-->
+  <app-image [frontEndImage]="currentAngioImg"></app-image>
+  <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
+    <div class="space-y-2">
+
+      <app-titre [titre]="currentAngioTitle"/>
+      <p class="text-xm text-gray-600">
+        @if(currentLocale==='fr'){
+        <a [routerLink]="['/examens/angioplasty/en']"><span class="fi fi-gb fis"></span> English</a>
+        }
+        @else{
+        <a [routerLink]="['/examens/angioplastie/fr']"><span class="fi fi-fr fis"></span> Français</a>
+        }
+
+      </p>
+    </div>
+    <div class="text-gray-800">
+      <app-article [innerHTML]="angioMessage" ngSkipHydration class="text-justify prose md:prose-lg lg:prose-xl"></app-article>
+    </div>
+  </div>
+</div>
+
+
+

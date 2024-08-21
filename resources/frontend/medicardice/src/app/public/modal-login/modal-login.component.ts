@@ -1,5 +1,5 @@
 // @ts-ignore
-import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {Component, Output, EventEmitter, Input, signal} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import Swal from "sweetalert2";
@@ -12,14 +12,10 @@ import {ModalService} from "../../shared/services/modal/modal-service.service";
   styleUrl: './modal-login.component.css'
 })
 export class ModalLoginComponent {
-  @Output() close = new EventEmitter<void>();
-  @Input() isOpen = false;
+  //@Output() close = new EventEmitter<void>();
+  //@Input() isOpen = false;
   frmGroupModalLogin!:FormGroup;
-
-
-
-
-
+  @Input() isModalOpen=signal(false);
   constructor(
     private fb:FormBuilder,
     public modalService:ModalService
@@ -40,20 +36,23 @@ export class ModalLoginComponent {
 
   onSubmit() {
 
-    Swal.fire()
-    console.log("in a modal")
+    //Swal.fire()
+    //console.log("in a modal")
   }
 
   onClose() {
     // @ts-ignore
-    this.close.emit();
+    //this.close.emit();
   }
   toggleModal() {
-    this.isOpen = !this.isOpen;
+    //this.isOpen = !this.isOpen;
   }
-
+  openModal(){
+    this.isModalOpen.set(true);
+  }
   closeModal() {
-    this.close.emit()
+    //this.close.emit()
+    this.isModalOpen.set(false);
   }
   onOverlayClick(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('fixed')) {

@@ -11,6 +11,10 @@ import {CoronaryangioplastyService} from "../../../shared/services/coronaryangio
   styleUrl: './front-end-coronaryangioplasty.component.css'
 })
 export class FrontEndCoronaryangioplastyComponent implements OnInit {
+  currentBreadCrumbCurrent=[]=[{fr: "La Coronarographie", en: 'Coronary Angiography'}];
+  currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
 
   currentCoronaryangioplastyImg!:string;
   currentCoronaryangioplastyTitle!:string;
@@ -28,9 +32,18 @@ export class FrontEndCoronaryangioplastyComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'];
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    this.breadCrumbCurrent=this.getBreadCrumbCurrent(this.currentLocale);
     this.getCoronaryangioplasty()
   }
-
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
+  }
+  getBreadCrumbCurrent(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbCurrent.map(item=>item.fr):this.currentBreadCrumbCurrent.map(item=>item.en);
+    return breadcrumb[0]
+  }
   private getCoronaryangioplasty() {
     // @ts-ignore
     return this.coronaryangioplastyService.getLastCoronaryangioplastyBySlug()

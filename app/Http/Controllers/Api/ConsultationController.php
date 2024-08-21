@@ -8,6 +8,8 @@ use App\Repositories\ConsultationRepository;
 use Illuminate\Http\Request;
 use Stevebauman\Hypertext\Transformer;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\UploadedFile;
+
 
 class ConsultationController extends Controller
 {
@@ -100,15 +102,18 @@ class ConsultationController extends Controller
     public function update(Request $request, int $id)
     {
         //
+        //dd( $request->hasFile('photo'));
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
+        //dd($request->has('photo'));
         $consultation=$this->consultationRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
-        //dd($excludedPhoto);
+        $request->merge(['photo' => $excludedPhoto]);
+
         $consultation=$this->consultationRepository->findById($id);
         if($request->hasFile('photo')){
+            $consultation->clearMediaCollection('consultation');
             $consultation->addMediaFromRequest('photo')
-                ->usingName($consultation->doc_titre_fr)
+                ->usingName($consultation->cons_titre_fr)
                 ->toMediaCollection('consultation');
         }
         if ($consultation){

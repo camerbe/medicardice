@@ -14,7 +14,13 @@ export class FrontEndStressComponent implements OnInit{
   currentStressTitle!:string;
   stressMessage:any;
   currentLocale:string='fr';
-
+  //currentBreadCrumbParent="Examens" || "Exams";
+  //currentBreadCrumbCurrent="L'épeuve D'effort" || "Cyclo Ergometer";
+  currentBreadCrumbCurrent=[]=[{fr: "L'épeuve D'effort", en: 'Cyclo Ergometer'}];
+  currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }
+  ];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
   currentStress!:Stress
   media!:Media
 
@@ -64,8 +70,18 @@ export class FrontEndStressComponent implements OnInit{
         }
       })
   }
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
+  }
+  getBreadCrumbCurrent(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbCurrent.map(item=>item.fr):this.currentBreadCrumbCurrent.map(item=>item.en);
+    return breadcrumb[0]
+  }
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'];
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    this.breadCrumbCurrent=this.getBreadCrumbCurrent(this.currentLocale);
     this.getStress()
   }
 }

@@ -177,21 +177,21 @@ export class MonitoringComponent implements OnInit {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
     const formData = new FormData();
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
+    formData.append('monitoring_titre_fr_slug',this.monitoring_titre_fr_slug?.value);
+    formData.append('monitoring_titre_en_slug',this.monitoring_titre_en_slug?.value);
+    formData.append('monitoring_description_fr',this.monitoring_description_fr?.value);
+    formData.append('monitoring_description_en',this.monitoring_description_en?.value);
+    formData.append('monitoring_keyword_fr',this.monitoring_keyword_fr?.value);
+    formData.append('monitoring_keyword_en',this.monitoring_keyword_en?.value);
+    formData.append('monitoring_msg_en',this.monitoring_msg_en?.value);
+    formData.append('monitoring_msg_fr',this.monitoring_msg_fr?.value);
+    formData.append('monitoring_titre_en',this.monitoring_titre_en?.value);
+    formData.append('monitoring_titre_fr',this.monitoring_titre_fr?.value);
     // @ts-ignore
     if(this.isAddMode){
-
-      formData.append('photo',file,file.name);
-      formData.append('monitoring_titre_fr_slug',this.monitoring_titre_fr_slug?.value);
-      formData.append('monitoring_titre_en_slug',this.monitoring_titre_en_slug?.value);
-      formData.append('monitoring_description_fr',this.monitoring_description_fr?.value);
-      formData.append('monitoring_description_en',this.monitoring_description_en?.value);
-      formData.append('monitoring_keyword_fr',this.monitoring_keyword_fr?.value);
-      formData.append('monitoring_keyword_en',this.monitoring_keyword_en?.value);
-      formData.append('monitoring_msg_en',this.monitoring_msg_en?.value);
-      formData.append('monitoring_msg_fr',this.monitoring_msg_fr?.value);
-      formData.append('monitoring_titre_en',this.monitoring_titre_en?.value);
-      formData.append('monitoring_titre_fr',this.monitoring_titre_fr?.value);
-
       this.monitoringService.store(formData)
         .subscribe({
           next:res=>{
@@ -208,7 +208,6 @@ export class MonitoringComponent implements OnInit {
         })
     }
     else{
-      formData.append('photo',file,file.name);
       formData.append('_method', 'PUT');
       this.monitoringService.updateByFormData(this.id,formData)
         .subscribe({

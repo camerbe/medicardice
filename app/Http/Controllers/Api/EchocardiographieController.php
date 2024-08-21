@@ -104,10 +104,11 @@ class EchocardiographieController extends Controller
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $echocardiographie=$this->echocardiographieRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $echocardiographie=$this->echocardiographieRepository->findById($id);
         if($request->hasFile('photo')){
+            $echocardiographie->clearMediaCollection('echocardiographie');
             $echocardiographie->addMediaFromRequest('photo')
                 ->usingName($echocardiographie->echocardiography_titre_fr)
                 ->toMediaCollection('echocardiographie');

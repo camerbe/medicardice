@@ -167,8 +167,9 @@ export class MedecinComponent implements OnInit{
 
     //console.log(`${file} ${file.name}`)
     const formData = new FormData();
-
-    formData.append('photo',file,file.name);
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
     formData.append('doc_titre_fr_slug',this.doc_titre_fr_slug?.value);
     formData.append('doc_titre_en_slug',this.doc_titre_en_slug?.value);
     formData.append('doc_description_fr',this.doc_description_fr?.value);
@@ -194,18 +195,8 @@ export class MedecinComponent implements OnInit{
         })
     }
     else{
-      // @ts-ignore
-     /* for (const value of formData.values()) {
-        console.log(`value ${value}`);
-      }*/
-      // @ts-ignore
-      //console.log(`formData.values() : ${formData.values()}`)
-      //console.log(`frmGroupMedecin : ${this.frmGroupMedecin.value}`)
-      const formData = new FormData();
-      formData.append('photo',file,file.name);
+
       formData.append('_method', 'PUT');
-      this.medecinService.update(this.id,this.frmGroupMedecin.value)
-        .subscribe(res=>console.log(res))
       this.medecinService.updateByFormData(this.id,formData)
         .subscribe({
           next:res=>{

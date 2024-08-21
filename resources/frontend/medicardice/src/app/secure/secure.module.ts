@@ -39,6 +39,14 @@ import { CatheterizationComponent } from './examens/catheterization/catheterizat
 import { CatheterizationListComponent } from './examens/catheterization/catheterization-list/catheterization-list.component';
 import { CoronaryangioplastyComponent } from './examens/coronaryangioplasty/coronaryangioplasty/coronaryangioplasty.component';
 import { CoronaryangioplastyListComponent } from './examens/coronaryangioplasty/coronaryangioplasty-list/coronaryangioplasty-list.component';
+import { AngioComponent } from './examens/angio/angio/angio.component';
+import { AngioListComponent } from './examens/angio/angio-list/angio-list.component';
+import { HypertensionComponent } from './dossiers/hypertension/hypertension/hypertension.component';
+import { HypertensionListComponent } from './dossiers/hypertension/hypertension-list/hypertension-list.component';
+import {ChestComponent} from "./dossiers/chest/chest/chest.component";
+import {ChestListComponent} from "./dossiers/chest/chest-list/chest-list.component";
+import {HeartComponent} from "./dossiers/heart/heart/heart.component";
+import {HeartListComponent} from "./dossiers/heart/heart-list/heart-list.component";
 
 
 
@@ -79,9 +87,15 @@ import { CoronaryangioplastyListComponent } from './examens/coronaryangioplasty/
         CatheterizationComponent,
         CatheterizationListComponent,
         CoronaryangioplastyComponent,
-        CoronaryangioplastyListComponent
-
-
+        CoronaryangioplastyListComponent,
+        AngioComponent,
+        AngioListComponent,
+        HypertensionComponent,
+        HypertensionListComponent,
+        ChestComponent,
+        ChestListComponent,
+        HeartComponent,
+        HeartListComponent
     ],
     imports: [
         CommonModule,

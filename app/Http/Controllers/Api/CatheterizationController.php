@@ -102,10 +102,11 @@ class CatheterizationController extends Controller
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $catheterization=$this->catheterizationRepository->update($requestData,$id);
-        //$request->merge(['photo' => $excludedPhoto]);
+        $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
         $catheterization=$this->catheterizationRepository->findById($id);
         if($request->hasFile('photo')){
+            $catheterization->clearMediaCollection('catheterization');
             $catheterization->addMediaFromRequest('photo')
                 ->usingName($catheterization->catheterization_titre_fr)
                 ->toMediaCollection('catheterization');

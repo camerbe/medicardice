@@ -21,7 +21,6 @@ return new class extends Migration
             $table->String('updated_by',50)->nullable();
             $table->softDeletes();
             $table->String('dayweek',50);
-
             $table->foreignId('doctor_id')
                 ->constrained();
             $table->timestamps();

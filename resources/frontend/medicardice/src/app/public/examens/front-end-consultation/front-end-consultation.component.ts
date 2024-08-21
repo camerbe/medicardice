@@ -16,6 +16,10 @@ export class FrontEndConsultationComponent implements OnInit{
   consultationMessage:any;
   currentLocale:string='fr';
 
+  currentBreadCrumbCurrent=[]=[{fr: "La Consultation Générale", en: 'Consultation Cardiology'}];
+  currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }];
+  breadCrumbCurrent:string='';
+  breadCrumbParent:string='';
   currentConsultation!:Consultation
   media!:Media
 
@@ -29,7 +33,18 @@ export class FrontEndConsultationComponent implements OnInit{
   }
   ngOnInit(): void {
     this.currentLocale=this.route.snapshot.params['locale'];
+    this.breadCrumbParent=this.getBreadCrumb(this.currentLocale);
+    this.breadCrumbCurrent=this.getBreadCrumbCurrent(this.currentLocale);
     this.getConsultation()
+  }
+
+  getBreadCrumb(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbParent.map(item=>item.fr):this.currentBreadCrumbParent.map(item=>item.en);
+    return breadcrumb[0]
+  }
+  getBreadCrumbCurrent(locale:string){
+    const breadcrumb= locale==='fr'? this.currentBreadCrumbCurrent.map(item=>item.fr):this.currentBreadCrumbCurrent.map(item=>item.en);
+    return breadcrumb[0]
   }
 
   private getConsultation() {
