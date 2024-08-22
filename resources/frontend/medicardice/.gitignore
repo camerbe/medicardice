@@ -1,5 +1,5 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-resources/frontend/medicardice/src/assets/movie/foading.mp4
+*.mp4
 # Compiled output
 /dist
 /tmp
