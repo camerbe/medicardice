@@ -5,9 +5,9 @@
   </div>
 
   <div class="flex md:w-1/2 justify-center py-8 items-center bg-white">
-    <form class="bg-white">
+    <form class="bg-white" [formGroup]="frmGroupRegister">
       <h1 class="uppercase py-5 font-bold text-2xl mb-5 text-transparent bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text">patient</h1>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ last_name?.invalid && (last_name?.touched || last_name?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
              fill="currentColor">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
@@ -20,7 +20,7 @@
           placeholder="Nom"
         />
       </div>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ first_name?.invalid && (first_name?.touched || first_name?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
              fill="currentColor">
           <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
@@ -33,7 +33,7 @@
           placeholder="Prénom"
         />
       </div>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ dob?.invalid && (dob?.touched || dob?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
              viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,7 +46,7 @@
           placeholder="Date de naiss..."
         />
       </div>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ email?.invalid && (email?.touched || email?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
              viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,7 +60,7 @@
           placeholder="Email"
         />
       </div>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ phone_number?.invalid && (phone_number?.touched || phone_number?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
 
         <svg xmlns="http://www.w3.org/2000/svg"  fill="none"  stroke="currentColor" class="h-5 w-5 text-gray-400">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
@@ -71,7 +71,7 @@
           type="text"
           formControlName="phone_number" id="" placeholder="Tél" />
       </div>
-      <div class="hidden flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
+      <div class="{{ password?.invalid && (password?.touched || password?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl mb-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
              fill="currentColor">
           <path fill-rule="evenodd"
@@ -80,10 +80,10 @@
         </svg>
         <input
           class="pl-2 outline-none border-none"
-          type="hidden"
+          type="password"
           formControlName="password"  placeholder="Mot de passe" />
       </div>
-      <div class="flex items-center border-2 py-2 px-3 rounded-2xl hidden">
+      <div class="{{ password_confirm?.invalid && (password_confirm?.touched || password_confirm?.dirty)? 'border-2 border-rose-600':'' }} flex items-center border-2 py-2 px-3 rounded-2xl">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
              fill="currentColor">
           <path fill-rule="evenodd"
@@ -92,11 +92,11 @@
         </svg>
         <input
           class="pl-2 outline-none border-none"
-          type="hidden"
-          formControlName="password_confirm" id="" placeholder="Confirmation"
+          type="password"
+          formControlName="password_confirm"  placeholder="Confirmation"
         />
       </div>
-      <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
+      <button type="submit" [disabled]="frmGroupRegister.status=='INVALID'"  class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
 
     </form>
   </div>
