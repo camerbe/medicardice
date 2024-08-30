@@ -74,6 +74,8 @@ import {FrontEndChestComponent} from "./public/dossiers/front-end-chest/front-en
 import {HeartComponent} from "./secure/dossiers/heart/heart/heart.component";
 import {HeartListComponent} from "./secure/dossiers/heart/heart-list/heart-list.component";
 import {FrontEndHeartComponent} from "./public/dossiers/front-end-heart/front-end-heart.component";
+import {LocationComponent} from "./secure/location/location.component";
+import {LocationListComponent} from "./secure/location/location-list/location-list.component";
 
 const routes: Routes = [
   {
@@ -468,6 +470,30 @@ const routes: Routes = [
         canActivate:[authGuard],
         title: 'Editer un heart',
         component: HeartComponent
+      },
+      {
+        path:'location/add',
+        canActivate:[authGuard],
+        title: "Ajout d'une location",
+        component: LocationComponent
+      },
+      {
+        path:'location/list',
+        canActivate:[authGuard],
+        title: 'Liste des locations',
+        component: LocationListComponent
+      },
+      {
+        path:'location/:id',
+        canActivate:[authGuard],
+        title: 'Suppression de location',
+        component: LocationListComponent
+      },
+      {
+        path:'location/edit/:id',
+        canActivate:[authGuard],
+        title: 'Editer une location',
+        component: LocationComponent
       }
     ],
   },

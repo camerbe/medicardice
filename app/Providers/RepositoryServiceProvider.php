@@ -15,6 +15,7 @@ use App\Repositories\ElectrocardiographieRepository;
 use App\Repositories\HeartRepository;
 use App\Repositories\HolterRepository;
 use App\Repositories\HypertensionRepository;
+use App\Repositories\LocationRepository;
 use App\Repositories\MedecinRepository;
 use App\Repositories\MonitoringRepository;
 use App\Repositories\PatientRepository;
@@ -50,6 +51,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BaseRepository::class,HypertensionRepository::class);
         $this->app->bind(BaseRepository::class,ChestRepository::class);
         $this->app->bind(BaseRepository::class,HeartRepository::class);
+        $this->app->bind(BaseRepository::class,LocationRepository::class);
     }
 
     /**

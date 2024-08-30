@@ -233,6 +233,23 @@ export interface Chest
   meta_description_fr :string,
   meta_description_en :string,
 }
+export interface Location
+{
+  id:number,
+  location_titre_fr:string,
+  location_titre_en:string,
+  location_msg_fr:string,
+  location_msg_en:string,
+  photo:File,
+  location_keyword_en:string,
+  location_keyword_fr:string,
+  location_description_en:string,
+  location_description_fr:string,
+  location_titre_fr_slug :string,
+  location_titre_en_slug :string,
+  meta_description_fr :string,
+  meta_description_en :string,
+}
 
 export interface Media {
   id: number,

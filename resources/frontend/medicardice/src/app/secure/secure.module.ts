@@ -47,6 +47,8 @@ import {ChestComponent} from "./dossiers/chest/chest/chest.component";
 import {ChestListComponent} from "./dossiers/chest/chest-list/chest-list.component";
 import {HeartComponent} from "./dossiers/heart/heart/heart.component";
 import {HeartListComponent} from "./dossiers/heart/heart-list/heart-list.component";
+import { LocationComponent } from './location/location.component';
+import { LocationListComponent } from './location/location-list/location-list.component';
 
 
 
@@ -95,7 +97,9 @@ import {HeartListComponent} from "./dossiers/heart/heart-list/heart-list.compone
         ChestComponent,
         ChestListComponent,
         HeartComponent,
-        HeartListComponent
+        HeartListComponent,
+        LocationComponent,
+        LocationListComponent
     ],
     imports: [
         CommonModule,

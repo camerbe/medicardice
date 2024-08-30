@@ -108,6 +108,13 @@
       <a
         routerLinkActive="bg-gray-700"
         [routerLinkActiveOptions]="{exact: true}"
+        [routerLink]="['/dashboard/location/list']"
+        class="py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+        Location
+      </a>
+      <a
+        routerLinkActive="bg-gray-700"
+        [routerLinkActiveOptions]="{exact: true}"
         [routerLink]="['/dashboard/profile']"
         (click)="handleProfile()"
 

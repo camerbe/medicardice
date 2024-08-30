@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ElectrocardiographieController;
 use App\Http\Controllers\Api\HeartController;
 use App\Http\Controllers\Api\HolterController;
 use App\Http\Controllers\Api\HypertensionController;
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\MedecinController;
 use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\PatientController;
@@ -71,6 +72,9 @@ Route::get('chests/last', [ChestController::class, 'getLastChestBySlug']);
 Route::get('hearts/slug/{hearts}', [HeartController::class, 'getHeartBySlug']);
 Route::get('hearts/last', [HeartController::class, 'getLastHeartBySlug']);
 
+Route::get('locations/slug/{locations}', [LocationController::class, 'getLocationBySlug']);
+Route::get('locations/last', [LocationController::class, 'getLastLocationBySlug']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('auth/profile', [AuthController::class, 'profile']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
@@ -94,6 +98,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         "hypertensions"=> HypertensionController::class,
         "chests"=> ChestController::class,
         "hearts"=> HeartController::class,
+        "locations"=> LocationController::class,
     ]);
 
 });

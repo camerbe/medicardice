@@ -3,29 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Hypertension;
-use App\Repositories\HypertensionRepository;
+use App\Models\Location;
+use App\Repositories\LocationRepository;
 use Illuminate\Http\Request;
 use Stevebauman\Hypertext\Transformer;
 use Symfony\Component\HttpFoundation\Response;
 
-class HypertensionController extends Controller
+class LocationController extends Controller
 {
-    protected $hypertensionRepository;
+    protected $locationRepository;
     protected $transformer;
-    protected $lastHypertension;
+    protected $lastLocation;
 
     /**
-     * @param $hypertensionRepository
+     * @param $locationRepository
      * @param $transformer
-     * @param $lastHypertension
+     * @param $lastLocation
      */
-    public function __construct(HypertensionRepository $hypertensionRepository)
+    public function __construct(LocationRepository  $locationRepository)
     {
-        $this->hypertensionRepository = $hypertensionRepository;
-        $this->transformer = new Transformer();
-        $this->lastHypertension = Hypertension::last();
+        $this->locationRepository = $locationRepository;
+        $this->transformer = new  Transformer();
+        $this->lastLocation = Location::last();
     }
+
 
     /**
      * Display a listing of the resource.
@@ -33,17 +34,17 @@ class HypertensionController extends Controller
     public function index()
     {
         //
-        $hypertension=$this->hypertensionRepository->findAll();
-        if ($hypertension){
+        $locations=$this->locationRepository->findAll();
+        if ($locations){
             return response()->json([
                 'success'=>true,
-                'data'=>$hypertension,
-                'message'=>"Liste des hypertensions"
+                'data'=>$locations,
+                'message'=>"Liste des Locations"
             ],Response::HTTP_OK);
         }
         return response()->json([
             "success"=>false,
-            "message"=>"Pas d'hypertension trouvée"
+            "message"=>"Pas de location trouvée"
         ],Response::HTTP_NOT_FOUND);
     }
 
@@ -53,22 +54,22 @@ class HypertensionController extends Controller
     public function store(Request $request)
     {
         //
-        $hypertension=$this->hypertensionRepository->create($request->all());
+        $location=$this->locationRepository->create($request->all());
         if($request->hasFile('photo')){
-            $hypertension->addMediaFromRequest('photo')
-                ->usingName($hypertension->hypertension_titre_fr)
-                ->toMediaCollection('hypertension');
+            $location->addMediaFromRequest('photo')
+                ->usingName($location->location_titre_fr)
+                ->toMediaCollection('location');
         }
-        if ($hypertension){
+        if ($location){
             return response()->json([
                 'success'=>true,
-                'data'=>$hypertension,
-                'message'=>"hypertension insérée",
+                'data'=>$location,
+                'message'=>"Location insérée",
             ],Response::HTTP_CREATED);
         }
         return response()->json([
             "sucess"=>false,
-            "message"=>"Erreur lors de l'insertion d'une hypertension"
+            "message"=>"Erreur lors de l'insertion d'une location"
         ],Response::HTTP_NOT_FOUND);
     }
 
@@ -78,19 +79,19 @@ class HypertensionController extends Controller
     public function show(int $id)
     {
         //
-        $hypertension=$this->hypertensionRepository->findById($id);
+        $location=$this->locationRepository->findById($id);
         //dd($user);
-        if($hypertension){
+        if($location){
             return response()->json([
                 "success"=>true,
-                "data"=>$hypertension,
-                "photo"=>$hypertension->getFirstMediaUrl(),
-                "message"=>"hypertension trouvée"
+                "data"=>$location,
+                "photo"=>$location->getFirstMediaUrl(),
+                "message"=>"location trouvée"
             ],Response::HTTP_OK);
         }
         return response()->json([
             "success"=>false,
-            "message"=>"hypertension inexistante"
+            "message"=>"location inexistante"
         ],Response::HTTP_NOT_FOUND);
     }
 
@@ -102,27 +103,28 @@ class HypertensionController extends Controller
         //
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
-        $hypertension=$this->hypertensionRepository->update($requestData,$id);
+        $location=$this->locationRepository->update($requestData,$id);
         $request->merge(['photo' => $excludedPhoto]);
         //dd($excludedPhoto);
-        $hypertension=$this->hypertensionRepository->findById($id);
+        $location=$this->locationRepository->findById($id);
         if($request->hasFile('photo')){
-            $hypertension->clearMediaCollection('hypertension');
-            $hypertension->addMediaFromRequest('photo')
-                ->usingName($hypertension->hypertension_titre_fr)
-                ->toMediaCollection('hypertension');
+            $location->clearMediaCollection('location');
+            $location->addMediaFromRequest('photo')
+                ->usingName($location->location_titre_fr)
+                ->toMediaCollection('location');
         }
-        if ($hypertension){
+        if ($location){
             return response()->json([
                 'success'=>true,
-                'data'=>$hypertension,
-                'message'=>"hypertension mise à jour",
+                'data'=>$location,
+                'message'=>"location mise à jour",
             ],Response::HTTP_CREATED);
         }
         return response()->json([
             "sucess"=>false,
-            "message"=>"Erreur lors de la mise à jour d'une hypertension"
+            "message"=>"Erreur lors de la mise à jour d'une location"
         ],Response::HTTP_NOT_FOUND);
+
     }
 
     /**
@@ -131,8 +133,8 @@ class HypertensionController extends Controller
     public function destroy(int $id)
     {
         //
-        $hypertension=$this->hypertensionRepository->delete($id);
-        if($hypertension>0){
+        $location=$this->locationRepository->delete($id);
+        if($location>0){
             return response()->json([
                 "success"=>true,
                 "message"=>"Suppression réussie"
@@ -143,22 +145,23 @@ class HypertensionController extends Controller
             "message"=>"Une erreur s'est produite..."
         ],Response::HTTP_NOT_FOUND);
     }
-    public function getHypertensionBySlug($slug){
-        $hypertension=$this->hypertensionRepository->findBySlug($slug);
-        if($hypertension->count()>0){
+
+    public function getLocationBySlug($slug){
+        $location=$this->locationRepository->findBySlug($slug);
+        if($location->count()>0){
             return response()->json([
                 "success"=>true,
-                "data"=>$hypertension,
-                "photo"=>$hypertension->getFirstMediaUrl(),
-                "message"=>"hypertension trouvée"
+                "data"=>$location,
+                "photo"=>$location->getFirstMediaUrl(),
+                "message"=>"location trouvée"
             ],Response::HTTP_OK);
         }
         return response()->json([
             "success"=>false,
-            "message"=>"hypertension inexistante"
+            "message"=>"location inexistante"
         ],Response::HTTP_NOT_FOUND);
     }
-    public function getLastHypertensionBySlug(){
-        return $this->show($this->lastHypertension->id);
+    public function getLastLocationBySlug(){
+        return $this->show($this->lastLocation->id);
     }
 }

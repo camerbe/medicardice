@@ -1,53 +1,47 @@
 import {Component, Inject, OnInit, PLATFORM_ID, signal} from '@angular/core';
-import {Chest} from "../../../../shared/models/welcome";
-import {AuthService} from "../../../../public/auth.service";
+import {Location} from "../../../shared/models/welcome";
+import {AuthService} from "../../../public/auth.service";
 import {Router} from "@angular/router";
-import {ExpiresAtService} from "../../../../shared/services/expires-at.service";
+import {ExpiresAtService} from "../../../shared/services/expires-at.service";
+import {LocationService} from "../../../shared/services/location/location.service";
 import Swal from "sweetalert2";
-import {UserData} from "../../../../shared/models/user.response.login";
-import {ChestService} from "../../../../shared/services/chests/chest.service";
+import {UserData} from "../../../shared/models/user.response.login";
 
 @Component({
-  selector: 'app-chest-list',
-  templateUrl: './chest-list.component.html',
-  styleUrl: './chest-list.component.css'
+  selector: 'app-location-list',
+  templateUrl: './location-list.component.html',
+  styleUrl: './location-list.component.css'
 })
-export class ChestListComponent implements OnInit{
+export class LocationListComponent implements OnInit{
 
-  userData: Chest[]=[];
+  userData: Location[]=[];
   isExpired!:boolean;
-  url=signal("/dashboard/chest/add");
-  label=signal('nouveau chest');
+  url=signal("/dashboard/location/add");
+  label=signal('nouvelle location');
   labelTitle=signal('');
-  items!:Chest[];
+  items!:Location[];
 
   constructor(
     private authService:AuthService,
     private router:Router,
     private expireService:ExpiresAtService,
-    private chestService:ChestService,
+    private locationService:LocationService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   private getAll(){
-    return this.chestService.getAll()
+    return this.locationService.getAll()
       .subscribe({
         next:res=>{
           const dataKey:string="data"
           // @ts-ignore
           this.userData=res[dataKey]
-          console.log(this.userData)
           // @ts-ignore
           this.labelTitle.set(res.message)
         }
       })
   }
-  ngOnInit(): void {
-    this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
-    this.getAll();
-  }
-
-  deleteChest(id: number) {
+  deleteLocation(id:number) {
     const swalWithTailwindButtons=Swal.mixin({
       customClass:{
         container: 'bg-gray-800',
@@ -61,7 +55,7 @@ export class ChestListComponent implements OnInit{
     })
     swalWithTailwindButtons.fire({
       title: 'Êtes-vous sûr?',
-      text: "De vouloir supprimer ce Chest !",
+      text: "De vouloir supprimer cette location !",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Supprimer',
@@ -69,7 +63,7 @@ export class ChestListComponent implements OnInit{
       reverseButtons: true
     }).then((result)=>{
       if(result.isConfirmed){
-        this.chestService.delete(id)
+        this.locationService.delete(id)
           .subscribe({
             next:()=>{
               // @ts-ignore
@@ -83,6 +77,12 @@ export class ChestListComponent implements OnInit{
 
       }
     })
-    this.router.navigate(['/dashboard/chest/list'])
+    this.router.navigate(['/dashboard/location/list'])
+
+  }
+
+  ngOnInit(): void {
+    this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router)
+    this.getAll()
   }
 }
