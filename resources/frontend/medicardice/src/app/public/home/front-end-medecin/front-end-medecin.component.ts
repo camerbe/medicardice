@@ -73,7 +73,7 @@ export class FrontEndMedecinComponent implements OnInit{
           this.metaService.updateTag({property:'og:title',content:this.currentMedecin.doc_titre_fr});
           this.metaService.updateTag({property:'og:description',content:this.currentMedecin.doc_description_fr});
           this.metaService.updateTag({property:'og:image',content:this.currentMedecinImg});
-          this.titleService.setTitle(`Medicardice ${this.currentMedecinTitle}`)
+          this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: Cardiology - Cardiologue Bruxelles - ${this.currentMedecinTitle}`)
         }
       })
   }

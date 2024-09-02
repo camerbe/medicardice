@@ -95,19 +95,19 @@ class LocationRepository extends BaseRepository
     }
 
     public function findBySlug(string $slug){
-        if($heart=Cache::get('location-findBySlug')) return $heart;
-        $heart= Heart::where('location_titre_en_slug ',$slug)
+        if($location=Cache::get('location-findBySlug')) return $location;
+        $location= Location::where('location_titre_en_slug ',$slug)
             ->orWhere('location_titre_fr_slug ',$slug)
             ->get();
-        Cache::set('location-findBySlug',$heart,Carbon::now()->hour(24));
-        return $heart;
+        Cache::set('location-findBySlug',$location,Carbon::now()->hour(24));
+        return $location;
     }
     public function findAll(){
         //Cache::forget('location-list');
-        if($heart=Cache::get('location-list')) return $heart;
-        $heart=Heart::orderBy('id','desc')->get();
-        Cache::set('location-list',$heart,Carbon::now()->hour(24));
-        return  $heart;
+        if($location=Cache::get('location-list')) return $location;
+        $location=Location::orderBy('id','desc')->get();
+        Cache::set('location-list',$location,Carbon::now()->hour(24));
+        return  $location;
 
     }
 

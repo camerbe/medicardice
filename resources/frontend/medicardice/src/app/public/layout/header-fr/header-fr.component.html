@@ -21,7 +21,15 @@
           Accueil
         </a>
         <a
-          [routerLink]="['medecin',currentLang]"
+          [routerLink]="['/chemin',currentLang]"
+          routerLinkActive="text-rose-500 hover:text-rose-500"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="hover:text-blue-200 flex">
+          Accès
+        </a>
+
+        <a
+          [routerLink]="['/medecin',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
           class="hover:text-blue-200 flex">
@@ -135,12 +143,6 @@
             <!-- Autres examens... -->
       </div>
     </div>
-    <a   href="#" class="hover:text-blue-200 flex capitalize">
-    <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-1">
-      <path fill-rule="evenodd" d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clip-rule="evenodd" />
-    </svg>-->
-    Accès
-    </a>
 
     <div  class="relative text-nowrap group">
     <button   class="hover:text-blue-200 flex capitalize">
@@ -184,7 +186,7 @@
       <!-- Autres examens... -->
       </div>
     </div>
-        <!--<a   href="#" class="hover:text-blue-200 flex capitalize">
+        <!--<a   href="#" class="hover:text-blue-200 flex capitalize">-->
          <!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
            <path d="M6.5 3c-1.051 0-2.093.04-3.125.117A1.49 1.49 0 0 0 2 4.607V10.5h9V4.606c0-.771-.59-1.43-1.375-1.489A41.568 41.568 0 0 0 6.5 3ZM2 12v2.5A1.5 1.5 0 0 0 3.5 16h.041a3 3 0 0 1 5.918 0h.791a.75.75 0 0 0 .75-.75V12H2Z" />
            <path d="M6.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM13.25 5a.75.75 0 0 0-.75.75v8.514a3.001 3.001 0 0 1 4.893 1.44c.37-.275.61-.719.595-1.227a24.905 24.905 0 0 0-1.784-8.549A1.486 1.486 0 0 0 14.823 5H13.25ZM14.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
@@ -228,10 +230,13 @@
           </svg>
           Email
         </label>
-        <input type="email" id="email" name="email"
-               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-               formControlName="email"
-               required
+        <input
+            type="email"
+            id="email"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            formControlName="email"
+            autocomplete="username"
+
         >
       </div>
       <div class="mb-4">
@@ -241,10 +246,14 @@
           </svg>
           Mot de passe
         </label>
-        <input type="password" id="password" name="password"
-               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-               formControlName="password"
-               required>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          formControlName="password"
+          autocomplete="current-password"
+               >
       </div>
       <div class="flex items-center justify-between">
         <button type="submit"

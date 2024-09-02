@@ -19,7 +19,7 @@ export class HeaderFrComponent {
   ) {
       this.currentLang=this.translateService.getCurrentLang()
       this.frmGroupModalLogin=this.fb.group({
-      email:['',Validators.required,Validators.email],
+      email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required]]
     })
   }

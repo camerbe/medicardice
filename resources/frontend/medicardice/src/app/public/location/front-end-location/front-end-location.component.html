@@ -1,0 +1,33 @@
+
+<div class="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
+  <app-breadcrumb [parent]="breadCrumbParent"  />
+  <app-image [frontEndImage]="currentLocationImg"></app-image>
+  <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
+    <div class="space-y-2">
+      <app-titre [titre]="currentLocationTitle"/>
+      <p class="text-xm text-gray-600">
+        @if(currentLocale==='fr'){
+        <a [routerLink]="['/way/en']"><span class="fi fi-gb fis"></span> English</a>
+        }
+        @else{
+        <a [routerLink]="['/chemin/fr']"><span class="fi fi-fr fis"></span> Français</a>
+        }
+
+      </p>
+    </div>
+    <div class="text-gray-800">
+      <app-article [innerHTML]="locationMessage" ngSkipHydration class="text-justify prose md:prose-lg lg:prose-xl"></app-article>
+      <div class="relative w-full h-96">
+        <iframe
+          class="absolute top-0 left-0 w-full h-full rounded-lg shadow-md"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1742.7342789358681!2d4.350086075056529!3d50.82070086063809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c458c110b801%3A0xbee68b4dd160ee70!2sCabinet%20M%C3%A9dical%20Cardice%20-%20Dr%20Foading!5e1!3m2!1sfr!2sbe!4v1725306186275!5m2!1sfr!2sbe" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

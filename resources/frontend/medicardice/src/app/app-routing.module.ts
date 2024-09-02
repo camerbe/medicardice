@@ -76,6 +76,7 @@ import {HeartListComponent} from "./secure/dossiers/heart/heart-list/heart-list.
 import {FrontEndHeartComponent} from "./public/dossiers/front-end-heart/front-end-heart.component";
 import {LocationComponent} from "./secure/location/location.component";
 import {LocationListComponent} from "./secure/location/location-list/location-list.component";
+import {FrontEndLocationComponent} from "./public/location/front-end-location/front-end-location.component";
 
 const routes: Routes = [
   {
@@ -547,6 +548,14 @@ const routes: Routes = [
 
       },
       {
+        path: 'chemin/:locale',
+        component: FrontEndLocationComponent
+      },
+      {
+        path: 'way/:locale',
+        component: FrontEndLocationComponent
+      },
+      {
         path: 'files',
         children:[
           {
@@ -672,7 +681,7 @@ const routes: Routes = [
 
     ]
   },
-  { path: '**', redirectTo: 'home/:locale' }
+  { path: '**', redirectTo: 'accueil/fr' }
 ];
 
 @NgModule({

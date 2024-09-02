@@ -40,6 +40,8 @@ import { FrontEndAngioComponent } from './examens/front-end-angio/front-end-angi
 import { FrontEndHypertensionComponent } from './examens/front-end-hypertension/front-end-hypertension.component';
 import {FrontEndChestComponent} from "./dossiers/front-end-chest/front-end-chest.component";
 import {FrontEndHeartComponent} from "./dossiers/front-end-heart/front-end-heart.component";
+import { FrontEndLocationComponent } from './location/front-end-location/front-end-location.component';
+import {GoogleMap} from "@angular/google-maps";
 
 
 
@@ -80,7 +82,8 @@ import {FrontEndHeartComponent} from "./dossiers/front-end-heart/front-end-heart
     FrontEndAngioComponent,
     FrontEndHypertensionComponent,
     FrontEndChestComponent,
-    FrontEndHeartComponent
+    FrontEndHeartComponent,
+    FrontEndLocationComponent
   ],
   imports: [
     CommonModule,
@@ -91,7 +94,8 @@ import {FrontEndHeartComponent} from "./dossiers/front-end-heart/front-end-heart
     RouterLink,
     SweetAlert2Module,
     RouterLinkActive,
-    NgClass
+    NgClass,
+    GoogleMap
   ]
 })
 export class PublicModule { }

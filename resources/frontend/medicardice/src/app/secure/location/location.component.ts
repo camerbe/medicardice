@@ -166,10 +166,10 @@ export class LocationComponent implements OnInit {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
     const file=this.photo?.value
 
-    //console.log(`${file} ${file.name}`)
+    console.log(`${file} ${file.name}`)
     const formData = new FormData();
     if (file != undefined && file != null) {
-      formData.append('photo',file,file.name);
+      formData.append('photo',file);
     }
     formData.append('location_titre_fr_slug',this.location_titre_fr_slug?.value);
     formData.append('location_titre_en_slug',this.location_titre_en_slug?.value);

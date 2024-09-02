@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit{
           this.metaService.updateTag({property:'og:title',content:this.currentWelcome.welcome_titre_fr});
           this.metaService.updateTag({property:'og:description',content:this.currentWelcome.welcome_description_fr});
           this.metaService.updateTag({property:'og:image',content:this.currentWelcomeImg});
-          this.titleService.setTitle(`Medicardice ${this.currentWelcomeTitle}`)
+          this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: Cardiology - Cardiologue Bruxelles - ${this.currentWelcomeTitle}`)
         }
       })
   }

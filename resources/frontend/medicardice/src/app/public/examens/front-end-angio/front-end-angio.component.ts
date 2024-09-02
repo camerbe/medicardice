@@ -65,7 +65,7 @@ export class FrontEndAngioComponent  implements OnInit {
             this.currentAngioImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentAngioImg});
           }
-          this.titleService.setTitle(`Medicardice ${this.currentAngioTitle}`)
+          this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: Cardiology - Cardiologue Bruxelles - ${this.currentAngioTitle}`)
         }
       })
   }
