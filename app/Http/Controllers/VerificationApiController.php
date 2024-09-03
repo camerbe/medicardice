@@ -16,10 +16,22 @@ class VerificationApiController extends Controller
 
         $userID=$request['id'];
         $user=User::find($userID);
-        $user->email_verified_at =now();
-        $user->save();
+        if(is_null($user->email_verified_at)){
+            $user->email_verified_at =now();
+            foreach ($user->roles as $perm){
+
+                if($perm->role==='Patient'){
+                    $user->password_changed_at=now();
+                }
+            }
+            $user->save();
+            return response()->json([
+                "msg"=>"Email verified."
+            ],Response::HTTP_OK);
+        }
+
         return response()->json([
-            "msg"=>"Email verified."
+            "msg"=>"Email already verified."
         ],Response::HTTP_OK);
     }
     public function resend(Request $request){

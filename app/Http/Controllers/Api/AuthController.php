@@ -46,6 +46,28 @@ class AuthController extends Controller
             $usrs=User::with('roles')
                 ->where('id',Auth::guard('web')->user()->id)
                 ->get();
+
+            /****************************************************
+             *
+             */
+            if( is_null(Auth::guard('web')->user()->password_changed_at) ){
+                return response()->json([
+                    'success'=>false,
+                    'user' => $user,
+                    'token'=>null,
+                    'message' => 'change_password'
+                ],Response::HTTP_UNAUTHORIZED);
+            }
+            if( is_null(Auth::guard('web')->user()->email_verified_at) ){
+                return response()->json([
+                    'success'=>false,
+                    'user' => $user,
+                    'token'=>null,
+                    'message' => 'verify_mail'
+                ],Response::HTTP_UNAUTHORIZED);
+            }
+
+
             if(!is_null(Auth::guard('web')->user()->email_verified_at) && !is_null(Auth::guard('web')->user()->password_changed_at)){
                 //$request->session()->regenerate();
                 $token=Auth::guard('web')->user()->createToken('user',['*'],Carbon::now()->addMinute(30))->plainTextToken;
@@ -67,23 +89,8 @@ class AuthController extends Controller
                     'role'=>$poste,
                     'message'=>"Login OK"
                 ],Response::HTTP_OK);
-                /****************************************************
-                 *
-                 */
-                if( is_null(Auth::guard('web')->user()->password_changed_at) ){
-                    return response()->json([
-                        'success'=>false,
-                        'user' => $user,
-                        'token'=>null,
-                        'message' => 'change_password'
-                    ],Response::HTTP_UNAUTHORIZED);
-                }
-                return response()->json([
-                    'success'=>false,
-                    'user' => $user,
-                    'token'=>null,
-                    'message' => 'verify_mail'
-                ],Response::HTTP_UNAUTHORIZED);
+
+
             }
         }
         return response()->json([

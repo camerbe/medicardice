@@ -4,25 +4,29 @@ import {Medecin} from "../../models/welcome";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
+import {Patient} from "../../models/patient.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedecinService extends DataService<Medecin>{
+export class PatientService extends DataService<Patient>{
 
   constructor(httpClient:HttpClient) {
-    super(httpClient,environment.url+`medecins`);
+    super(httpClient,environment.url+`patients`);
   }
-  getMedecinBySlug(slug:string):Observable<Medecin>{
-    return this.httpClient.get<Medecin>(environment.url+`medecins/slug/${slug}`)
+  /*getMedecinBySlug(slug:string):Observable<Patient>{
+    return this.httpClient.get<Patient>(environment.url+`patients/slug/${slug}`)
   }
-  getLastMedecinBySlug():Observable<Medecin>{
-    return this.httpClient.get<Medecin>(environment.url+`medecins/last`)
+  getLastMedecinBySlug():Observable<Patient>{
+    return this.httpClient.get<Patient>(environment.url+`medecins/last`)
+  }*/
+  store(resource:FormData):Observable<Patient>{
+    return this.httpClient.post<Patient>(environment.url+`patients`,resource);
   }
-  store(resource:FormData):Observable<Medecin>{
-    return this.httpClient.post<Medecin>(environment.url+`medecins`,resource);
+  register(resource:Patient):Observable<Patient>{
+    return this.httpClient.post<Patient>(environment.url+`patients/register`,resource);
   }
-  updateByFormData(id:number,resource:FormData):Observable<Medecin>{
-    return this.httpClient.post<Medecin>(environment.url+`medecins/${id}`,resource);
+  updateByFormData(id:number,resource:FormData):Observable<Patient>{
+    return this.httpClient.post<Patient>(environment.url+`patients/${id}`,resource);
   }
 }

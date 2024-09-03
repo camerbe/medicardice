@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {PatientService} from "../../shared/services/patients/patient.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,10 @@ export class RegisterComponent {
 frmGroupRegister!:FormGroup;
 
   constructor(
-    private fb:FormBuilder)
+    private fb:FormBuilder,
+    private patientService:PatientService,
+    private router:Router
+  )
   {
     this.frmGroupRegister=this.fb.group({
       last_name:['',[Validators.required]],
@@ -57,4 +62,19 @@ frmGroupRegister!:FormGroup;
     return this.frmGroupRegister.get('created_by')
   }
 
+  registerPatient() {
+    this.patientService.register(this.frmGroupRegister.value)
+      .subscribe(res=>{
+        console.log(res)
+        // @ts-ignore
+        const data=res['data']
+        // @ts-ignore
+        if(res.success){
+          this.router.navigate(['activation',`${data.updated_by}`]);
+        }else{
+          this.frmGroupRegister.reset(this.frmGroupRegister.value)
+        }
+      })
+
+  }
 }

@@ -29,15 +29,15 @@ class Location extends Model implements HasMedia
     ];
     protected static function boot(){
         parent::boot();
-        Medecin::created(function($model){
+        Location::created(function($model){
             Cache::forget('location-list');
             Cache::forget('location-findBySlug');
         });
-        Medecin::deleted(function($model){
+        Location::deleted(function($model){
             Cache::forget('location-list');
             Cache::forget('location-findBySlug');
         });
-        Medecin::updated(function($model){
+        Location::updated(function($model){
             Cache::forget('location-list');
             Cache::forget('location-findBySlug');
         });

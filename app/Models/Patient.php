@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Cache;
 
 class Patient extends Model
 {
@@ -24,5 +25,20 @@ class Patient extends Model
     ];
     public function user():BelongsTo{
         return $this->belongsTo(User::class);
+    }
+    protected static function boot(){
+        parent::boot();
+        Patient::created(function($model){
+            Cache::forget('patient-list');
+            Cache::forget('patient-findBySlug');
+        });
+        Patient::deleted(function($model){
+            Cache::forget('patient-list');
+            Cache::forget('patient-findBySlug');
+        });
+        Patient::updated(function($model){
+            Cache::forget('patient-list');
+            Cache::forget('patient-findBySlug');
+        });
     }
 }

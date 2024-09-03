@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatientRequest;
+use App\Http\Requests\RequestUser;
 use App\Repositories\PatientRepository;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,4 +134,23 @@ class PatientController extends Controller
             "message"=>"Une erreur s'est produite..."
         ],Response::HTTP_NOT_FOUND);
     }
+    public function register(PatientRequest $request)
+    {
+        //dd('toto');
+        //
+        $user=$this->patientRepository->create($request->all());
+
+        if ($user){
+            return response()->json([
+                'success'=>true,
+                'data'=>$user,
+                'message'=>"Patient inséré",
+            ],Response::HTTP_CREATED);
+        }
+        return response()->json([
+            "sucess"=>false,
+            "message"=>"Erreur lors de l'insertion d'un patient"
+        ],Response::HTTP_NOT_FOUND);
+    }
+
 }

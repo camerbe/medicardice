@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 })->middleware('auth:sanctum');*/
 Route::post('users/register', [UserController::class, 'register']);
+Route::post('patients/register', [PatientController::class, 'register']);
+
 Route::put('users/changepassword/{changepassword}', [UserController::class, 'changePassword']);
 Route::post('auth/login', [AuthController::class, 'login']);
 Route::get('welcomes/slug/{welcomes}', [WelcomeController::class, 'getWelcomeBySlug']);

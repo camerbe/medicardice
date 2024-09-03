@@ -41,7 +41,7 @@ export class LoginComponent {
     this.authService.login(this.frmGroupLogin.value)
       .subscribe({
         next:(res)=>{
-
+          console.log(`TOKEN  : ${res.token}  ${isPlatformBrowser(this.platformId)}`)
           if(isPlatformBrowser(this.platformId)){
             localStorage.setItem('token',res.token)
             localStorage.setItem('expires_at',res.expires_at)
@@ -54,16 +54,17 @@ export class LoginComponent {
           this.router.navigate(['dashboard/menu'])
         },
         error:err=>{
-          /*console.log(err.error.message)
-          console.log(err.error)*/
+          /*console.log(err.error.message)*/
+          const usr=err.error['user']
+          //console.log(`id ${usr.id} usr ${usr}`)
           const msg=(err.error.message).toString()
           switch  (msg){
             case  'verify_mail' :
-              const fullName=err.error.user[0].last_name+' '+err.error.user[0].first_name;
+              const fullName=usr.last_name+' '+usr.first_name;
               this.router.navigate(['activation',`${fullName}`]);
               break;
             case  'change_password' :
-              this.router.navigate(['changepassword',err.error.user[0].id]);
+              this.router.navigate(['changepassword',usr.id]);
               break;
             default:
               this.error=err.error.message;
