@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Http\Resources\PatientResource;
+use App\Http\Resources\AppointmentResource;
 use App\Models\Patient;
 use App\Models\Role;
+use App\Models\Slot;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -95,5 +97,14 @@ class PatientRepository extends BaseRepository
             ->get();
         return PatientResource::collection($patients);
     }
+
+    public function findPatientAppointments($id){
+        return  is_null(Patient::find($id)->appointments()->get())? 0:AppointmentResource::collection(Patient::find($id)->appointments()->get());  ;
+    }
+
+    public function getPatientId($user_id){
+        return User::find($user_id)->patients()->first()->id;
+    }
+
 
 }

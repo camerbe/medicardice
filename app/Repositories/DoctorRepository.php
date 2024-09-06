@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Resources\AppointmentResource;
 use App\Http\Resources\DoctorResource;
 use App\Models\Doctor;
 use App\Models\Patient;
@@ -115,6 +116,10 @@ class DoctorRepository extends BaseRepository
                 })->all();*/
 
         return DoctorResource::collection($doctors);
+    }
+
+    public function findDoctorAppointments($id){
+        return  is_null(Doctor::find($id)->appointments()->get())? 0:AppointmentResource::collection(Doctor::find($id)->appointments()->get());  ;
     }
 
 }

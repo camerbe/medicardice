@@ -41,7 +41,7 @@ export class LoginComponent {
     this.authService.login(this.frmGroupLogin.value)
       .subscribe({
         next:(res)=>{
-          console.log(`TOKEN  : ${res.token}  ${isPlatformBrowser(this.platformId)}`)
+
           if(isPlatformBrowser(this.platformId)){
             localStorage.setItem('token',res.token)
             localStorage.setItem('expires_at',res.expires_at)
@@ -51,7 +51,24 @@ export class LoginComponent {
           }
 
           this.beheviorService.updateState(this.authService.isExpired())
-          this.router.navigate(['dashboard/menu'])
+          switch (res.role){
+            default:
+            case 'Admin':
+
+              this.router.navigate(['dashboard/menu'])
+              break
+            case 'Doctor':
+              // @ts-ignore
+              localStorage.setItem('id',res.user.id)
+              this.router.navigate(['private/doctor'])
+              break;
+            case 'Patient':
+              // @ts-ignore
+              localStorage.setItem('id',res.user.id)
+              this.router.navigate(['private/patient'])
+              break;
+          }
+
         },
         error:err=>{
           /*console.log(err.error.message)*/

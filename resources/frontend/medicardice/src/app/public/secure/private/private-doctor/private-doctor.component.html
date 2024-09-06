@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-gray-100 p-8">
+  <div class="mb-5 bg-gray-500 w-full p-4 flex justify-between items-center rounded-lg shadow-md">
+    <h1 class="text-white text-2xl font-bold">{{currentDoctor}} Dashboard</h1>
+    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700" (click)="logout()">Logout</button>
+  </div>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-semibold text-gray-900">Tableau de bord du médecin</h1>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
+        Ajouter des disponibilités
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Appointments Section -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Mes rendez-vous</h2>
+        <div class="space-y-4">
+          <!-- Single Appointment Card -->
+          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-700">Rendez-vous avec John Doe</h3>
+            <p class="text-gray-500">Le 12 septembre 2024 à 10:00</p>
+            <p class="text-gray-500">Motif : Consultation générale</p>
+          </div>
+          <!-- Repeat similar blocks for other appointments -->
+        </div>
+      </div>
+
+      <!-- Availability Section -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Ajouter des disponibilités</h2>
+
+        <form class="space-y-4" [formGroup]="frmGroupPrivateSlot" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+            <input
+                type="date"
+                id="date"
+                formControlName="date_slot"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label for="start" class="block text-sm font-medium text-gray-700">Heure début</label>
+            <input
+              type="time"
+              formControlName="start"
+              id="start"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label for="end" class="block text-sm font-medium text-gray-700">Heure fin</label>
+            <input
+              type="time"
+              id="end"
+              formControlName="end"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+          <input
+            type="hidden"
+            value="{{id}}"
+            formControlName="doctor_id">
+          <button type="submit"
+                  class="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+            Ajouter
+          </button>
+
+        </form>
+      </div>
+    </div>
+    <div class="mt-5 bg-gray-50 px-4 py-6 rounded-lg shadow-md">
+      <full-calendar [options]="calendarOptions" ></full-calendar>
+    </div>
+
+  </div>
+
+</div>

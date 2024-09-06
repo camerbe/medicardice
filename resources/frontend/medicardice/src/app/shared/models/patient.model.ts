@@ -31,3 +31,29 @@ export interface Administrator{
   'active':boolean,
   "email": string
 }
+export interface Slot {
+  'id':number,
+  'start':Date,
+  'end':Date,
+  'status':string,
+  'created_by':string,
+  'updated_by':string,
+  'doctor_id':number
+}
+export interface Appointment {
+  'id':number,
+  'slot_id':number,
+  'patient_id':number,
+  'status':string,
+  'appointment_date':Date,
+  'doctor_id':number
+}
+export interface DisplayAppointment{
+  'id':number,
+  'slot':Slot,
+  'patient':Patient,
+  'doctor':Doctor,
+  'status':string,
+  'appointment_date':Date,
+}
+

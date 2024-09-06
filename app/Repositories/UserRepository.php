@@ -83,5 +83,11 @@ class UserRepository extends BaseRepository
                 ->get();
         return UserResource::collection($users);
     }
+    public function findDoctor($id){
+        return $this->findById($id)->doctors->get();
+    }
+    public function findPatient($id){
+        return $this->findById($id)->doctors->get();
+    }
 
 }

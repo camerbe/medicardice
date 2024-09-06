@@ -3,8 +3,7 @@ import {inject, PLATFORM_ID} from "@angular/core";
 import {AuthService} from "../../../public/auth.service";
 import {isPlatformBrowser} from "@angular/common";
 
-// @ts-ignore
-export const authGuard: CanActivateFn = (route, state) => {
+export const patientGuard: CanActivateFn = (route, state) => {
   const authService=inject(AuthService);
   const router=inject(Router);
   const platformId = inject(PLATFORM_ID);
@@ -14,14 +13,12 @@ export const authGuard: CanActivateFn = (route, state) => {
       localStorage.removeItem('role')
       localStorage.clear()
     }
-    //localStorage.removeItem('role')
-    //router.navigate(['/login'])
 
     return false;
   }
-  const requiredRoles=['Admin']
+  const requiredRoles=['Doctor','Patient']
   const userRoles:string | null = localStorage.getItem('role');
-  //console.log(`userRoles ${userRoles}`)
+  console.log(`userRoles ${userRoles}`)
   if(userRoles===null) return false
   // @ts-ignore
   if(!requiredRoles.some(role => userRoles.includes(role))){
@@ -32,5 +29,4 @@ export const authGuard: CanActivateFn = (route, state) => {
     return false;
   }
   return true;
-
 };

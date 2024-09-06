@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Electrocardiographie;
 use App\Repositories\AngioRepository;
+use App\Repositories\AppointmentRepository;
 use App\Repositories\BaseRepository;
 use App\Repositories\CatheterizationRepository;
 use App\Repositories\ChestRepository;
@@ -19,6 +20,7 @@ use App\Repositories\LocationRepository;
 use App\Repositories\MedecinRepository;
 use App\Repositories\MonitoringRepository;
 use App\Repositories\PatientRepository;
+use App\Repositories\SlotRepository;
 use App\Repositories\SpecialiteRepository;
 use App\Repositories\StressRepository;
 use App\Repositories\UserRepository;
@@ -52,6 +54,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BaseRepository::class,ChestRepository::class);
         $this->app->bind(BaseRepository::class,HeartRepository::class);
         $this->app->bind(BaseRepository::class,LocationRepository::class);
+        $this->app->bind(BaseRepository::class,SlotRepository::class);
+        $this->app->bind(BaseRepository::class,AppointmentRepository::class);
     }
 
     /**

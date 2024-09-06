@@ -1,0 +1,93 @@
+<div class="min-h-screen  flex flex-col items-center">
+  <!-- Header -->
+  <!-- Main content -->
+  <main class="flex-grow container mx-auto py-6 px-4">
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <header class="bg-gray-300 w-full p-4 flex justify-between items-center rounded-lg mb-5 ">
+        <h1 class="text-white text-2xl font-bold">Patient Dashboard</h1>
+        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700" (click)="logout()">Logout</button>
+      </header>
+      <!-- Section Title -->
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Mes Rendez-vous</h2>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" (click)="openModal()">Ajouter un rendez-vous</button>
+      </div>
+
+      <!-- Appointments List -->
+      <ul>
+        <!-- Sample Appointment 1 -->
+        <li *ngFor="let appointment of appointments"  class="flex justify-between items-center p-4 border-b">
+          <div>
+            <h3 class="text-lg font-semibold">Consultation</h3>
+            <p class="text-gray-600">Date : {{appointment.appointment_date | date:'EEEE, d MMMM y'}}</p>
+            <p class="text-gray-600">Heure : {{appointment.appointment_date | date: 'HH:mm'}}</p>
+          </div>
+          <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" (click)="onCancel(appointment.id)">Annuler</button>
+        </li>
+
+      </ul>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal HTML -->
+<div class="fixed z-10 inset-0 overflow-y-auto" *ngIf="isModalOpen">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-6 space-y-6">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="text-lg font-semibold text-gray-700">Nouveau Rendez-vous</h3>
+        <button (click)="closeModal()" class="text-gray-600 hover:text-gray-900">
+          <span class="text-xl">&times;</span>
+        </button>
+      </div>
+
+      <!-- FullCalendar for slot_id -->
+      <div >
+
+      </div>
+
+      <!-- Form Fields -->
+      <form [formGroup]="frmGroupAppointment" (ngSubmit)="submitForm()">
+        <div class="mt-4">
+          <full-calendar [options]="calendarOptions" class="w-full h-128"></full-calendar>
+        </div>
+        <!-- Patient ID -->
+        <div class="mt-4 hidden">
+          <label for="patient_id" class="block text-sm font-medium text-gray-700">Patient ID</label>
+          <input id="patient_id" type="text" formControlName="patient_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        </div>
+
+        <!-- Doctor ID -->
+        <div class="mt-4">
+          <label for="doctor_id" class="block text-sm font-medium text-gray-700 hidden">Doctor ID</label>
+          <input id="doctor_id" type="text" formControlName="doctor_id" class=" hidden mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        </div>
+
+        <!-- Appointment Date -->
+        <div class="mt-4 ">
+          <label for="appointment_date" class="block text-sm font-medium text-gray-700 hidden">Appointment Date</label>
+          <input id="appointment_date" type="text" formControlName="appointment_date" class=" hidden mt-1 block w-full border-gray-300 rounded-md shadow-sm" readonly>
+        </div>
+
+        <!-- Status -->
+        <div class="mt-4">
+          <label for="status" class="block text-sm font-medium text-gray-700  hidden">Status</label>
+          <select id="status" formControlName="status" class=" hidden mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-6 hidden">
+          <button [disabled]="!frmGroupAppointment.valid" type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Save Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

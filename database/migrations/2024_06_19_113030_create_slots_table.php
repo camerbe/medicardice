@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
-            $table->string('beginning',6);
-            $table->string('end',6);
-            $table->integer('duration');
+            $table->dateTime('start',6);
+            $table->dateTime('end',6);
             $table->enum('status',['Available','Canceled','Reserved'])->default('Available');
             $table->String('created_by',50)->nullable();
             $table->String('updated_by',50)->nullable();
             $table->softDeletes();
-            $table->String('dayweek',50);
             $table->foreignId('doctor_id')
                 ->constrained();
             $table->timestamps();

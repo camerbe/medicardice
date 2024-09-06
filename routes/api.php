@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AngioController;
+use App\Http\Controllers\Api\AppointmentController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatheterizationController;
 use App\Http\Controllers\Api\ChestController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\MedecinController;
 use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\PatientController;
+use App\Http\Controllers\Api\SlotController;
 use App\Http\Controllers\Api\SpecialiteController;
 use App\Http\Controllers\Api\StressController;
 use App\Http\Controllers\Api\UserController;
@@ -81,6 +83,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('auth/profile', [AuthController::class, 'profile']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
+    Route::get('patients/appointment/{patients}', [PatientController::class, 'findAppointementByPatient']);
+    Route::get('patients/login/{patients}', [PatientController::class, 'getPatientId']);
+
+    Route::get('appointments/slot', [AppointmentController::class, 'getSlots']);
+    Route::get('appointments/doctor', [AppointmentController::class, 'getDoctors']);
+
     Route::apiResources([
         "users"=> UserController::class,
         "patients"=> PatientController::class,
@@ -101,6 +109,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         "chests"=> ChestController::class,
         "hearts"=> HeartController::class,
         "locations"=> LocationController::class,
+        "slots"=> SlotController::class,
+        "appointments"=> AppointmentController::class,
     ]);
 
 });

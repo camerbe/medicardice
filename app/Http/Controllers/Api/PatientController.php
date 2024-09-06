@@ -69,7 +69,7 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
         //
         $patient=$this->patientRepository->findById($id);
@@ -152,5 +152,14 @@ class PatientController extends Controller
             "message"=>"Erreur lors de l'insertion d'un patient"
         ],Response::HTTP_NOT_FOUND);
     }
+
+    public function findAppointementByPatient($user_id){
+        return $this->patientRepository->findPatientAppointments($user_id);
+    }
+
+    public function getPatientId($user_id){
+        return $this->patientRepository->getPatientId($user_id);
+    }
+
 
 }

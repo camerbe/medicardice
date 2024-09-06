@@ -37,7 +37,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "localize": ["en-US","fr-BE"],
+
             "outputPath": "dist/medicardice",
             "index": "src/index.html",
             "browser": "src/main.ts",

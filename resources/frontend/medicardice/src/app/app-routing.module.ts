@@ -77,12 +77,15 @@ import {FrontEndHeartComponent} from "./public/dossiers/front-end-heart/front-en
 import {LocationComponent} from "./secure/location/location.component";
 import {LocationListComponent} from "./secure/location/location-list/location-list.component";
 import {FrontEndLocationComponent} from "./public/location/front-end-location/front-end-location.component";
+import {patientGuard} from "./shared/services/guards/patient.guard";
+import {PrivatePatientComponent} from "./public/secure/private/private-patient/private-patient.component";
+import {PrivateDoctorComponent} from "./public/secure/private/private-doctor/private-doctor.component";
 
 const routes: Routes = [
   {
     path:'dashboard',
     component:SecureComponent,
-    //canActivate:[authGuard],
+    //canActivate:[authGuard,patientGuard],
     children:[
       {
         path:'user/add',
@@ -536,6 +539,16 @@ const routes: Routes = [
         path:'changepassword/:userID',
         title: 'Modification du mot de passe',
         component: ChangePasswordComponent
+      },
+      {
+        path: 'private/patient',
+        canActivate: [patientGuard],
+        component: PrivatePatientComponent
+      },
+      {
+        path: 'private/doctor',
+        canActivate: [patientGuard],
+        component: PrivateDoctorComponent
       },
       {
         path: 'medecin/:locale',

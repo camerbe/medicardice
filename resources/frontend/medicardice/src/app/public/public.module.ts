@@ -42,6 +42,9 @@ import {FrontEndChestComponent} from "./dossiers/front-end-chest/front-end-chest
 import {FrontEndHeartComponent} from "./dossiers/front-end-heart/front-end-heart.component";
 import { FrontEndLocationComponent } from './location/front-end-location/front-end-location.component';
 import {GoogleMap} from "@angular/google-maps";
+import { PrivatePatientComponent } from './secure/private/private-patient/private-patient.component';
+import { PrivateDoctorComponent } from './secure/private/private-doctor/private-doctor.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 
 
@@ -83,19 +86,22 @@ import {GoogleMap} from "@angular/google-maps";
     FrontEndHypertensionComponent,
     FrontEndChestComponent,
     FrontEndHeartComponent,
-    FrontEndLocationComponent
+    FrontEndLocationComponent,
+    PrivatePatientComponent,
+    PrivateDoctorComponent
   ],
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterLink,
-    SweetAlert2Module,
-    RouterLinkActive,
-    NgClass,
-    GoogleMap
-  ]
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterLink,
+        SweetAlert2Module,
+        RouterLinkActive,
+        NgClass,
+        GoogleMap,
+        FullCalendarModule
+    ]
 })
 export class PublicModule { }

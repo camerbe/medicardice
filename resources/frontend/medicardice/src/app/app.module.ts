@@ -7,6 +7,7 @@ import {SecureModule} from "./secure/secure.module";
 import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/auth.interceptor";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {FullCalendarModule} from "@fullcalendar/angular";
 
 
 
@@ -22,7 +23,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
         AppRoutingModule,
         PublicModule,
         SecureModule,
-        SweetAlert2Module.forRoot()
+        FullCalendarModule,
+      SweetAlert2Module.forRoot()
     ],
     providers: [
         provideClientHydration(),

@@ -4,7 +4,7 @@ import {Medecin} from "../../models/welcome";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {Patient} from "../../models/patient.model";
+import {DisplayAppointment, Patient} from "../../models/patient.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,12 @@ export class PatientService extends DataService<Patient>{
   }
   updateByFormData(id:number,resource:FormData):Observable<Patient>{
     return this.httpClient.post<Patient>(environment.url+`patients/${id}`,resource);
+  }
+
+  findPatientAppointment(id:number):Observable<DisplayAppointment[]>{
+    return this.httpClient.get<DisplayAppointment[]>(environment.url+`patients/appointment/${id}`)
+  }
+  getPatientId(id:number):Observable<any>{
+    return this.httpClient.get<any>(environment.url+`patients/login/${id}`)
   }
 }
