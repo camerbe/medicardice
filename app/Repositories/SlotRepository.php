@@ -45,8 +45,7 @@ class SlotRepository extends BaseRepository
 
     public function create(array $input)
     {
-        $user=User::find($input['doctor_id'])->doctors()->get();
-        $input['doctor_id']=$user[0]->id;
+
         $input['start']=Carbon::parse($input['start'])->format('Y-m-d H:i');
         $input['end']=Carbon::parse($input['end'])->format('Y-m-d H:i');
         unset($input['date_slot']);

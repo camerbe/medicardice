@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\SpecialiteController;
 use App\Http\Controllers\Api\StressController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\WelcomeController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\VerificationApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,12 +80,18 @@ Route::get('hearts/last', [HeartController::class, 'getLastHeartBySlug']);
 Route::get('locations/slug/{locations}', [LocationController::class, 'getLocationBySlug']);
 Route::get('locations/last', [LocationController::class, 'getLastLocationBySlug']);
 
+Route::post('password/forgot', [PasswordController::class, 'forgot']);
+Route::post('password/reset', [PasswordController::class, 'reset']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('auth/profile', [AuthController::class, 'profile']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
 
     Route::get('patients/appointment/{patients}', [PatientController::class, 'findAppointementByPatient']);
     Route::get('patients/login/{patients}', [PatientController::class, 'getPatientId']);
+
+    Route::get('doctors/appointment/{doctors}', [DoctorController::class, 'findAppointementByDoctor']);
+    Route::get('doctors/login/{doctors}', [DoctorController::class, 'getDoctorId']);
 
     Route::get('appointments/slot', [AppointmentController::class, 'getSlots']);
     Route::get('appointments/doctor', [AppointmentController::class, 'getDoctors']);

@@ -119,7 +119,11 @@ class DoctorRepository extends BaseRepository
     }
 
     public function findDoctorAppointments($id){
-        return  is_null(Doctor::find($id)->appointments()->get())? 0:AppointmentResource::collection(Doctor::find($id)->appointments()->get());  ;
+        return  AppointmentResource::collection(Doctor::find($id)->appointments()->orderBy('appointment_date', 'asc')->get());
+    }
+
+    public function getDoctorId($user_id){
+        return User::find($user_id)->doctors()->first()->id;
     }
 
 }

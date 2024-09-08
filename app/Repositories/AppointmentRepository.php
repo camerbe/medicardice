@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Resources\PatientResource;
+use App\Mail\AppointmentConfirmationMail;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
@@ -10,6 +11,7 @@ use App\Models\Role;
 use App\Models\Slot;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -60,7 +62,10 @@ class AppointmentRepository extends BaseRepository
             $doctorEmail=$user->email;
             //dd($doctorName);
         }
-
+        Carbon::setLocale('fr');
+        $date_rdv=Carbon::parse($input['appointment_date'])->translatedFormat('d F Y');
+        $date_heure=Carbon::parse($input['appointment_date'])->format('H:i');
+        Mail::to($patientEmail)->send(new AppointmentConfirmationMail($patientName,$date_rdv,$date_heure));
         return parent::create($input);
     }
     public function findAll(){

@@ -1,28 +1,53 @@
 <div class="min-h-screen bg-gray-100 p-8">
-  <div class="mb-5 bg-gray-500 w-full p-4 flex justify-between items-center rounded-lg shadow-md">
-    <h1 class="text-white text-2xl font-bold">{{currentDoctor}} Dashboard</h1>
+  <div class="mb-5 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-700  w-full p-4 flex justify-between items-center rounded-t shadow-md">
+    <h1 class="text-white text-2xl font-bold flex">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+      </svg>
+      {{currentDoctor}}
+    </h1>
     <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700" (click)="logout()">Logout</button>
   </div>
   <div class="max-w-7xl mx-auto">
-    <!-- Header -->
+    <!-- Header
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-semibold text-gray-900">Tableau de bord du médecin</h1>
       <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
         Ajouter des disponibilités
       </button>
-    </div>
+    </div>-->
 
     <!-- Main Content -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Appointments Section -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Mes rendez-vous</h2>
+        <h2 class="py-4 px-2 bg-gradient-to-r from-fuchsia-500 to-purple-600 flex text-xl font-semibold text-gray-100 mb-4 shadow-md rounded-t">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+          </svg>
+
+          Mes rendez-vous
+        </h2>
         <div class="space-y-4">
           <!-- Single Appointment Card -->
-          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <h3 class="font-semibold text-gray-700">Rendez-vous avec John Doe</h3>
-            <p class="text-gray-500">Le 12 septembre 2024 à 10:00</p>
-            <p class="text-gray-500">Motif : Consultation générale</p>
+          <div *ngFor="let appointment of appointments" class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <h3 class="font-semibold text-gray-700 flex">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              Rendez-vous avec {{appointment.patient.created_by}}
+            </h3>
+            <p class="text-gray-500 flex">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              Le {{appointment.appointment_date | date:'EEEE, d MMMM y'}} à {{appointment.appointment_date | date: 'HH:mm'}}
+            </p>
+            <p class="text-gray-500 flex">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              Motif : Consultation</p>
           </div>
           <!-- Repeat similar blocks for other appointments -->
         </div>
@@ -30,7 +55,13 @@
 
       <!-- Availability Section -->
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Ajouter des disponibilités</h2>
+        <h2 class="py-4 px-2 bg-gradient-to-r from-fuchsia-500 to-purple-600 flex  text-xl font-semibold text-gray-100 mb-4 shadow-md rounded-t">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+
+          Ajouter des disponibilités
+        </h2>
 
         <form class="space-y-4" [formGroup]="frmGroupPrivateSlot" (ngSubmit)="onSubmit()">
           <div>
@@ -62,7 +93,7 @@
             value="{{id}}"
             formControlName="doctor_id">
           <button type="submit"
-                  class="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
+                  class="shadow-md w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 focus:outline-none">
             Ajouter
           </button>
 

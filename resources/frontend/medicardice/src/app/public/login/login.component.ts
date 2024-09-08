@@ -6,6 +6,7 @@ import {ObservableService} from "../../shared/services/observable.service";
 import {UserLogin} from "../../shared/models/user.response.login";
 import {ExpiresAtService} from "../../shared/services/expires-at.service";
 import {isPlatformBrowser} from "@angular/common";
+import {PatientIdService} from "../../shared/services/patient-id.service";
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent {
     private authService:AuthService,
     private observableService :ObservableService,
     private beheviorService:ExpiresAtService,
+    private patientIdService:PatientIdService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.frmGroupLogin=this.fb.group({
@@ -54,7 +56,6 @@ export class LoginComponent {
           switch (res.role){
             default:
             case 'Admin':
-
               this.router.navigate(['dashboard/menu'])
               break
             case 'Doctor':
@@ -62,11 +63,12 @@ export class LoginComponent {
               localStorage.setItem('id',res.user.id)
               this.router.navigate(['private/doctor'])
               break;
-            case 'Patient':
+            /*case 'Patient':
               // @ts-ignore
               localStorage.setItem('id',res.user.id)
+              // @ts-ignore
               this.router.navigate(['private/patient'])
-              break;
+              break;*/
           }
 
         },

@@ -31,4 +31,7 @@ class Doctor extends Model
     public function slots():HasMany{
         return $this->hasMany(Slot::class);
     }
+    public function appointments():HasMany{
+        return $this->hasMany(Appointment::class);
+    }
 }

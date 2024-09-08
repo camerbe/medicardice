@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../../auth.service";
 import {Router} from "@angular/router";
 import {PatientService} from "../../../../shared/services/patients/patient.service";
@@ -18,7 +18,7 @@ import {DisplayAppointment} from "../../../../shared/models/patient.model";
   templateUrl: './private-patient.component.html',
   styleUrl: './private-patient.component.css'
 })
-export class PrivatePatientComponent implements OnInit{
+export class PrivatePatientComponent implements OnInit,OnDestroy{
   userId!:number;
   id!:number;
   doctorId!:number;
@@ -26,7 +26,7 @@ export class PrivatePatientComponent implements OnInit{
   frmGroupAppointment! : FormGroup;
   Events: any[] = [];
   appointments: DisplayAppointment[] = [];
-
+  currentPatient!:string;
   tmpAppointment:any;
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -108,24 +108,38 @@ export class PrivatePatientComponent implements OnInit{
         }
       })
   }
+  private getPatient(id:number){
+    return this.patientService.getPatientId(this.userId)
+      .subscribe(res=>this.patientIdService.setPatientIDObs(res))
+  }
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem('id'));
-    this.patientService.getPatientId(this.userId)
+    //console.log(this.patientIdService.getUserIdObs())
+    //this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
+    //console.log(`localStorage ${localStorage.getItem('id')}`)
+    this.userId=this.patientIdService.getUserIdObs();
+    // @ts-ignore
+    this.currentPatient=localStorage.getItem('authUser');
+    /*this.patientService.getPatientId(this.userId)
       .subscribe(res=>{
-        //this.id=res;
-        this.id=res
-        this.patientIdService.setPatientIDObs(this.id)
+        this.id=res;
+        console.log(` this.id ${this.id}  res ${res}`)
+        //this.id=res
+        this.patientIdService.setPatientIDObs(res)
         //console.log(`this.id=${this.id}`)
-      })
+      })*/
     //this.id=Number(localStorage.getItem('patientId'))
-    this.id=this.patientIdService.getPatientIdObs()
+    this.getPatient(this.userId)
 
-    this.patientService.findPatientAppointment(this.id)
+    //console.log(`1 this.id ${this.id}`)
+    this.id=this.patientIdService.getPatientIdObs()
+    console.log(`2 this.id ${this.id}`)
+    console.log(`3 this.id ${this.patientIdService.getPatientIdObs()}`)
+    this.patientService.findPatientAppointment(this.patientIdService.getPatientIdObs())
       .subscribe({
         next:res=>{
           // @ts-ignore
           this.appointments=res['data']
-          console.log(this.appointments)
+          //console.log(this.appointments)
         }
       })
 
@@ -255,5 +269,9 @@ export class PrivatePatientComponent implements OnInit{
       .subscribe(res=>console.log(res))*/
 
 
+  }
+
+  ngOnDestroy(): void {
+    this.frmGroupAppointment.reset()
   }
 }

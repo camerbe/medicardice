@@ -134,4 +134,11 @@ class DoctorController extends Controller
             "message"=>"Une erreur s'est produite..."
         ],Response::HTTP_NOT_FOUND);
     }
+    public function findAppointementByDoctor($user_id){
+        return $this->doctorRepository->findDoctorAppointments($user_id);
+    }
+
+    public function getDoctorId($user_id){
+        return $this->doctorRepository->getDoctorId($user_id);
+    }
 }

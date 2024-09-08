@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {isPlatformBrowser} from "@angular/common";
 import {AuthService} from "../../auth.service";
 import {ExpiresAtService} from "../../../shared/services/expires-at.service";
+import {PatientIdService} from "../../../shared/services/patient-id.service";
 
 @Component({
   selector: 'app-header-fr',
@@ -22,6 +23,7 @@ export class HeaderFrComponent {
     private authService:AuthService,
     private beheviorService:ExpiresAtService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private patientIdService:PatientIdService,
     private router:Router
   ) {
       this.currentLang=this.translateService.getCurrentLang()
@@ -55,21 +57,15 @@ export class HeaderFrComponent {
 
           }
 
-          this.beheviorService.updateState(this.authService.isExpired())
+          //this.beheviorService.updateState(this.authService.isExpired())
           switch (res.role){
-            default:
-            case 'Admin':
-              this.router.navigate(['dashboard/menu'])
-              break
-            case 'Doctor':
-              // @ts-ignore
-              localStorage.setItem('id',res.user.id)
-              this.router.navigate(['private/doctor'])
-              break;
+
             case 'Patient':
               // @ts-ignore
-              localStorage.setItem('id',res.user.id)
+              this.patientIdService.setUserIDObs(res.user.id)
+              //localStorage.setItem('id',res.user.id)
               this.router.navigate(['private/patient'])
+              this.frmGroupModalLogin.reset()
               break;
           }
 

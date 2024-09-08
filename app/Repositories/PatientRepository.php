@@ -99,7 +99,7 @@ class PatientRepository extends BaseRepository
     }
 
     public function findPatientAppointments($id){
-        return  is_null(Patient::find($id)->appointments()->get())? 0:AppointmentResource::collection(Patient::find($id)->appointments()->get());  ;
+        return AppointmentResource::collection(Patient::find($id)->appointments()->orderBy('appointment_date', 'asc')->get());  ;
     }
 
     public function getPatientId($user_id){

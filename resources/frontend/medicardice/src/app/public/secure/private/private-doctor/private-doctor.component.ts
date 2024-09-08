@@ -6,6 +6,10 @@ import {CalendarOptions} from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {Router} from "@angular/router";
+import {AppointmentService} from "../../../../shared/services/appointment/appointment.service";
+import {PatientIdService} from "../../../../shared/services/patient-id.service";
+import {DoctorService} from "../../../../shared/services/doctor/doctor.service";
+import {DisplayAppointment} from "../../../../shared/models/patient.model";
 
 //import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 
@@ -18,6 +22,7 @@ import {Router} from "@angular/router";
 export class PrivateDoctorComponent implements OnInit{
   currentDoctor!:string;
   id!:number;
+  user_id!:number;
   strStart:string='';
   strEnd:string='';
   strSlotDate:string='';
@@ -31,11 +36,16 @@ export class PrivateDoctorComponent implements OnInit{
   Events: any[] = [];
   Resources: any[] = [];
 
+  appointments: DisplayAppointment[] = [];
   constructor(
     private slotService :SlotService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private router:Router
+    private router:Router,
+    private appointmentService:AppointmentService,
+    private patientIdService:PatientIdService,
+    private doctorService:DoctorService
+
   )
   {
     this.frmGroupPrivateSlot=this.fb.group({
@@ -76,6 +86,7 @@ export class PrivateDoctorComponent implements OnInit{
     return this.frmGroupPrivateSlot.get('doctor_id')
   }
 
+
   private getAll(){
     return this.slotService.getAll()
       .subscribe(res=>{
@@ -101,10 +112,29 @@ export class PrivateDoctorComponent implements OnInit{
       })
   }
   ngOnInit(): void {
+    this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
     // @ts-ignore
     this.currentDoctor=localStorage.getItem('authUser');
     // @ts-ignore
-    this.id=localStorage.getItem('id');
+    this.user_id=this.patientIdService.getUserIdObs() ;
+    this.doctorService.getDoctorId(this.user_id)
+      .subscribe({
+        next:res=>{
+          this.id=res
+          //console.log(`this.id ${this.id}`)
+          this.patientIdService.setDoctorIDObs(res)
+        }
+      })
+    this.id=this.patientIdService.getDoctorIdObs();
+    console.log(`this.id ${this.id}`)
+    this.doctorService.findDoctorAppointment(this.id)
+      .subscribe({
+        next:res=>{
+          // @ts-ignore
+          this.appointments=res['data']
+          console.log(this.appointments[0].patient)
+        }
+      })
     this.getAll()
 
   }
@@ -126,6 +156,7 @@ export class PrivateDoctorComponent implements OnInit{
   logout() {
     const token =`Bearer `+localStorage.getItem('token');
     this.authService.logout(token)
-    this.router.navigate(['accueil/fr'])
+    localStorage.clear()
+    this.router.navigate(['login'])
   }
 }
