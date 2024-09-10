@@ -1,0 +1,45 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold mb-4">Réinitialiser votre mot de passe</h2>
+
+    <form [formGroup]="frmGroupModalReset" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-medium text-gray-700">Nouveau mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="{{ password?.invalid && (password?.touched || password?.dirty)? mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Entrez votre mot de passe"
+          required
+        />
+        <div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="text-red-500 text-sm mt-2">
+          Le mot de passe est requis.
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmez le mot de passe</label>
+        <input
+          id="password_confirm"
+          type="password"
+          formControlName="password_confirm"
+          class="{{ password_confirm?.invalid && (password_confirm?.touched || password_confirm?.dirty)? mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Confirmez votre mot de passe"
+          required
+        />
+        <div *ngIf="password_confirm?.invalid && (password_confirm?.touched || password_confirm?.dirty)" class="text-red-500 text-sm mt-2">
+          Les mots de passe ne correspondent pas.
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="frmGroupModalReset.invalid"
+        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
+      >
+        Réinitialiser le mot de passe
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,46 +1,61 @@
-  <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center item-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
-      <h2 class="text-3xl font-bold text-blue-600 mb-6 text-center">Connexion</h2>
-      <form [formGroup]="frmGroupModalLogin"  (ngSubmit)="onSubmit()">
-        <div class="mb-4">
-          <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
-            <i class="fas fa-user mr-2"></i>Nom d'utilisateur
-          </label>
-          <input type="email" id="email" name="email"
-                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                 formControlName="email"
-                 required
-          >
-        </div>
-        <div class="mb-6">
-          <label for="password" class="block text-gray-700 text-sm font-bold mb-2">
-            <i class="fas fa-lock mr-2"></i>Mot de passe
-          </label>
-          <input type="password" id="password" name="password"
-                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                 formControlName="password"
-                 required>
-        </div>
-        <div class="flex items-center justify-between">
-          <button type="submit"
-                  class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
-            Se connecter
-          </button>
-          <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-            Mot de passe oublié ?
-          </a>
-        </div>
-      </form>
-      <div class="mt-6 text-center">
-        <p class="text-gray-600">Vous n'avez pas de compte ?</p>
-        <a href="inscription.html" class="font-bold text-blue-500 hover:text-blue-800">
-          Créer un compte
-        </a>
+<!-- Modal de Connexion -->
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+    <button
+      (click)="closeModal()"
+      class="justify-end hover:text-gray-900">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-gray-600">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+
+    </button>
+    <h2 class="text-2xl font-semibold text-center mb-4">Connexion</h2>
+
+    <!-- Formulaire de connexion -->
+    <form [formGroup]="frmGroupModalLogin" (ngSubmit)="onSubmit()">
+      <!-- Champ E-mail -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          autocomplete="username"
+          class="{{ email?.invalid && (email?.touched || email?.dirty)? 'border-2 border-rose-600':'' }} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       </div>
+
+      <!-- Champ Mot de passe -->
+      <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          autocomplete="current-password"
+          class="{{ password?.invalid && (password?.touched || password?.dirty)? 'border-2 border-rose-600':'' }} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <!-- Bouton de Connexion -->
+      <div class="flex justify-center">
+        <button type="submit"
+                [disabled]="frmGroupModalLogin.status=='INVALID'"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          Se connecter
+        </button>
+      </div>
+
+      <!-- Lien vers réinitialisation mot de passe -->
+      <div class="mt-4 text-center">
+        <a  [routerLink]="['/resetpassword']" class="text-sm text-indigo-600 hover:text-indigo-700">Mot de passe oublié ?</a>
+      </div>
+    </form>
+
+    <!-- Lien vers création de compte -->
+    <div class="mt-4 text-center">
+      <p class="text-sm">
+        Pas encore de compte ?
+        <a [routerLink]="['/register']" class="text-indigo-600 hover:text-indigo-700 font-bold">Créer un compte</a>
+      </p>
     </div>
-
   </div>
-
-
-
-
+</div>

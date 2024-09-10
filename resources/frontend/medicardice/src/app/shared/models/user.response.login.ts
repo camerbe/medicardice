@@ -63,3 +63,8 @@ export interface UserData{
   "updated_at": Date,
   'roles':Role[]
 }
+export interface PasswordReset{
+  email:string;
+  password:string;
+  confirm_password:string;
+}

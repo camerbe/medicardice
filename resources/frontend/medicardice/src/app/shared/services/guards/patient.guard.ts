@@ -18,7 +18,6 @@ export const patientGuard: CanActivateFn = (route, state) => {
   }
   const requiredRoles=['Doctor','Patient']
   const userRoles:string | null = localStorage.getItem('role');
-  console.log(`userRoles ${userRoles}`)
   if(userRoles===null) return false
   // @ts-ignore
   if(!requiredRoles.some(role => userRoles.includes(role))){

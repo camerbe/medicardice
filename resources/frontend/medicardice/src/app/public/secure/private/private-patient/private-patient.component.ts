@@ -3,7 +3,7 @@ import {AuthService} from "../../../auth.service";
 import {Router} from "@angular/router";
 import {PatientService} from "../../../../shared/services/patients/patient.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CalendarOptions} from "@fullcalendar/core";
+import {Calendar, CalendarOptions, EventApi} from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin  from "@fullcalendar/interaction";
@@ -18,7 +18,7 @@ import {DisplayAppointment} from "../../../../shared/models/patient.model";
   templateUrl: './private-patient.component.html',
   styleUrl: './private-patient.component.css'
 })
-export class PrivatePatientComponent implements OnInit,OnDestroy{
+export class PrivatePatientComponent implements OnInit{
   userId!:number;
   id!:number;
   doctorId!:number;
@@ -28,6 +28,8 @@ export class PrivatePatientComponent implements OnInit,OnDestroy{
   appointments: DisplayAppointment[] = [];
   currentPatient!:string;
   tmpAppointment:any;
+  // @ts-ignore
+  // @ts-ignore
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     //initialView: 'timeGridWeek',
@@ -37,7 +39,21 @@ export class PrivatePatientComponent implements OnInit,OnDestroy{
     eventDisplay:'block',
     dateClick: (info) => this.onDateSelect(info),
     eventClick: (info) => this.onEventClick(info),
+    // @ts-ignore
+    eventClassNames: this.disableNonEventCells,
+    // @ts-ignore
+    eventDidMount: this.onEventDidMount,
     plugins: [dayGridPlugin,timeGridPlugin,interactionPlugin ]
+  };
+  disableNonEventCells = (eventInfo: { event: EventApi; el: HTMLElement }) => {
+    if (!eventInfo.event.start) {
+      eventInfo.el.classList.add('fc-disabled-cell');
+    }
+  };
+  onEventDidMount = (info: { event: EventApi; el: HTMLElement; view: Calendar }) => {
+    if (!info.event.start) {
+      info.el.classList.add('fc-disabled-cell');
+    }
   };
   constructor(
     private authService:AuthService,
@@ -110,31 +126,23 @@ export class PrivatePatientComponent implements OnInit,OnDestroy{
   }
   private getPatient(id:number){
     return this.patientService.getPatientId(this.userId)
-      .subscribe(res=>this.patientIdService.setPatientIDObs(res))
+      .subscribe({
+        next:res=>{
+          const patientid=res
+          console.log(`const ${patientid}`)
+          localStorage.setItem('patientid',patientid)
+          this.patientIdService.setPatientIDObs(Number(patientid))
+        }
+      })
   }
   ngOnInit(): void {
-    //console.log(this.patientIdService.getUserIdObs())
-    //this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
-    //console.log(`localStorage ${localStorage.getItem('id')}`)
+
     this.userId=this.patientIdService.getUserIdObs();
+    this.id=this.patientIdService.getPatientIdObs()
     // @ts-ignore
     this.currentPatient=localStorage.getItem('authUser');
-    /*this.patientService.getPatientId(this.userId)
-      .subscribe(res=>{
-        this.id=res;
-        console.log(` this.id ${this.id}  res ${res}`)
-        //this.id=res
-        this.patientIdService.setPatientIDObs(res)
-        //console.log(`this.id=${this.id}`)
-      })*/
-    //this.id=Number(localStorage.getItem('patientId'))
-    this.getPatient(this.userId)
 
-    //console.log(`1 this.id ${this.id}`)
-    this.id=this.patientIdService.getPatientIdObs()
-    console.log(`2 this.id ${this.id}`)
-    console.log(`3 this.id ${this.patientIdService.getPatientIdObs()}`)
-    this.patientService.findPatientAppointment(this.patientIdService.getPatientIdObs())
+    this.patientService.findPatientAppointment(this.id)
       .subscribe({
         next:res=>{
           // @ts-ignore
@@ -271,7 +279,4 @@ export class PrivatePatientComponent implements OnInit,OnDestroy{
 
   }
 
-  ngOnDestroy(): void {
-    this.frmGroupAppointment.reset()
-  }
 }

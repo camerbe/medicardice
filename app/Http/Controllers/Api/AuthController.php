@@ -79,14 +79,28 @@ class AuthController extends Controller
                 foreach ($usrs as $usr){
                     foreach ($usr->roles as $rol){
                         $poste=$rol->role;
+
                     }
                 }
+                switch ($poste){
+                    case 'Patient':
+                        $userPatientAndDoctor=$user->patients()->first();
+                        break;
+                    case 'Doctor' :
+                        $userPatientAndDoctor=$user->doctors()->first();
+                        break;
+                    default:
+                        $userPatientAndDoctor=$user;
+
+                }
+
                 return response()->json([
                     'success'=>true,
                     'user'=>$user,
                     'token'=>$token,
                     'expires_at'=>$personalAccessTokens->expires_at,
                     'role'=>$poste,
+                    'doctorPatientUser_id'=>$userPatientAndDoctor->id,
                     'message'=>"Login OK"
                 ],Response::HTTP_OK);
 

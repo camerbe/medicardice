@@ -195,7 +195,7 @@
     </a>-->
     <!-- Autres liens du menu... -->
         <div class="items-center flex-shrink-0 hidden lg:flex">
-          <button (click)="openModal()"
+          <a [routerLink]="['/modalLogin']"
             class="px-4 py-1 font-semibold rounded bg-gradient-to-r from-red-600 to-red-800 shadow-sm text-gray-100 flex"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-2">
@@ -204,7 +204,7 @@
             </svg>
 
             Prendre rendez-vous
-          </button>
+          </a>
         </div>
     </div>
 
@@ -261,7 +261,10 @@
           Se connecter
         </button>
 
-        <a href="#" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+        <a
+          (click)="closeModal()"
+          [routerLink]="['/resetpassword']"
+          class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
           Mot de passe oublié ?
         </a>
       </div>
@@ -286,10 +289,57 @@
 
     </button>
   </div>
+  <!--Reset password-->
+  <div [ngClass]="isResetPasswordModalOpen() ? 'block':'hidden'">
+    <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <span class="hidden sm:inline-block sm:h-screen sm:w-screen" aria-hidden="true">&#8203;</span>
+
+        <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.876M12 15h.01M12 9v12m0 0H9m3 0h3m-3-9l6.938 9h-13.876" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Mot de passe oublié ?</h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Saisissez votre adresse e-mail ci-dessous pour recevoir un lien de réinitialisation.
+                </p>
+              </div>
+              <form class="space-y-6" action="#" method="POST">
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700">
+                    Votre adresse e-mail
+                  </label>
+                  <div class="mt-1">
+                    <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  </div>
+                </div>
+                <div>
+                  <button type="submit" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Envoyer le lien de réinitialisation
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--End Reset password-->
 
 </div>
 
 </header>
+
+
 
 
 

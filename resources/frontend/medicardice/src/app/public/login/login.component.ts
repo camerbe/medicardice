@@ -61,6 +61,10 @@ export class LoginComponent {
             case 'Doctor':
               // @ts-ignore
               localStorage.setItem('id',res.user.id)
+              // @ts-ignore
+              this.patientIdService.setUserIDObs(res.user.id)
+              // @ts-ignore
+              this.patientIdService.setDoctorIDObs(res.doctorPatientUser_id)
               this.router.navigate(['private/doctor'])
               break;
             /*case 'Patient':

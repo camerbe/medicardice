@@ -80,6 +80,8 @@ import {FrontEndLocationComponent} from "./public/location/front-end-location/fr
 import {patientGuard} from "./shared/services/guards/patient.guard";
 import {PrivatePatientComponent} from "./public/secure/private/private-patient/private-patient.component";
 import {PrivateDoctorComponent} from "./public/secure/private/private-doctor/private-doctor.component";
+import {ResetPasswordComponent} from "./public/reset-password/reset-password.component";
+import {ResetComponent} from "./public/reset/reset.component";
 
 const routes: Routes = [
   {
@@ -524,7 +526,7 @@ const routes: Routes = [
         component:LoginComponent
       },
       {
-        path:'modal/login',
+        path:'modalLogin',
         component:ModalLoginComponent
       },
       {
@@ -539,6 +541,16 @@ const routes: Routes = [
         path:'changepassword/:userID',
         title: 'Modification du mot de passe',
         component: ChangePasswordComponent
+      },
+      {
+        path:'reset/:token',
+        title: 'Post Réinitialisation du mot de passe',
+        component: ResetComponent
+      },
+      {
+        path:'resetpassword',
+        title: 'Réinitialisation du mot de passe',
+        component: ResetPasswordComponent
       },
       {
         path: 'private/patient',

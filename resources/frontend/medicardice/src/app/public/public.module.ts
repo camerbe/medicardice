@@ -45,6 +45,8 @@ import {GoogleMap} from "@angular/google-maps";
 import { PrivatePatientComponent } from './secure/private/private-patient/private-patient.component';
 import { PrivateDoctorComponent } from './secure/private/private-doctor/private-doctor.component';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetComponent } from './reset/reset.component';
 
 
 
@@ -88,7 +90,10 @@ import {FullCalendarModule} from "@fullcalendar/angular";
     FrontEndHeartComponent,
     FrontEndLocationComponent,
     PrivatePatientComponent,
-    PrivateDoctorComponent
+    PrivateDoctorComponent,
+    ResetPasswordComponent,
+    ModalLoginComponent,
+    ResetComponent
   ],
     imports: [
         CommonModule,

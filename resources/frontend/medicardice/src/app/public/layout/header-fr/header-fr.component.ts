@@ -17,6 +17,7 @@ export class HeaderFrComponent {
   error!:string;
   frmGroupModalLogin!:FormGroup;
   isModalOpen=signal(false)
+  isResetPasswordModalOpen=signal(false)
   constructor(
     private translateService:TranslationService,
     private fb:FormBuilder,
@@ -93,13 +94,24 @@ export class HeaderFrComponent {
   openModal(){
     this.isModalOpen.set(true);
   }
+  openResetPasswordModal(){
+    this.isResetPasswordModalOpen.set(true);
+  }
   closeModal(){
     this.isModalOpen.set(false)
+  }
+  closeResetPasswordModal(){
+    this.isResetPasswordModalOpen.set(false)
   }
   closeModalOnOutsideClick(event:MouseEvent){
     const targetElement=event.target as HTMLElement;
     if(targetElement.classList.contains('fixed')){
       this.closeModal();
     }
+  }
+
+  resetPassword() {
+    this.openModal()
+    this.openResetPasswordModal()
   }
 }

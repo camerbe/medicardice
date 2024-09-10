@@ -112,19 +112,19 @@ export class PrivateDoctorComponent implements OnInit{
       })
   }
   ngOnInit(): void {
-    this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
+    //this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
     // @ts-ignore
     this.currentDoctor=localStorage.getItem('authUser');
     // @ts-ignore
     this.user_id=this.patientIdService.getUserIdObs() ;
-    this.doctorService.getDoctorId(this.user_id)
+    /*this.doctorService.getDoctorId(this.user_id)
       .subscribe({
         next:res=>{
           this.id=res
           //console.log(`this.id ${this.id}`)
           this.patientIdService.setDoctorIDObs(res)
         }
-      })
+      })*/
     this.id=this.patientIdService.getDoctorIdObs();
     console.log(`this.id ${this.id}`)
     this.doctorService.findDoctorAppointment(this.id)
