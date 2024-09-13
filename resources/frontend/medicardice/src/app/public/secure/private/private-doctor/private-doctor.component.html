@@ -6,7 +6,14 @@
       </svg>
       {{currentDoctor}}
     </h1>
-    <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700" (click)="logout()">Logout</button>
+
+    <button (click)="logout()" class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-md hover:from-red-600 hover:to-red-800 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V4m0 16h10" />
+      </svg>
+      <span>Déconnexion</span>
+    </button>
+
   </div>
   <div class="max-w-7xl mx-auto">
     <!-- Header
@@ -47,7 +54,23 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
               </svg>
-              Motif : Consultation</p>
+              Motif : Consultation
+            </p>
+            <div class="flex justify-center items-center">
+              <button (click)="cancelAppointment(appointment.id)" class="mt-3 bg-gradient-to-r from-red-500 to-red-700 text-white font-bold py-1 px-2 rounded flex items-center space-x-2 hover:from-red-600 hover:to-red-800 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm4.707-11.707a1 1 0 00-1.414-1.414L10 8.586 6.707 5.293a1 1 0 00-1.414 1.414L8.586 10l-3.293 3.293a1 1 0 001.414 1.414L10 11.414l3.293 3.293a1 1 0 001.414-1.414L11.414 10l3.293-3.293z" clip-rule="evenodd" />
+                </svg>
+                <span>Annuler</span>
+              </button>
+              <!--
+              <button (click)="openModal()" class="bg-green-500 text-white py-2 px-4 rounded-md">
+                Ajouter un Medical Record
+              </button>-->
+            </div>
+
+
+
           </div>
           <!-- Repeat similar blocks for other appointments -->
         </div>
@@ -101,7 +124,15 @@
       </div>
     </div>
     <div class="mt-5 bg-gray-50 px-4 py-6 rounded-lg shadow-md">
-      <full-calendar [options]="calendarOptions" ></full-calendar>
+      <full-calendar [options]="calendarOptions"  ></full-calendar>
+      <!--<app-medical-record
+        *ngIf="isModalOpen"
+        [medicalRecord]="selectedMedicalRecord"
+        [isEditMode]="isEditMode"
+        (closeModal)="closeModal()"
+        (saveMedicalRecord)="handleSave($event)"
+        (deleteMedicalRecord)="handleDelete($event)">
+      </app-medical-record>-->
     </div>
 
   </div>

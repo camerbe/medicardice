@@ -82,6 +82,9 @@ import {PrivatePatientComponent} from "./public/secure/private/private-patient/p
 import {PrivateDoctorComponent} from "./public/secure/private/private-doctor/private-doctor.component";
 import {ResetPasswordComponent} from "./public/reset-password/reset-password.component";
 import {ResetComponent} from "./public/reset/reset.component";
+import {ContactFrComponent} from "./public/contact/contact-fr/contact-fr.component";
+import {ContactEnComponent} from "./public/contact/contact-en/contact-en.component";
+import {PageNotFoundComponent} from "./public/pagenotfound/page-not-found/page-not-found.component";
 
 const routes: Routes = [
   {
@@ -510,7 +513,7 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        redirectTo:'home',
+        redirectTo:'accueil/fr',
         pathMatch:"full"
       },
       {
@@ -610,6 +613,14 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'contact/:locale',
+        component: ContactFrComponent
+      },
+      {
+        path: 'contactus/:locale',
+        component: ContactEnComponent
+      },
+      {
         path: 'examens',
         children: [
           {
@@ -706,7 +717,7 @@ const routes: Routes = [
 
     ]
   },
-  { path: '**', redirectTo: 'accueil/fr' }
+  { path: '**', component:PageNotFoundComponent }
 ];
 
 @NgModule({

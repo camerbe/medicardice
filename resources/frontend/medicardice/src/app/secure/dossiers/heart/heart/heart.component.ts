@@ -26,10 +26,10 @@ export class HeartComponent implements OnInit{
   labelAdd = signal('ajouter');
   svgUpdPath = signal('m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125');
   labelUpd = signal('mettre à jour');
-  selectedFile!: File;
+  selectedFile!: File[];
   // @ts-ignore
   init = {
-    path_absolute: "/storage",
+    path_absolute: "http:/localhost:8000/storage",
     relative_urls: false,
     base_url: '/tinymce',
     suffix: '.min',
@@ -164,7 +164,9 @@ export class HeartComponent implements OnInit{
     // @ts-ignore
     const fileList: FileList = target.files;
     if (fileList.length > 0) {
-      const file = fileList[0];
+      //console.log(`fileList ${fileList.length}`)
+      //const file = fileList[0];
+      const file = Array.from(fileList);
       // Use file immediately or store a copy
       const reader = new FileReader();
       this.frmGroupHeart.patchValue({photo: file});
@@ -175,10 +177,15 @@ export class HeartComponent implements OnInit{
 
   onSubmit() {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
-    const file=this.photo?.value
+    const files=this.photo?.value
+
     const formData = new FormData();
-    if (file != undefined && file != null) {
-      formData.append('photo',file,file.name);
+    if (files != undefined && files != null) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('photo['+i+']', files[i], files[i].name);
+      }
+      //console.log(`photo ${file}`)
+      //formData.append('photo',file);
     }
     formData.append('heart_titre_fr_slug',this.heart_titre_fr_slug?.value);
     formData.append('heart_titre_en_slug',this.heart_titre_en_slug?.value);

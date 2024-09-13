@@ -108,6 +108,7 @@ class AppointmentController extends Controller
     public function destroy(int $id)
     {
         //
+
         $appointment=$this->appointmentRepository->delete($id);
         if($appointment>0){
             return response()->json([

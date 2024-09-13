@@ -47,7 +47,10 @@ import { PrivateDoctorComponent } from './secure/private/private-doctor/private-
 import {FullCalendarModule} from "@fullcalendar/angular";
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetComponent } from './reset/reset.component';
-
+import { ContactFrComponent } from './contact/contact-fr/contact-fr.component';
+import { ContactEnComponent } from './contact/contact-en/contact-en.component';
+import { PageNotFoundComponent } from './pagenotfound/page-not-found/page-not-found.component';
+import { MedicalRecordComponent } from './secure/medical-record/medical-record.component';
 
 
 @NgModule({
@@ -93,7 +96,11 @@ import { ResetComponent } from './reset/reset.component';
     PrivateDoctorComponent,
     ResetPasswordComponent,
     ModalLoginComponent,
-    ResetComponent
+    ResetComponent,
+    ContactFrComponent,
+    ContactEnComponent,
+    PageNotFoundComponent,
+    MedicalRecordComponent
   ],
     imports: [
         CommonModule,

@@ -1,0 +1,59 @@
+<!-- medical-record-modal.component.html -->
+<div class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+  <div class="bg-white w-full max-w-2xl mx-auto rounded-lg shadow-lg p-6">
+    <h2 class="text-xl font-semibold mb-4">
+      {{ isEditMode ? 'Modifier le Medical Record' : 'Créer un Medical Record' }}
+    </h2>
+
+    <form (ngSubmit)="onSubmit()" #medicalRecordForm="ngForm">
+      <!-- Patient ID -->
+      <div class="mb-4">
+        <label for="patient_id" class="block text-sm font-medium text-gray-700">Patient ID</label>
+        <input type="text" id="patient_id" [(ngModel)]="medicalRecord.patient_id" name="patient_id" required
+               class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm">
+      </div>
+
+      <!-- Doctor ID -->
+      <div class="mb-4">
+        <label for="doctor_id" class="block text-sm font-medium text-gray-700">Doctor ID</label>
+        <input type="text" id="doctor_id" [(ngModel)]="medicalRecord.doctor_id" name="doctor_id" required
+               class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm">
+      </div>
+
+      <!-- Visit Date -->
+      <div class="mb-4">
+        <label for="visit_date" class="block text-sm font-medium text-gray-700">Visit Date</label>
+        <input type="date" id="visit_date" [(ngModel)]="medicalRecord.visit_date" name="visit_date" required
+               class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm">
+      </div>
+
+      <!-- Prescriptions -->
+      <div class="mb-4">
+        <label for="prescriptions" class="block text-sm font-medium text-gray-700">Prescriptions</label>
+        <textarea id="prescriptions" [(ngModel)]="medicalRecord.prescriptions" name="prescriptions"
+                  class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
+      </div>
+
+      <!-- Notes -->
+      <div class="mb-4">
+        <label for="notes" class="block text-sm font-medium text-gray-700">Notes</label>
+        <textarea id="notes" [(ngModel)]="medicalRecord.notes" name="notes"
+                  class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm"></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-3">
+        <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded-md" (click)="onClose()">
+          Annuler
+        </button>
+        <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md">
+          {{ isEditMode ? 'Modifier' : 'Créer' }}
+        </button>
+        <button *ngIf="isEditMode" type="button" class="bg-red-600 text-white py-2 px-4 rounded-md"
+                (click)="onDelete()">
+          Supprimer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

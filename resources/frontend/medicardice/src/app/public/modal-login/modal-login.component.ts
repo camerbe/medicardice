@@ -34,7 +34,7 @@ export class ModalLoginComponent {
     return this.frmGroupModalLogin.get('password');
   }
   closeModal() {
-    this.router.navigate(['/accueil.fr'])
+    this.router.navigate(['/accueil/fr'])
 
   }
 

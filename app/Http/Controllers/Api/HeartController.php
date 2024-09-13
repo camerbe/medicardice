@@ -55,10 +55,14 @@ class HeartController extends Controller
         //
         $heart=$this->heartRepository->create($request->all());
         if($request->hasFile('photo')){
-
-            $heart->addMediaFromRequest('photo')
+            $fileAdders=$heart->addMultipleMediaFromRequest(['photo'])
+                ->each(function ($fileAdder)use ($heart){
+                    $fileAdder->usingName($heart->heart_titre_fr)
+                        ->toMediaCollection('heart');
+                });
+            /*$heart->addMediaFromRequest('photo')
                 ->usingName($heart->heart_titre_fr)
-                ->toMediaCollection('heart');
+                ->toMediaCollection('heart');*/
         }
         if ($heart){
             return response()->json([
@@ -101,6 +105,7 @@ class HeartController extends Controller
     public function update(Request $request, int $id)
     {
         //
+
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $heart=$this->heartRepository->update($requestData,$id);
@@ -109,9 +114,15 @@ class HeartController extends Controller
         $heart=$this->heartRepository->findById($id);
         if($request->hasFile('photo')){
             $heart->clearMediaCollection('heart');
-            $heart->addMediaFromRequest('photo')
+            $fileAdders=$heart->addMultipleMediaFromRequest(['photo'])
+                ->each(function ($fileAdder)use ($heart){
+                    $fileAdder->usingName($heart->heart_titre_fr)
+                        ->toMediaCollection('heart');
+                });
+            //dd($fileAdders);
+           /* $heart->addMediaFromRequest('photo')
                 ->usingName($heart->heart_titre_fr)
-                ->toMediaCollection('heart');
+                ->toMediaCollection('heart');*/
         }
         if ($heart){
             return response()->json([

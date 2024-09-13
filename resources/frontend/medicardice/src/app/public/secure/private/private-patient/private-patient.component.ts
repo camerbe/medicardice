@@ -222,12 +222,7 @@ export class PrivatePatientComponent implements OnInit{
     this.isModalOpen=true
   }
   submitForm() {
-    //this.frmGroupAppointment.patchValue(this.tmpAppointment)
-    //const tmp=this.stringify(this.frmGroupAppointment.value)
-    //console.log(this.frmGroupAppointment.value)
-    //console.log(this.frmGroupAppointment.valid)
-    // @ts-ignore
-    console.log(this.tmpAppointment);
+
     this.appointmentService.create(this.tmpAppointment)
       .subscribe(res=>console.log(res))
     this.closeModal()
@@ -239,7 +234,6 @@ export class PrivatePatientComponent implements OnInit{
   private formattedDate(date:any){
     const arrDate=date.split('/');
     const arrHourMin=arrDate[2].split(' ')
-
     return `${arrHourMin[0]}-${arrDate[1]}-${arrDate[0]} ${arrHourMin[1]}`
   }
   // @ts-ignore

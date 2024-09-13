@@ -1,0 +1,83 @@
+
+
+<!--<div class="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">-->
+
+<div class="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
+  <app-breadcrumb [parent]="breadCrumbParent"  />
+  <!--<img src="https://source.unsplash.com/random/480x360" alt="" class="w-full h-60 sm:h-96 bg-gray-500">-->
+  <app-image [frontEndImage]="currentMedecinImg"></app-image>
+  <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
+    <div class="space-y-2">
+
+        <app-titre  class="inline-block text-2xl font-semibold sm:text-3xl" [titre]="currentMedecinTitle"/>
+
+      <p class="text-xm text-gray-600">
+        @if(currentLocale==='fr'){
+        <a [routerLink]="['/contactus/en']"><span class="fi fi-gb fis"></span> English</a>
+        }
+        @else{
+        <a [routerLink]="['/contact/fr']"><span class="fi fi-fr fis"></span> Français</a>
+        }
+
+      </p>
+    </div>
+    <div class="text-gray-800">
+      <!-- Import Tailwind CSS and Heroicons -->
+
+
+      <!--<div class="bg-gray-100 p-8 rounded-lg shadow-md max-w-4xl mx-auto">-->
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Contact Us</h1>
+
+      <!--<div class="bg-white p-6 rounded-lg shadow-md">-->
+        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Consultations are by appointment.</h3>
+
+        <div class="flex items-start mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6  mr-4">
+            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-xl text-gray-700">
+            To make an appointment, please call the secretariat number:
+            <br><br><strong><span class="mt-2 bg-blue-100 p-2 rounded-lg shadow-md text-lg font-semibold text-blue-600 tracking-wide">+32 347 53 11</span></strong>
+          </p>
+        </div>
+
+        <div class="flex items-start mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6  mr-4">
+            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-xl text-gray-700">
+            To contact Doctor Foading, you can send an email to:
+            <strong><a href="mailto:bertinfoading@medicardice.be" class="text-email text-underline-hover">bertinfoading&#64;medicardice.be</a></strong>
+          </p>
+        </div>
+
+        <div class="flex items-start mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6  mr-4">
+            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-xl text-gray-700">
+            To contact the webmaster, you can send an email to:
+            <strong><a href="mailto:webcardice@medicardice.be" class="text-email text-underline-hover">webcardice&#64;medicardice.be</a></strong>
+          </p>
+        </div>
+
+        <div class="flex items-start">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6  mr-4">
+            <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+          </svg>
+          <p class="text-xl text-gray-700">
+            For more information on Cabinet Médical Cardice, you can send a message to the address:
+            <strong><a href="mailto:info@medicardice.be" class="text-email text-underline-hover">info&#64;medicardice.be</a></strong>
+          </p>
+        </div>
+
+
+      <!--</div>
+  </div>-->
+
+    </div>
+  </div>
+</div>
+<!--</div>-->
+
+

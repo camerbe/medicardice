@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Chest, Heart, Media} from "../../../shared/models/welcome";
+import {Heart, Media} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
 import {ActivatedRoute} from "@angular/router";
-import {ChestService} from "../../../shared/services/chests/chest.service";
 import {HeartService} from "../../../shared/services/heart/heart.service";
 
 @Component({
@@ -63,7 +62,7 @@ export class FrontEndHeartComponent implements OnInit{
           // @ts-ignore
           if(this.media[0].original_url){
             // @ts-ignore
-            this.currentHeartImg=this.media[0].original_url
+            this.currentHeartImg=this.media[3].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentHeartImg});
           }
           this.titleService.setTitle(`Medicardice ${this.currentHeartTitle}`)

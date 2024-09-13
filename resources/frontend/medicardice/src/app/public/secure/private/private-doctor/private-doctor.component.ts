@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SlotService} from "../../../../shared/services/slot/slot.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../auth.service";
-import {CalendarOptions} from "@fullcalendar/core";
+import {CalendarOptions, EventApi} from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {Router} from "@angular/router";
@@ -10,9 +10,16 @@ import {AppointmentService} from "../../../../shared/services/appointment/appoin
 import {PatientIdService} from "../../../../shared/services/patient-id.service";
 import {DoctorService} from "../../../../shared/services/doctor/doctor.service";
 import {DisplayAppointment} from "../../../../shared/models/patient.model";
+import Swal from "sweetalert2";
 
 //import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
-
+interface MedicalRecord {
+  patient_id: string;
+  doctor_id: string;
+  visit_date: string;
+  prescriptions: string;
+  notes: string;
+}
 @Component({
   selector: 'app-private-doctor',
   templateUrl: './private-doctor.component.html',
@@ -30,6 +37,7 @@ export class PrivateDoctorComponent implements OnInit{
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     locale: 'fr',
+
     plugins: [dayGridPlugin,timeGridPlugin ]
   };
 
@@ -37,6 +45,12 @@ export class PrivateDoctorComponent implements OnInit{
   Resources: any[] = [];
 
   appointments: DisplayAppointment[] = [];
+/*********** MedicalRecord ******************/
+  isModalOpen = false;
+  isEditMode = false;
+  selectedMedicalRecord!: MedicalRecord ;
+
+
   constructor(
     private slotService :SlotService,
     private fb: FormBuilder,
@@ -61,7 +75,22 @@ export class PrivateDoctorComponent implements OnInit{
     this.frmGroupPrivateSlot.get('end')?.valueChanges.subscribe(value=>this.strEnd=value);
     this.frmGroupPrivateSlot.get('date_slot')?.valueChanges.subscribe(value=>this.strSlotDate=value);
   }
+  renderEventContent(eventInfo: EventApi){
+    const eventType = eventInfo.title;
+    let backgroundColor = '';
 
+    switch(eventType) {
+      case 'Available':
+        backgroundColor = 'ff3363';
+        break;
+      case 'Reserve':
+        backgroundColor = '#1fa03d';
+        break;
+
+    }
+
+    return { html: `<div style="background-color: ${backgroundColor}; color: white; padding: 2px;">${eventInfo.title}</div>` };
+  }
 
   get date_slot() {
     return this.frmGroupPrivateSlot.get('date_slot')
@@ -99,6 +128,8 @@ export class PrivateDoctorComponent implements OnInit{
           resourceId:slot.id,
           start:slot.start,
           end:slot.end,
+          rendering:'background'
+          //rendering : (slot.status=='Reserve')? '#ff3363':'#1fa03d'
         }));
         // @ts-ignore
         /*this.Resources=data.map(resource=>({
@@ -111,30 +142,24 @@ export class PrivateDoctorComponent implements OnInit{
         //console.log(res)
       })
   }
+  private getDoctorAppointmant(id:number){
+    return this.doctorService.findDoctorAppointment(id)
+      .subscribe({
+        next:res=>{
+          // @ts-ignore
+          this.appointments=res['data']
+
+        }
+      })
+  }
   ngOnInit(): void {
     //this.patientIdService.setUserIDObs(Number(localStorage.getItem('id')) )
     // @ts-ignore
     this.currentDoctor=localStorage.getItem('authUser');
     // @ts-ignore
     this.user_id=this.patientIdService.getUserIdObs() ;
-    /*this.doctorService.getDoctorId(this.user_id)
-      .subscribe({
-        next:res=>{
-          this.id=res
-          //console.log(`this.id ${this.id}`)
-          this.patientIdService.setDoctorIDObs(res)
-        }
-      })*/
     this.id=this.patientIdService.getDoctorIdObs();
-    console.log(`this.id ${this.id}`)
-    this.doctorService.findDoctorAppointment(this.id)
-      .subscribe({
-        next:res=>{
-          // @ts-ignore
-          this.appointments=res['data']
-          console.log(this.appointments[0].patient)
-        }
-      })
+    this.getDoctorAppointmant(this.id)
     this.getAll()
 
   }
@@ -158,5 +183,62 @@ export class PrivateDoctorComponent implements OnInit{
     this.authService.logout(token)
     localStorage.clear()
     this.router.navigate(['login'])
+  }
+
+  cancelAppointment(id: number) {
+    // @ts-ignore
+    Swal.fire({
+      title: "Êtes-vous sûr?",
+      text: "Vous ne pourrez pas revenir en arrière!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, annulez-le!",
+      cancelButtonText: "Annuler",
+      // @ts-ignore
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.appointmentService.delete(id)
+          .subscribe({
+            next:res=>{
+              this.appointments=this.appointments.filter(el=>el.id!=id)
+              this.getAll()
+            }
+          })
+        Swal.fire({
+          title: "Annulation!",
+          text: "Ce rendez-vous a été annulé.",
+          icon: "success"
+        });
+      }
+    });
+    //this.getDoctorAppointmant(this.id)
+
+  }
+  /**************** Medical Record***************************************/
+  openModal(record?: MedicalRecord) {
+    this.isModalOpen = true;
+    this.isEditMode = !!record;
+    this.selectedMedicalRecord = record || {
+      patient_id: '',
+      doctor_id: '',
+      visit_date: '',
+      prescriptions: '',
+      notes: ''
+    };
+  }
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  handleSave(record: MedicalRecord) {
+    console.log('Medical record saved:', record);
+    this.closeModal();
+  }
+
+  handleDelete(record: MedicalRecord) {
+    console.log('Medical record deleted:', record);
+    this.closeModal();
   }
 }

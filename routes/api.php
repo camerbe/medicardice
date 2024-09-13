@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\HolterController;
 use App\Http\Controllers\Api\HypertensionController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\MedecinController;
+use App\Http\Controllers\Api\MedicalRecordController;
 use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\PatientController;
 use App\Http\Controllers\Api\SlotController;
@@ -96,6 +97,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('appointments/slot', [AppointmentController::class, 'getSlots']);
     Route::get('appointments/doctor', [AppointmentController::class, 'getDoctors']);
 
+    Route::get('medicalrecords/patient/{patient}', [MedicalRecordController::class, 'getMedicalRecordsByPatient']);
+
     Route::apiResources([
         "users"=> UserController::class,
         "patients"=> PatientController::class,
@@ -118,6 +121,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         "locations"=> LocationController::class,
         "slots"=> SlotController::class,
         "appointments"=> AppointmentController::class,
+        "medicalrecords"=> MedicalRecordController::class,
+
     ]);
 
 });

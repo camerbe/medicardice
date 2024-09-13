@@ -41,17 +41,14 @@
   <app-image [frontEndImage]="currentWelcomeImg"></app-image>
   <div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
     <div class="space-y-2">
-      <a rel="noopener noreferrer" href="#" class="inline-block text-2xl font-semibold sm:text-3xl">
-        <app-titre [titre]="currentWelcomeTitle"/>
-      </a>
-      <p class="text-xm text-gray-600">
+        <app-titre  class="inline-block text-2xl font-semibold sm:text-3xl" [titre]="currentWelcomeTitle"/>
+        <p class="text-xm text-gray-600">
         @if(currentLocale==='fr'){
         <a [routerLink]="['/home/en']"><span class="fi fi-gb fis"></span> English</a>
         }
         @else{
         <a [routerLink]="['/accueil/fr']"><span class="fi fi-fr fis"></span> Français</a>
         }
-
       </p>
     </div>
     <div class="text-gray-800">

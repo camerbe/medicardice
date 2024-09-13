@@ -30,6 +30,9 @@ class Patient extends Model
     public function appointments():HasMany{
         return $this->hasMany(Appointment::class);
     }
+    public function medicalrecords():HasMany{
+        return $this->hasMany(MedicalRecord::class);
+    }
     protected static function boot(){
         parent::boot();
         Patient::created(function($model){
