@@ -221,9 +221,50 @@
         </div>
     </div>
 
-    <button class="md:hidden">
-      <i class="fas fa-bars"></i>
-    </button>
+
+      <div class="relative">
+      <!-- Hamburger Button -->
+        <button (click)="toggleMenu()" class="md:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M2 3.75A.75.75 0 0 1 2.75 3h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75Zm0 4.167a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Zm0 4.166a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Zm0 4.167a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+          </svg>
+        </button>
+
+      <!-- Dropdown Menu -->
+        <div [ngClass]="{'hidden': !isMenuOpen}" class="divide-x grid grid-cols-3 gap-4 absolute right-0 mt-2 w-96 bg-white border rounded-lg shadow-lg">
+          <div>
+            <a [routerLink]="['/home',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accueil</a>
+            <a [routerLink]="['/chemin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accès</a>
+            <a [routerLink]="['/medecin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Médecin</a>
+            <a [routerLink]="['/contact',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+          </div>
+
+          <div>
+            <a [routerLink]="['/examens/consultation',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consultation</a>
+            <a [routerLink]="['/examens/electrocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Electro</a>
+            <a [routerLink]="['/examens/echocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Echo</a>
+            <a [routerLink]="['/examens/stress',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Effort</a>
+            <a [routerLink]="['/examens/holter',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Holter</a>
+            <a [routerLink]="['/examens/catheterization',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cathétérisme</a>
+            <a [routerLink]="['/examens/coronaryangioplastie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Coronarographie</a>
+            <a [routerLink]="['/examens/angioplastie',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Angioplastie</a>
+
+          </div>
+          <div>
+            <a [routerLink]="['/files/hypertension-arterielle',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Hypertension</a>
+            <a [routerLink]="['/files/douleur-thoracique',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Douleur</a>
+            <a [routerLink]="['/files/insuffisance-cardiaque',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Insuffisance</a>
+            <a [routerLink]="['/modalLogin']" (click)="toggleMenu()"
+               class="px-4 py-1 font-semibold rounded bg-gradient-to-r from-red-600 to-red-800 shadow-sm text-gray-100 flex"
+            >
+              Prendre rendez-vous
+            </a>
+          </div>
+        </div>
+
+
+    </div>
+
     </div>
   </nav>
 

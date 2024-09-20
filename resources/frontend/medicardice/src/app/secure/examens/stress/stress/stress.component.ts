@@ -180,7 +180,7 @@ export class StressComponent implements OnInit{
     const file=this.photo?.value
     const formData = new FormData();
     if (file != undefined && file != null) {
-      formData.append('photo',file,file.name);
+      formData.append('photo',file);
     }
     formData.append('stress_titre_fr_slug',this.stress_titre_fr_slug?.value);
     formData.append('stress_titre_en_slug',this.stress_titre_en_slug?.value);

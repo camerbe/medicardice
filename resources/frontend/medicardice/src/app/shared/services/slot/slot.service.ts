@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {DataService} from "../data.service";
 import {Patient, Slot} from "../../models/patient.model";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 

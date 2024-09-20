@@ -96,9 +96,10 @@ class StressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
         //
+
         $excludedPhoto = $request->input('photo');
         $requestData = $request->except('photo');
         $stress=$this->stressRepository->update($requestData,$id);
@@ -106,6 +107,7 @@ class StressController extends Controller
         //dd($excludedPhoto);
         $stress=$this->stressRepository->findById($id);
         if($request->hasFile('photo')){
+            $stress->clearMediaCollection('stress');
             $stress->addMediaFromRequest('photo')
                 ->usingName($stress->stress_titre_fr)
                 ->toMediaCollection('stress');

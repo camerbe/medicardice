@@ -28,10 +28,15 @@ class Medecin extends Model implements HasMedia
     ];
     protected static function boot(){
         parent::boot();
+        Medecin::creating(function($model){
+           Cache::forget('front-end-medecin-'.$model->id);
+        });
         Medecin::created(function($model){
             Cache::forget('medecin-list');
             Cache::forget('medecin-findBySlug');
+            Cache::forget('front-end-medecin-'.$model->id);
         });
+
         Medecin::deleted(function($model){
             Cache::forget('medecin-list');
             Cache::forget('medecin-findBySlug');
@@ -39,6 +44,7 @@ class Medecin extends Model implements HasMedia
         Medecin::updated(function($model){
             Cache::forget('medecin-list');
             Cache::forget('medecin-findBySlug');
+            Cache::forget('front-end-medecin-'.$model->id);
         });
     }
     public function registerMediaCollections(): void

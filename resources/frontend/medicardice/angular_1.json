@@ -37,8 +37,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-
-            "outputPath": "dist/medicardice",
+            "outputPath": "../../../public/assets/angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,6 +68,12 @@
               "localize": "en"
             },
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/shared/environments/environment.ts",
+                  "with": "src/app/shared/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -81,6 +86,15 @@
                   "maximumError": "4kb"
                 }
               ],
+              "baseHref": "./",
+              "deployUrl": "http://localhost:9000/assets/angular/browser/",
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public/assets/angular",
+                  "output": "/assets/angular"
+                }
+              ]
               "outputHashing": "all"
             },
             "development": {
@@ -127,7 +141,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "postbuild": "node update-paths.js"
+            }
+            ]
           }
         }
       }

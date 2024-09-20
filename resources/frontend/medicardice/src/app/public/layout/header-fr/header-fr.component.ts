@@ -18,6 +18,7 @@ export class HeaderFrComponent {
   frmGroupModalLogin!:FormGroup;
   isModalOpen=signal(false)
   isResetPasswordModalOpen=signal(false)
+  isMenuOpen: boolean=false;
   constructor(
     private translateService:TranslationService,
     private fb:FormBuilder,
@@ -113,5 +114,9 @@ export class HeaderFrComponent {
   resetPassword() {
     this.openModal()
     this.openResetPasswordModal()
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

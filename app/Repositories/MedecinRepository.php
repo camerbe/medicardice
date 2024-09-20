@@ -26,7 +26,11 @@ class MedecinRepository extends BaseRepository
      */
     public function findById($id)
     {
-        return parent::findById($id);
+        if($medecin=Cache::get('front-end-medecin-'.$id)) return $medecin;
+        $medecin= parent::findById($id);
+        Cache::set('front-end-medecin-'.$id,$medecin,Carbon::now()->hour(24));
+        return $medecin;
+        //return parent::findById($id);
     }
 
     /**
@@ -96,6 +100,7 @@ class MedecinRepository extends BaseRepository
     }
 
     public function findBySlug(string $slug){
+
         if($medecin=Cache::get('front-end-medecin-findBySlug')) return $medecin;
         $medecin= Medecin::where('doc_titre_en_slug ',$slug)
             ->orWhere('doc_titre_fr_slug ',$slug)

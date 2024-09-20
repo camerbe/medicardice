@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {PublicModule} from "./public/public.module";
 import {SecureModule} from "./secure/secure.module";
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } from "@angular/common/http";
 import {authInterceptor} from "./shared/interceptors/auth.interceptor";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {FullCalendarModule} from "@fullcalendar/angular";

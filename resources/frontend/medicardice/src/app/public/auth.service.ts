@@ -1,5 +1,5 @@
 import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../shared/environments/environment";
 import {Profile, UserLogin} from "../shared/models/user.response.login";
 import {isPlatformBrowser} from "@angular/common";

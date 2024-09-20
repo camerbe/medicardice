@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {DataService} from "../data.service";
 import {Medecin} from "../../models/welcome";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {DisplayAppointment, Patient} from "../../models/patient.model";

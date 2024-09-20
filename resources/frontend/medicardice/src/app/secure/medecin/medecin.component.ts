@@ -168,7 +168,7 @@ export class MedecinComponent implements OnInit{
     //console.log(`${file} ${file.name}`)
     const formData = new FormData();
     if (file != undefined && file != null) {
-      formData.append('photo',file,file.name);
+      formData.append('photo',file);
     }
     formData.append('doc_titre_fr_slug',this.doc_titre_fr_slug?.value);
     formData.append('doc_titre_en_slug',this.doc_titre_en_slug?.value);

@@ -62,7 +62,7 @@ export class FrontEndHeartComponent implements OnInit{
           // @ts-ignore
           if(this.media[0].original_url){
             // @ts-ignore
-            this.currentHeartImg=this.media[3].original_url
+            this.currentHeartImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentHeartImg});
           }
           this.titleService.setTitle(`Medicardice ${this.currentHeartTitle}`)
