@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    <url>
+        <loc>http://localhost:9000/</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/home/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/chemin/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/medecin/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/holter/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/echocardiographie/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/electrocardiographie/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/contact/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/stress/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/consultation/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/coronaryangioplastie/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/angioplastie/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/files/hypertension-arterielle/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/files/douleur-thoracique/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/files/insuffisance-cardiaque/fr</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/home/en</loc>
+    
+            </url>
+    <url>
+        <loc>http://localhost:9000/examens/catheterization/fr</loc>
+    
+            </url>
+</urlset>
