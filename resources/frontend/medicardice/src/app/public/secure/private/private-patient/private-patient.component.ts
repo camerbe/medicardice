@@ -11,6 +11,7 @@ import {AppointmentService} from "../../../../shared/services/appointment/appoin
 import Swal from "sweetalert2";
 import {PatientIdService} from "../../../../shared/services/patient-id.service";
 import {DisplayAppointment} from "../../../../shared/models/patient.model";
+import {switchMap} from "rxjs";
 
 
 @Component({
@@ -147,7 +148,7 @@ export class PrivatePatientComponent implements OnInit{
         next:res=>{
           // @ts-ignore
           this.appointments=res['data']
-          //console.log(this.appointments)
+          console.log(this.appointments)
         }
       })
 
@@ -191,10 +192,17 @@ export class PrivatePatientComponent implements OnInit{
           appointment_date:this.formattedDate(info.event.start.toLocaleString()),
           status:'Scheduled',
         }
+        // @ts-ignore
         this.appointmentService.create(this.tmpAppointment)
-          .subscribe(res=>console.log(res))
-        this.closeModal()
-        this.patientService.findPatientAppointment(this.id)
+          .pipe(
+            // @ts-ignore
+            switchMap((result)=>{
+              // @ts-ignore
+              const res=result['data']
+              //console.log(`const ${res} result ${result}`)
+              return this.patientService.findPatientAppointment(this.tmpAppointment.patient_id)
+            })
+          )
           .subscribe({
             next:res=>{
               // @ts-ignore
@@ -204,14 +212,10 @@ export class PrivatePatientComponent implements OnInit{
             }
           })
 
+        this.closeModal();
+
       }
     });
-
-    //this.frmGroupAppointment.markAsPristine();
-    //this.frmGroupAppointment.markAsUntouched();
-    //this.frmGroupAppointment.updateValueAndValidity();
-    //console.log(this.frmGroupAppointment.valid)
-
   }
 
   closeModal() {
@@ -224,10 +228,10 @@ export class PrivatePatientComponent implements OnInit{
   submitForm() {
 
     this.appointmentService.create(this.tmpAppointment)
-      .subscribe(res=>console.log(res))
-    this.closeModal()
+      .subscribe(res=>console.log(res));
+    this.closeModal();
     this.patientService.findPatientAppointment(this.id)
-      .subscribe(res=>console.log(res))
+      .subscribe(res=>console.log(res));
     this.getSlots();
     this.getDoctor();
   }
