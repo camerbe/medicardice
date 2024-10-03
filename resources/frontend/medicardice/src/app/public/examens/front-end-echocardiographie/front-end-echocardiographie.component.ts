@@ -89,7 +89,7 @@ export class FrontEndEchocardiographieComponent implements OnInit{
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.currentEchocardiographieImg}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",

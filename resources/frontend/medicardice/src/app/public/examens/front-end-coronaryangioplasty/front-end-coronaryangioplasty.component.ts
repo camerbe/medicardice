@@ -104,11 +104,11 @@ export class FrontEndCoronaryangioplastyComponent implements OnInit {
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.currentCoronaryangioplastyImg}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",
-                "@id":`${this.currentCoronaryangioplastyTitle}`
+                "@id":`${this.currentCoronaryangioplasty.id}`
               },
               "headline":`${this.currentCoronaryangioplastyTitle}`,
               "image": {

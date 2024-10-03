@@ -90,7 +90,7 @@ export class FrontEndStressComponent implements OnInit{
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.currentStressImg}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",

@@ -94,7 +94,7 @@ export class FrontEndLocationComponent implements OnInit {
               "@type":"Organization",
               "name":"Médicardice",
               // @ts-ignore
-              "logo":`${this.media[0].original_url}`
+              "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
             },
             "mainEntityOfPage":{
               "@type":"WebPage",

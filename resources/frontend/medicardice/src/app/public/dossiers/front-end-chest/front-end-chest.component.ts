@@ -73,7 +73,8 @@ export class FrontEndChestComponent implements OnInit{
             this.currentChestImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentChestImg});
             // @ts-ignore
-            this.currentChestImg=this.media[0].mime_type
+            this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
+
           }
           this.altImage=this.currentChestTitle;
           this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentChestTitle}`)
@@ -91,7 +92,7 @@ export class FrontEndChestComponent implements OnInit{
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.media[0].original_url}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",

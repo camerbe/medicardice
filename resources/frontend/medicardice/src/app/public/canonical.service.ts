@@ -30,4 +30,6 @@ export class CanonicalService {
       this.renderer.appendChild(head, link);
     }
   }
+
+
 }

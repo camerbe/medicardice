@@ -106,11 +106,11 @@ export class FrontEndCatheterizationComponent implements OnInit {
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.currentCatheterizationImg}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",
-                "@id":`${this.currentCatheterizationTitle}`
+                "@id":`${this.currentCatheterization.id}`
               },
               "headline":`${this.currentCatheterizationTitle}`,
               "image": {

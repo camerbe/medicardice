@@ -103,11 +103,11 @@ export class FrontEndElectrocardiographieComponent implements OnInit{
                 "@type":"Organization",
                 "name":"Médicardice",
                 // @ts-ignore
-                "logo":`${this.currentElectrocardiographieImg}`
+                "logo":`${window.location.protocol}//${window.location.host}/assets/images/Medicardice.png`
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",
-                "@id":`${this.currentElectrocardiographieTitle}`
+                "@id":`${this.currentElectrocardiographie.id}`
               },
               "headline":`${this.currentElectrocardiographieTitle}`,
               "image": {
