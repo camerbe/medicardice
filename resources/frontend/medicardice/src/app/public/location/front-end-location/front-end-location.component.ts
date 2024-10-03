@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Location, Media} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LocationService} from "../../../shared/services/location/location.service";
+import {JsonldService} from "../../jsonld.service";
 
 @Component({
   selector: 'app-front-end-location',
@@ -24,6 +25,7 @@ export class FrontEndLocationComponent implements OnInit {
   currentLocale:string='fr';
   currentLocation!:Location;
   media!:Media
+  altImage!: string;
 
 
   constructor(
@@ -31,7 +33,9 @@ export class FrontEndLocationComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private metaService:Meta,
     private titleService:Title,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router:Router,
+    private jldService:JsonldService
   ) {}
 
   private getLocation() {
@@ -52,6 +56,7 @@ export class FrontEndLocationComponent implements OnInit {
               this.metaService.updateTag({name:'keyword',content:this.currentLocation.location_keyword_en});
               this.metaService.updateTag({property:'og:title',content:this.currentLocation.location_titre_en});
               this.metaService.updateTag({property:'og:description',content:this.currentLocation.location_description_en});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentLocation.location_titre_en});
               break
             default:
             case 'fr' :
@@ -61,15 +66,59 @@ export class FrontEndLocationComponent implements OnInit {
               this.metaService.updateTag({name:'keyword',content:this.currentLocation.location_keyword_fr});
               this.metaService.updateTag({property:'og:title',content:this.currentLocation.location_titre_fr});
               this.metaService.updateTag({property:'og:description',content:this.currentLocation.location_description_fr});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentLocation.location_titre_fr});
               break
           }
+          this.altImage=this.currentLocationTitle
           // @ts-ignore
           if(this.media[0].original_url){
             // @ts-ignore
             this.currentLocationImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentLocationImg});
+            // @ts-ignore
+            this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
           }
-          this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: Cardiology - Cardiologue Bruxelles - ${this.currentLocationTitle}`)
+
+          this.titleService.setTitle(`Cabinet Médical Cardice - Medical office cardice :: ${this.currentLocationTitle}`)
+          this.metaService.updateTag({name:'robots',content:'index, follow'});
+
+          const date =new Date(Date.now());
+          const today=date.toISOString().slice(0, 19) + '+00:00'
+          // @ts-ignore
+
+          const jsonLd={
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "url": `${window.location.protocol}//${window.location.host}${this.router.url}`,
+            "publisher":{
+              "@type":"Organization",
+              "name":"Médicardice",
+              // @ts-ignore
+              "logo":`${this.media[0].original_url}`
+            },
+            "mainEntityOfPage":{
+              "@type":"WebPage",
+              "@id":`${this.currentLocationTitle}`
+            },
+            "headline":`${this.currentLocationTitle}`,
+            "image": {
+              "@type": "ImageObject",
+              "url": `${this.currentLocationImg}`,
+              "height":500,
+              "width" :500
+            },
+            // @ts-ignore
+            "datePublished": `${today}`,
+            "dateModified": `${today}`,
+            "articleSection":"Cardiologie",
+            "keywords":this.currentLocale==='fr'? `["${this.currentLocation.location_titre_fr}"]`:`["${this.currentLocation.location_titre_en}"]`,
+            "author": {
+              "@type": "Person",
+              "name": "Medicardice",
+            },
+            "description":this.currentLocale==='fr'? `${this.currentLocation.location_description_fr}`:`${this.currentLocation.location_description_en}`
+          }
+          this.jldService.setJsonLd(jsonLd)
         }
       })
   }

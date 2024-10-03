@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Chest, Media} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ChestService} from "../../../shared/services/chests/chest.service";
+import {JsonldService} from "../../jsonld.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-front-end-chest',
@@ -22,13 +24,17 @@ export class FrontEndChestComponent implements OnInit{
   currentLocale!:string;
   currentChest!:Chest
   media!:Media
+  altImage!: string;
 
   constructor(
     private chestService:ChestService,
     private sanitizer: DomSanitizer,
     private metaService:Meta,
     private titleService:Title,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router: Router,
+    private jldService:JsonldService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   private getChest() {
@@ -48,6 +54,7 @@ export class FrontEndChestComponent implements OnInit{
               this.metaService.updateTag({name:'keyword',content:this.currentChest.chest_keyword_en});
               this.metaService.updateTag({property:'og:title',content:this.currentChest.chest_titre_en});
               this.metaService.updateTag({property:'og:description',content:this.currentChest.chest_description_en});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentChest.chest_titre_en});
               break
             default:
             case 'fr' :
@@ -57,6 +64,7 @@ export class FrontEndChestComponent implements OnInit{
               this.metaService.updateTag({name:'keyword',content:this.currentChest.chest_keyword_fr});
               this.metaService.updateTag({property:'og:title',content:this.currentChest.chest_titre_fr});
               this.metaService.updateTag({property:'og:description',content:this.currentChest.chest_description_fr});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentChest.chest_titre_fr});
               break
           }
           // @ts-ignore
@@ -64,8 +72,52 @@ export class FrontEndChestComponent implements OnInit{
             // @ts-ignore
             this.currentChestImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentChestImg});
+            // @ts-ignore
+            this.currentChestImg=this.media[0].mime_type
           }
-          this.titleService.setTitle(`Medicardice ${this.currentChestTitle}`)
+          this.altImage=this.currentChestTitle;
+          this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentChestTitle}`)
+          this.metaService.updateTag({name:'robots',content:'index, follow'});
+
+          const date =new Date(Date.now());
+          const today=date.toISOString().slice(0, 19) + '+00:00'
+          // @ts-ignore
+          if(isPlatformBrowser(this.platformId)){
+            const jsonLd={
+              "@context": "https://schema.org",
+              "@type": "NewsArticle",
+              "url": `${window.location.protocol}//${window.location.host}${this.router.url}`,
+              "publisher":{
+                "@type":"Organization",
+                "name":"Médicardice",
+                // @ts-ignore
+                "logo":`${this.media[0].original_url}`
+              },
+              "mainEntityOfPage":{
+                "@type":"WebPage",
+                "@id":`${this.currentChestTitle}`
+              },
+              "headline":`${this.currentChestTitle}`,
+              "image": {
+                "@type": "ImageObject",
+                "url": `${this.currentChestImg}`,
+                "height":500,
+                "width" :500
+              },
+              // @ts-ignore
+              "datePublished": `${today}`,
+              "dateModified": `${today}`,
+              "articleSection":"Cardiologie",
+              "keywords":this.currentLocale==='fr'? `["${this.currentChest.chest_keyword_fr}"]`:`["${this.currentChest.chest_keyword_en}"]`,
+              "author": {
+                "@type": "Person",
+                "name": "Medicardice",
+              },
+              "description":this.currentLocale==='fr'? `${this.currentChest.chest_description_fr}`:`${this.currentChest.chest_description_en}`
+            }
+            this.jldService.setJsonLd(jsonLd)
+          }
+
         }
       })
   }

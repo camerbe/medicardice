@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Media, Monitoring} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MonitoringService} from "../../../shared/services/monitoring/monitoring.service";
+import {JsonldService} from "../../jsonld.service";
 
 @Component({
   selector: 'app-front-end-monitoring',
@@ -22,13 +23,17 @@ export class FrontEndMonitoringComponent implements OnInit {
   currentLocale:string='fr';
   currentMonitoring!:Monitoring
   media!:Media
+  altImage!: string;
 
   constructor(
     private monitoringService:MonitoringService,
     private sanitizer: DomSanitizer,
     private metaService:Meta,
     private titleService:Title,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router: Router,
+    private jldService:JsonldService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   private getMonitoring() {

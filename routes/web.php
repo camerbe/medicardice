@@ -23,7 +23,8 @@ Route::get('/{any}', function () {
 
 Route::get('/{any}', function () {
     //return view('angular');
-    return File::get(public_path('angular/index.html'));
+    //return File::get(public_path('angular/index.html'));
+    return File::get(public_path('angular-ssr/index.server.html'));
 })->where('any', '^(?!api).*$');
 
 

@@ -8,11 +8,13 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } fro
 import {authInterceptor} from "./shared/interceptors/auth.interceptor";
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {FullCalendarModule} from "@fullcalendar/angular";
+import {NgxJsonLdModule} from "@ngx-lite/json-ld";
 
 
 
 
 
+// @ts-ignore
 @NgModule({
     declarations: [
         AppComponent
@@ -24,7 +26,9 @@ import {FullCalendarModule} from "@fullcalendar/angular";
         PublicModule,
         SecureModule,
         FullCalendarModule,
-      SweetAlert2Module.forRoot()
+      SweetAlert2Module.forRoot(),
+      // @ts-ignore
+      NgxJsonLdModule
     ],
     providers: [
         provideClientHydration(),

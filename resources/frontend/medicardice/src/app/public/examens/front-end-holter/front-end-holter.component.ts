@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Holter, Media} from "../../../shared/models/welcome";
 import {DomSanitizer, Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HolterService} from "../../../shared/services/holter/holter.service";
+import {JsonldService} from "../../jsonld.service";
+import {isPlatformBrowser} from "@angular/common";
 
 @Component({
   selector: 'app-front-end-holter',
@@ -21,12 +23,16 @@ export class FrontEndHolterComponent implements OnInit {
   currentBreadCrumbParent= [] = [{ fr: "Examens", en: 'Exams' }];
   breadCrumbCurrent:string='';
   breadCrumbParent:string='';
+  altImage!: string;
   constructor(
     private holterService:HolterService,
     private sanitizer: DomSanitizer,
     private metaService:Meta,
     private titleService:Title,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private router: Router,
+    private jldService:JsonldService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   private getHolter() {
@@ -46,6 +52,7 @@ export class FrontEndHolterComponent implements OnInit {
               this.metaService.updateTag({name:'keyword',content:this.currentHolter.holter_keyword_en});
               this.metaService.updateTag({property:'og:title',content:this.currentHolter.holter_titre_en});
               this.metaService.updateTag({property:'og:description',content:this.currentHolter.holter_description_en});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentHolter.holter_titre_en});
               break
             default:
             case 'fr' :
@@ -55,6 +62,7 @@ export class FrontEndHolterComponent implements OnInit {
               this.metaService.updateTag({name:'keyword',content:this.currentHolter.holter_keyword_fr});
               this.metaService.updateTag({property:'og:title',content:this.currentHolter.holter_titre_fr});
               this.metaService.updateTag({property:'og:description',content:this.currentHolter.holter_description_fr});
+              this.metaService.updateTag({property:'og:image:alt',content:this.currentHolter.holter_titre_fr});
               break
           }
           // @ts-ignore
@@ -62,8 +70,49 @@ export class FrontEndHolterComponent implements OnInit {
             // @ts-ignore
             this.currentHolterImg=this.media[0].original_url
             this.metaService.updateTag({property:'og:image',content:this.currentHolterImg});
+            // @ts-ignore
+            this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
           }
-          this.titleService.setTitle(`Medicardice ${this.currentHolterTitle}`)
+          this.titleService.setTitle(`Cabinet Médical Cardice - Medical office cardice ::  ${this.currentHolterTitle}`)
+          this.metaService.updateTag({name:'robots',content:'index, follow'});
+
+          const date =new Date(Date.now());
+          const today=date.toISOString().slice(0, 19) + '+00:00'
+          if(isPlatformBrowser(this.platformId)){
+            const jsonLd={
+              "@context": "https://schema.org",
+              "@type": "NewsArticle",
+              "url": `${window.location.protocol}//${window.location.host}${this.router.url}`,
+              "publisher":{
+                "@type":"Organization",
+                "name":"Médicardice",
+                // @ts-ignore
+                "logo":`${this.currentHolterImg}`
+              },
+              "mainEntityOfPage":{
+                "@type":"WebPage",
+                "@id":`${this.currentHolter.id}`
+              },
+              "headline":`${this.currentHolterTitle}`,
+              "image": {
+                "@type": "ImageObject",
+                "url":`${this.currentHolterImg}`,
+                "height":500,
+                "width" :500
+              },
+              // @ts-ignore
+              "datePublished": `${today}`,
+              "dateModified": `${today}`,
+              "articleSection":"Cardiologie",
+              "keywords":this.currentLocale==='fr'? `["${this.currentHolter.holter_keyword_fr}"]`:`["${this.currentHolter.holter_keyword_en}"]`,
+              "author": {
+                "@type": "Person",
+                "name": "Medicardice",
+              },
+              "description":this.currentLocale==='fr'? `${this.currentHolter.holter_description_fr}`:`${this.currentHolter.holter_description_en}`
+            }
+            this.jldService.setJsonLd(jsonLd)
+          }
         }
       })
   }
