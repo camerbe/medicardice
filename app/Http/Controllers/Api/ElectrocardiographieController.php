@@ -55,6 +55,7 @@ class ElectrocardiographieController extends Controller
         if($request->hasFile('photo')){
 
             $electrocardiographie->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($electrocardiographie->electrocardiography_titre_fr)
                 ->toMediaCollection('electrocardiographie');
         }
@@ -108,6 +109,7 @@ class ElectrocardiographieController extends Controller
         if($request->hasFile('photo')){
             $electrocardiographie->clearMediaCollection('electrocardiographie');
             $electrocardiographie->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($electrocardiographie->electrocardiography_titre_fr)
                 ->toMediaCollection('electrocardiographie');
         }

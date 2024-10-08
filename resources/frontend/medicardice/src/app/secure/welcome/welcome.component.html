@@ -18,7 +18,7 @@
         <input
           class="{{ photo?.invalid && (photo?.touched || photo?.dirty)? 'border-2 border-rose-600':''}}appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
           type="file"
-
+          formControlName="photo"
           name="photo"
           id="photo"
           accept="image/*"

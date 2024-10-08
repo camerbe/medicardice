@@ -55,6 +55,7 @@ class HolterController extends Controller
         if($request->hasFile('photo')){
 
             $holter->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($holter->holter_titre_fr)
                 ->toMediaCollection('holter');
         }
@@ -106,8 +107,9 @@ class HolterController extends Controller
         //dd($excludedPhoto);
         $holter=$this->holterRepository->findById($id);
         if($request->hasFile('photo')){
-            $holter->clearMediaCollection('holter');
+            $holter->clearMediaCollection('photo');
             $holter->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($holter->holter_titre_fr)
                 ->toMediaCollection('holter');
         }

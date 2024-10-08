@@ -79,6 +79,9 @@ export class FrontEndHeartComponent implements OnInit{
           this.altImage=this.currentHeartTitle
           this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentHeartTitle}`)
           this.metaService.updateTag({name:'robots',content:'index, follow'});
+          this.metaService.updateTag({property:'og:site_name',content:'medicardice.be'});
+          this.metaService.updateTag({property:'og:type',content:'article'});
+
 
           const date =new Date(Date.now());
           const today=date.toISOString().slice(0, 19) + '+00:00'

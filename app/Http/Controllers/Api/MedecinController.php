@@ -56,8 +56,9 @@ class MedecinController extends Controller
         //
         $medecin=$this->medecinRepository->create($request->all());
         if($request->hasFile('photo')){
-
+            $medecin->clearMediaCollection('medecin');
             $medecin->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($medecin->doc_titre_fr)
                 ->toMediaCollection('medecin');
         }
@@ -113,6 +114,7 @@ class MedecinController extends Controller
         if($request->hasFile('photo')){
             $medecin->clearMediaCollection('medecin');
             $medecin->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($medecin->doc_titre_fr)
                 ->toMediaCollection('medecin');
         }

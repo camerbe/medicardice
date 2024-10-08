@@ -57,6 +57,7 @@ class EchocardiographieController extends Controller
         if($request->hasFile('photo')){
 
             $echocardiographie->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($echocardiographie->echocardiography_titre_fr)
                 ->toMediaCollection('echocardiographie');
         }
@@ -110,6 +111,7 @@ class EchocardiographieController extends Controller
         if($request->hasFile('photo')){
             $echocardiographie->clearMediaCollection('echocardiographie');
             $echocardiographie->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($echocardiographie->echocardiography_titre_fr)
                 ->toMediaCollection('echocardiographie');
         }

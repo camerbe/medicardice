@@ -138,23 +138,28 @@ export class WelcomeComponent implements OnInit{
 
   onSubmit() {
     this.authService.checkExpires(this.authService,this.expireService,this.isExpired,this.router);
+    const file=this.photo?.value
+    const formData = new FormData();
+    if (file != undefined && file != null) {
+      formData.append('photo',file,file.name);
+    }
+    //console.log(`${file} ${file.name}`)
+
+
+    //formData.append('photo',file,file.name);
+    formData.append('welcome_titre_fr_slug',this.welcome_titre_fr_slug?.value);
+    formData.append('welcome_titre_en_slug',this.welcome_titre_en_slug?.value);
+    formData.append('welcome_description_fr',this.welcome_description_fr?.value);
+    formData.append('welcome_description_en',this.welcome_description_en?.value);
+    formData.append('welcome_keyword_fr',this.welcome_keyword_fr?.value);
+    formData.append('welcome_keyword_en',this.welcome_keyword_en?.value);
+    formData.append('welcome_msg_en',this.welcome_msg_en?.value);
+    formData.append('welcome_msg_fr',this.welcome_msg_fr?.value);
+    formData.append('welcome_titre_en',this.welcome_titre_en?.value);
+    formData.append('welcome_titre_fr',this.welcome_titre_fr?.value);
     // @ts-ignore
     if(this.isAddMode){
-      const file=this.photo?.value
 
-      //console.log(`${file} ${file.name}`)
-      const formData = new FormData();
-      formData.append('photo',file,file.name);
-      formData.append('welcome_titre_fr_slug',this.welcome_titre_fr_slug?.value);
-      formData.append('welcome_titre_en_slug',this.welcome_titre_en_slug?.value);
-      formData.append('welcome_description_fr',this.welcome_description_fr?.value);
-      formData.append('welcome_description_en',this.welcome_description_en?.value);
-      formData.append('welcome_keyword_fr',this.welcome_keyword_fr?.value);
-      formData.append('welcome_keyword_en',this.welcome_keyword_en?.value);
-      formData.append('welcome_msg_en',this.welcome_msg_en?.value);
-      formData.append('welcome_msg_fr',this.welcome_msg_fr?.value);
-      formData.append('welcome_titre_en',this.welcome_titre_en?.value);
-      formData.append('welcome_titre_fr',this.welcome_titre_fr?.value);
       //this.frmGroupWelcome.patchValue({photo:[this.selectedFile]})
       //console.log(this.frmGroupWelcome.value)
       //console.log(formData)
@@ -179,7 +184,8 @@ export class WelcomeComponent implements OnInit{
         })
     }
     else{
-      this.welcomeService.update(this.id,this.frmGroupWelcome.value)
+      formData.append('_method', 'PUT');
+      this.welcomeService.updateByFormData(this.id,formData)
         .subscribe({
           next:res=>{
             // @ts-ignore

@@ -54,8 +54,9 @@ class MonitoringController extends Controller
         //
         $monitoring=$this->monitoringRepository->create($request->all());
         if($request->hasFile('photo')){
-
+            $monitoring->clearMediaCollection('monitoring');
             $monitoring->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($monitoring->monitoring_titre_fr)
                 ->toMediaCollection('monitoring');
         }
@@ -109,6 +110,7 @@ class MonitoringController extends Controller
         if($request->hasFile('photo')){
             $monitoring->clearMediaCollection('monitoring');
             $monitoring->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($monitoring->monitoring_titre_fr)
                 ->toMediaCollection('monitoring');
         }

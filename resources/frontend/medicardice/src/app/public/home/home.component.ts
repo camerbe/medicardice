@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit{
 
   currentWelcome!:Welcome
   media!:Media
+  altImage!: string;
 
   constructor(
     private welcomeService:WelcomeService,
@@ -87,7 +88,7 @@ export class HomeComponent implements OnInit{
               this.currentWelcomeTitle =this.currentWelcome.welcome_titre_fr
               this.welcomeMessage=this.sanitizer.bypassSecurityTrustHtml(this.currentWelcome.welcome_msg_fr)
               this.metaService.updateTag({name:'description',content:this.currentWelcome.welcome_description_fr});
-              this.metaService.updateTag({name:'keyword',content:this.currentWelcome.welcome_keyword_fr});
+              this.metaService.updateTag({name:'keyword',content:this.currentWelcome.welcome_keyword_fr.toString()});
               this.metaService.updateTag({property:'og:title',content:this.currentWelcome.welcome_titre_fr});
               this.metaService.updateTag({property:'og:description',content:this.currentWelcome.welcome_description_fr});
               this.metaService.updateTag({property:'og:image:alt',content:this.currentWelcome.welcome_titre_fr});
@@ -95,12 +96,16 @@ export class HomeComponent implements OnInit{
               break
 
           }
+          this.altImage=this.currentWelcomeTitle;
           //this.currentWelcomeTitle =this.currentWelcome.welcome_titre_fr
           // @ts-ignore
           this.currentWelcomeImg=this.media[0].original_url
           // @ts-ignore
           this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
           this.metaService.updateTag({property:'og:image',content:this.currentWelcomeImg});
+          this.metaService.updateTag({property:'og:site_name',content:'medicardice.be'});
+          this.metaService.updateTag({property:'og:type',content:'article'});
+
           // @ts-ignore
           this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentWelcomeTitle}`)
           this.metaService.updateTag({name:'robots',content:'index, follow'});
@@ -121,7 +126,7 @@ export class HomeComponent implements OnInit{
               },
               "mainEntityOfPage":{
                 "@type":"WebPage",
-                "@id":`${this.currentWelcomeTitle}`
+                "@id":`${this.currentWelcome.id}`
               },
               "headline":`${this.currentWelcomeTitle}`,
               "image": {
@@ -134,7 +139,7 @@ export class HomeComponent implements OnInit{
               "datePublished": `${today}`,
               "dateModified": `${today}`,
               "articleSection":"Cardiologie",
-              "keywords":this.currentLocale==='fr'? `["${this.currentWelcome.welcome_keyword_fr}"]`:`["${this.currentWelcome.welcome_keyword_en}"]`,
+              "keywords":this.currentLocale==='fr'? `[${this.currentWelcome.welcome_keyword_fr.split(', ')}]`:`[${this.currentWelcome.welcome_keyword_en.split(', ')}]`,
               "author": {
                 "@type": "Person",
                 "name": "Medicardice",

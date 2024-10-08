@@ -56,6 +56,7 @@ class ChestController extends Controller
         $chest=$this->chestRepository->create($request->all());
         if($request->hasFile('photo')){
             $chest->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($chest->chest_titre_fr)
                 ->toMediaCollection('chest');
         }
@@ -109,6 +110,7 @@ class ChestController extends Controller
         if($request->hasFile('photo')){
             $chest->clearMediaCollection('chest');
             $chest->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($chest->chest_titre_fr)
                 ->toMediaCollection('chest');
         }

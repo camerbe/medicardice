@@ -76,6 +76,9 @@ export class FrontEndChestComponent implements OnInit{
             this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
 
           }
+          this.metaService.updateTag({property:'og:site_name',content:'medicardice.be'});
+          this.metaService.updateTag({property:'og:type',content:'article'});
+
           this.altImage=this.currentChestTitle;
           this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentChestTitle}`)
           this.metaService.updateTag({name:'robots',content:'index, follow'});

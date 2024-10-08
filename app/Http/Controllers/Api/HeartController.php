@@ -58,6 +58,7 @@ class HeartController extends Controller
             $fileAdders=$heart->addMultipleMediaFromRequest(['photo'])
                 ->each(function ($fileAdder)use ($heart){
                     $fileAdder->usingName($heart->heart_titre_fr)
+                        ->withResponsiveImages()
                         ->toMediaCollection('heart');
                 });
             /*$heart->addMediaFromRequest('photo')
@@ -117,6 +118,7 @@ class HeartController extends Controller
             $fileAdders=$heart->addMultipleMediaFromRequest(['photo'])
                 ->each(function ($fileAdder)use ($heart){
                     $fileAdder->usingName($heart->heart_titre_fr)
+                        ->withResponsiveImages()
                         ->toMediaCollection('heart');
                 });
             //dd($fileAdders);

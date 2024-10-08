@@ -57,6 +57,7 @@ class AngioController extends Controller
         $angio=$this->angioRepository->create($request->all());
         if($request->hasFile('photo')){
             $angio->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($angio->angio_titre_fr)
                 ->toMediaCollection('angio');
         }
@@ -110,6 +111,7 @@ class AngioController extends Controller
         if($request->hasFile('photo')){
             $angio->clearMediaCollection('angio');
             $angio->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($angio->angio_titre_fr)
                 ->toMediaCollection('angio');
         }

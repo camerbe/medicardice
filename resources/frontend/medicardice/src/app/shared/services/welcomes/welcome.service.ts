@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {DataService} from "../data.service";
-import {Welcome} from "../../models/welcome";
+import {Hypertension, Welcome} from "../../models/welcome";
 import { HttpClient } from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
@@ -22,5 +22,8 @@ export class WelcomeService extends DataService<Welcome>{
   }
   store(resource:FormData):Observable<Welcome>{
     return this.httpClient.post<Welcome>(environment.url+`welcomes`,resource);
+  }
+  updateByFormData(id:number,resource:FormData):Observable<Welcome>{
+    return this.httpClient.post<Welcome>(environment.url+`welcomes/${id}`,resource);
   }
 }

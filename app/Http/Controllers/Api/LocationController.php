@@ -57,6 +57,7 @@ class LocationController extends Controller
         $location=$this->locationRepository->create($request->all());
         if($request->hasFile('photo')){
             $location->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($location->location_titre_fr)
                 ->toMediaCollection('location');
         }
@@ -110,6 +111,7 @@ class LocationController extends Controller
         if($request->hasFile('photo')){
             $location->clearMediaCollection('location');
             $location->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($location->location_titre_fr)
                 ->toMediaCollection('location');
         }

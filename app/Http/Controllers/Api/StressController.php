@@ -55,6 +55,7 @@ class StressController extends Controller
         if($request->hasFile('photo')){
 
             $stress->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($stress->stress_titre_fr)
                 ->toMediaCollection('stress');
         }
@@ -109,6 +110,7 @@ class StressController extends Controller
         if($request->hasFile('photo')){
             $stress->clearMediaCollection('stress');
             $stress->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($stress->stress_titre_fr)
                 ->toMediaCollection('stress');
         }

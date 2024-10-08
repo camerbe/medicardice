@@ -63,6 +63,7 @@ class WelcomeController extends Controller
         if($request->hasFile('photo')){
 
             $welcome->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($welcome->welcome_titre_fr)
                 ->toMediaCollection('welcome');
         }
@@ -104,12 +105,26 @@ class WelcomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
+        /*$excludedPhoto = $request->input('photo');
+        $requestData = $request->except('photo');
+        $hypertension=$this->hypertensionRepository->update($requestData,$id);
+        $request->merge(['photo' => $excludedPhoto]);
+        //dd($excludedPhoto);
+        $hypertension=$this->hypertensionRepository->findById($id);*/
         //
-        $welcome=$this->welcomeRepository->update($request->all(),$id);
+        //dd($request->all());
+        $excludedPhoto = $request->input('photo');
+        $requestData = $request->except('photo');
+        $welcome=$this->welcomeRepository->update($requestData,$id);
+        $request->merge(['photo' => $excludedPhoto]);
+        $welcome=$this->welcomeRepository->findById($id);
         if($request->hasFile('photo')){
+
+            $welcome->clearMediaCollection('welcome');
            $welcome->addMediaFromRequest('photo')
+               ->withResponsiveImages()
                 ->usingName($welcome->welcome_titre_fr)
                 ->toMediaCollection('welcome');
         }

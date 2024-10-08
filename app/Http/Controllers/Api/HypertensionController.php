@@ -56,6 +56,7 @@ class HypertensionController extends Controller
         $hypertension=$this->hypertensionRepository->create($request->all());
         if($request->hasFile('photo')){
             $hypertension->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($hypertension->hypertension_titre_fr)
                 ->toMediaCollection('hypertension');
         }
@@ -109,6 +110,7 @@ class HypertensionController extends Controller
         if($request->hasFile('photo')){
             $hypertension->clearMediaCollection('hypertension');
             $hypertension->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($hypertension->hypertension_titre_fr)
                 ->toMediaCollection('hypertension');
         }

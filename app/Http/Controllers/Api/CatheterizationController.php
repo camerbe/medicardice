@@ -55,6 +55,7 @@ class CatheterizationController extends Controller
         if($request->hasFile('photo')){
 
             $catheterization->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($catheterization->catheterization_titre_fr)
                 ->toMediaCollection('catheterization');
         }
@@ -108,6 +109,7 @@ class CatheterizationController extends Controller
         if($request->hasFile('photo')){
             $catheterization->clearMediaCollection('catheterization');
             $catheterization->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($catheterization->catheterization_titre_fr)
                 ->toMediaCollection('catheterization');
         }

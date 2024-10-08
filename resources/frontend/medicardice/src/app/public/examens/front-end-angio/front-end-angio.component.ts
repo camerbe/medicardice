@@ -76,6 +76,9 @@ export class FrontEndAngioComponent  implements OnInit {
             // @ts-ignore
             this.metaService.updateTag({property:'og:image:type',content:this.media[0].mime_type});
           }
+          this.metaService.updateTag({property:'og:site_name',content:'medicardice.be'});
+          this.metaService.updateTag({property:'og:type',content:'article'});
+
           this.titleService.setTitle(`Cabinet Médical Cardice - Medical office cardice :: ${this.currentAngioTitle}`)
           this.metaService.updateTag({name:'robots',content:'index, follow'});
           this.altImage=this.currentAngioTitle;

@@ -57,6 +57,7 @@ class CoronaryangioplastyController extends Controller
         if($request->hasFile('photo')){
 
             $coronaryangioplasty->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($coronaryangioplasty->coronaryangioplasty_titre_fr)
                 ->toMediaCollection('coronaryangioplasty');
         }
@@ -110,6 +111,7 @@ class CoronaryangioplastyController extends Controller
         if($request->hasFile('photo')){
             $coronaryangioplasty->clearMediaCollection('coronaryangioplasty');
             $coronaryangioplasty->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($coronaryangioplasty->coronaryangioplasty_titre_fr)
                 ->toMediaCollection('coronaryangioplasty');
         }

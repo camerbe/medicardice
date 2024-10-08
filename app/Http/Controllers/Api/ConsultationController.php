@@ -58,6 +58,7 @@ class ConsultationController extends Controller
         if($request->hasFile('photo')){
 
             $consultation->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($consultation->cons_titre_fr)
                 ->toMediaCollection('consultation');
         }
@@ -113,6 +114,7 @@ class ConsultationController extends Controller
         if($request->hasFile('photo')){
             $consultation->clearMediaCollection('consultation');
             $consultation->addMediaFromRequest('photo')
+                ->withResponsiveImages()
                 ->usingName($consultation->cons_titre_fr)
                 ->toMediaCollection('consultation');
         }
