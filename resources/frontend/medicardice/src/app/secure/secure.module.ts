@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { SecureComponent } from './secure.component';
 import { NavComponent } from './nav/nav.component';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
@@ -108,7 +108,8 @@ import { LocationListComponent } from './location/location-list/location-list.co
         ReactiveFormsModule,
         RouterLinkActive,
         FormsModule,
-        EditorModule
+        EditorModule,
+        NgOptimizedImage
     ],
     exports: [
         WelcomeComponent

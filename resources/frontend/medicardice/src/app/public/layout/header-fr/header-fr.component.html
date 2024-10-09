@@ -11,6 +11,7 @@
       </div>
       <div  class="hidden md:flex space-x-4">
         <a
+          rel="dofollow"
           [routerLink]="['/home',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
@@ -21,6 +22,7 @@
           Accueil
         </a>
         <a
+          rel="dofollow"
           [routerLink]="['/chemin',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
@@ -29,6 +31,7 @@
         </a>
 
         <a
+          rel="dofollow"
           [routerLink]="['/medecin',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
@@ -40,6 +43,7 @@
 
         </a>
         <a
+          rel="dofollow"
           [routerLink]="['/contact',currentLang]"
           routerLinkActive="text-rose-500 hover:text-rose-500"
           [routerLinkActiveOptions]="{exact: true}"
@@ -53,6 +57,7 @@
 
         <div class="relative text-nowrap  group">
           <a
+            rel="nofollow"
               routerLinkActive=" text-rose-500 hover:text-rose-500"
               class="hover:text-gray-50 flex">
             Examens
@@ -62,6 +67,7 @@
           </a>
           <div  class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
             <a
+              rel="dofollow"
               [routerLink]="['/examens/consultation',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -72,6 +78,7 @@
               <span class="text-nowrap">Consultation générale</span>
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/electrocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -82,6 +89,7 @@
               Electrocardiographie
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/echocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -92,6 +100,7 @@
               Echocardiographie
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/stress',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -102,6 +111,7 @@
               Epreuve d'effort
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/holter',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -122,6 +132,7 @@
               Monitoring
             </a>-->
             <a
+              rel="dofollow"
               [routerLink]="['/examens/catheterization',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -132,6 +143,7 @@
               Cathétérisme
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/coronaryangioplastie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -142,6 +154,7 @@
               Coronarographie
             </a>
             <a
+              rel="dofollow"
               [routerLink]="['/examens/angioplastie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -166,6 +179,7 @@
     </button>
     <div   class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
       <a
+        rel="dofollow"
         [routerLink]="['/files/hypertension-arterielle',currentLang]"
         routerLinkActive="text-rose-500 hover:text-rose-500"
         [routerLinkActiveOptions]="{exact: true}"
@@ -176,6 +190,7 @@
         Hypertension artérielle
       </a>
       <a
+        rel="dofollow"
         [routerLink]="['/files/douleur-thoracique',currentLang]"
         routerLinkActive="text-rose-500 hover:text-rose-500"
         [routerLinkActiveOptions]="{exact: true}"
@@ -186,6 +201,7 @@
         Douleur thoracique
       </a>
      <a
+       rel="dofollow"
        [routerLink]="['/files/insuffisance-cardiaque',currentLang]"
        routerLinkActive="text-rose-500 hover:text-rose-500"
        [routerLinkActiveOptions]="{exact: true}"
@@ -208,7 +224,7 @@
     </a>-->
     <!-- Autres liens du menu... -->
         <div class="items-center flex-shrink-0 hidden lg:flex">
-          <a [routerLink]="['/modalLogin']"
+          <a [routerLink]="['/modalLogin']" rel="dofollow"
             class="px-4 py-1 font-semibold rounded bg-gradient-to-r from-red-600 to-red-800 shadow-sm text-gray-100 flex"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 mr-2">
@@ -231,30 +247,30 @@
         </button>
 
       <!-- Dropdown Menu -->
-        <div [ngClass]="{'hidden': !isMenuOpen}" class="divide-x grid grid-cols-3 gap-4 absolute right-0 mt-2 w-96 bg-white border rounded-lg shadow-lg">
+        <div [ngClass]="{'hidden': !isMenuOpen}" class="divide-x grid grid-cols-3 gap-4 absolute mx-auto right-0 mt-2 w-96 bg-white border rounded-lg shadow-lg">
           <div>
-            <a [routerLink]="['/home',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accueil</a>
-            <a [routerLink]="['/chemin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accès</a>
-            <a [routerLink]="['/medecin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Médecin</a>
-            <a [routerLink]="['/contact',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
+            <a rel="dofollow" [routerLink]="['/home',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accueil</a>
+            <a rel="dofollow" [routerLink]="['/chemin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Accès</a>
+            <a rel="dofollow" [routerLink]="['/medecin',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Médecin</a>
+            <a rel="dofollow" [routerLink]="['/contact',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contact</a>
           </div>
 
           <div>
-            <a [routerLink]="['/examens/consultation',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consultation</a>
-            <a [routerLink]="['/examens/electrocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Electro</a>
-            <a [routerLink]="['/examens/echocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Echo</a>
-            <a [routerLink]="['/examens/stress',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Effort</a>
-            <a [routerLink]="['/examens/holter',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Holter</a>
-            <a [routerLink]="['/examens/catheterization',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cathétérisme</a>
-            <a [routerLink]="['/examens/coronaryangioplastie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Coronarographie</a>
-            <a [routerLink]="['/examens/angioplastie',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Angioplastie</a>
+            <a rel="dofollow" [routerLink]="['/examens/consultation',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Consultation</a>
+            <a rel="dofollow" [routerLink]="['/examens/electrocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Electro</a>
+            <a rel="dofollow" [routerLink]="['/examens/echocardiographie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Echo</a>
+            <a rel="dofollow" [routerLink]="['/examens/stress',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Effort</a>
+            <a rel="dofollow" [routerLink]="['/examens/holter',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Holter</a>
+            <a rel="dofollow" [routerLink]="['/examens/catheterization',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Cathétérisme</a>
+            <a rel="dofollow" [routerLink]="['/examens/coronaryangioplastie',currentLang]" (click)="toggleMenu()"   class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Coronarographie</a>
+            <a rel="dofollow" [routerLink]="['/examens/angioplastie',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Angioplastie</a>
 
           </div>
           <div>
-            <a [routerLink]="['/files/hypertension-arterielle',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Hypertension</a>
-            <a [routerLink]="['/files/douleur-thoracique',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Douleur</a>
-            <a [routerLink]="['/files/insuffisance-cardiaque',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Insuffisance</a>
-            <a [routerLink]="['/modalLogin']" (click)="toggleMenu()"
+            <a rel="dofollow" [routerLink]="['/files/hypertension-arterielle',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Hypertension</a>
+            <a rel="dofollow" [routerLink]="['/files/douleur-thoracique',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Douleur</a>
+            <a rel="dofollow" [routerLink]="['/files/insuffisance-cardiaque',currentLang]" (click)="toggleMenu()"  class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Insuffisance</a>
+            <a rel="dofollow" [routerLink]="['/modalLogin']" (click)="toggleMenu()"
                class="px-4 py-1 font-semibold rounded bg-gradient-to-r from-red-600 to-red-800 shadow-sm text-gray-100 flex"
             >
               Prendre rendez-vous

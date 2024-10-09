@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {CommonModule, NgClass} from '@angular/common';
+import {CommonModule, NgClass, NgOptimizedImage} from '@angular/common';
 import { PublicComponent } from './public.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -51,6 +51,7 @@ import { ContactFrComponent } from './contact/contact-fr/contact-fr.component';
 import { ContactEnComponent } from './contact/contact-en/contact-en.component';
 import { PageNotFoundComponent } from './pagenotfound/page-not-found/page-not-found.component';
 import { MedicalRecordComponent } from './secure/medical-record/medical-record.component';
+import { LazyLoadVideoDirective } from './layout/directives/lazy-load-video.directive';
 
 
 @NgModule({ declarations: [
@@ -99,7 +100,8 @@ import { MedicalRecordComponent } from './secure/medical-record/medical-record.c
         ContactFrComponent,
         ContactEnComponent,
         PageNotFoundComponent,
-        MedicalRecordComponent
+        MedicalRecordComponent,
+        LazyLoadVideoDirective
     ], imports: [CommonModule,
         RouterOutlet,
         FormsModule,
@@ -109,5 +111,5 @@ import { MedicalRecordComponent } from './secure/medical-record/medical-record.c
         RouterLinkActive,
         NgClass,
         GoogleMap,
-        FullCalendarModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        FullCalendarModule, NgOptimizedImage], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class PublicModule { }

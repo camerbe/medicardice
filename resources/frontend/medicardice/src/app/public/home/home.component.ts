@@ -105,6 +105,7 @@ export class HomeComponent implements OnInit{
           this.metaService.updateTag({property:'og:image',content:this.currentWelcomeImg});
           this.metaService.updateTag({property:'og:site_name',content:'medicardice.be'});
           this.metaService.updateTag({property:'og:type',content:'article'});
+          this.metaService.updateTag({ name: 'canonical', content: this.router.url });
 
           // @ts-ignore
           this.titleService.setTitle(`Cardiologie - Cabinet Médical Cardice - Medical office cardice :: ${this.currentWelcomeTitle}`)

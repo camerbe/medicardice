@@ -706,10 +706,12 @@ const routes: Routes = [
             path: 'angioplastie/:locale',
             component: FrontEndAngioComponent
 
+
           },
           {
             path: 'angioplasty/:locale',
             component: FrontEndAngioComponent
+
           }
         ]
 
