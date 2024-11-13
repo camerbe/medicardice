@@ -19,6 +19,7 @@ export class HeaderFrComponent {
   isModalOpen=signal(false)
   isResetPasswordModalOpen=signal(false)
   isMenuOpen: boolean=false;
+  selectedSubAnchor: string | null = null;
   constructor(
     private translateService:TranslationService,
     private fb:FormBuilder,
@@ -36,6 +37,12 @@ export class HeaderFrComponent {
   }
   isMenuActive(route: string): boolean {
     return this.router.url.startsWith(route);
+  }
+  isParentMenuActive():boolean{
+    return  this.router.url.startsWith(<string>this.selectedSubAnchor);
+  }
+  setActiveSubAnchor(anchor: string) {
+    this.selectedSubAnchor = anchor;
   }
   get email(){
     return this.frmGroupModalLogin.get('email');

@@ -58,8 +58,8 @@
         <div class="relative text-nowrap  group">
           <a
             rel="nofollow"
-              routerLinkActive=" text-rose-500 hover:text-rose-500"
-              class="hover:text-gray-50 flex">
+            [ngClass]="isParentMenuActive() && selectedSubAnchor=='/examens' ? 'flex text-rose-500 hover:text-rose-500': 'hover:text-gray-50 flex'"
+            >
             Examens
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
               <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
@@ -67,7 +67,8 @@
           </a>
           <div  class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
             <a
-              rel="dofollow"
+
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/consultation',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -79,6 +80,7 @@
             </a>
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/electrocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -89,6 +91,7 @@
               Electrocardiographie
             </a>
             <a
+              (click)="setActiveSubAnchor('/examens')"
               rel="dofollow"
               [routerLink]="['/examens/echocardiographie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
@@ -101,6 +104,7 @@
             </a>
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/stress',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -112,6 +116,7 @@
             </a>
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/holter',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -133,6 +138,7 @@
             </a>-->
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/catheterization',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -144,6 +150,7 @@
             </a>
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/coronaryangioplastie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -155,6 +162,7 @@
             </a>
             <a
               rel="dofollow"
+              (click)="setActiveSubAnchor('/examens')"
               [routerLink]="['/examens/angioplastie',currentLang]"
               routerLinkActive="text-rose-500 hover:text-rose-500"
               [routerLinkActiveOptions]="{exact: true}"
@@ -171,15 +179,18 @@
     </div>
 
     <div  class="relative text-nowrap group">
-    <button   class="hover:text-blue-200 flex capitalize">
-      dossiers
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
-        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-      </svg>
-    </button>
+      <button
+        [ngClass]="isParentMenuActive()  && selectedSubAnchor=='/files' ? 'flex capitalize text-rose-500 hover:text-rose-500': 'hover:text-gray-50 flex capitalize'"
+       >
+        dossiers
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5  mr-1">
+          <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+      </button>
     <div   class="absolute hidden group-hover:block bg-white text-gray-300 p-2 rounded shadow-lg">
       <a
         rel="dofollow"
+        (click)="setActiveSubAnchor('/files')"
         [routerLink]="['/files/hypertension-arterielle',currentLang]"
         routerLinkActive="text-rose-500 hover:text-rose-500"
         [routerLinkActiveOptions]="{exact: true}"
@@ -191,6 +202,7 @@
       </a>
       <a
         rel="dofollow"
+        (click)="setActiveSubAnchor('/files')"
         [routerLink]="['/files/douleur-thoracique',currentLang]"
         routerLinkActive="text-rose-500 hover:text-rose-500"
         [routerLinkActiveOptions]="{exact: true}"
@@ -202,6 +214,7 @@
       </a>
      <a
        rel="dofollow"
+       (click)="setActiveSubAnchor('/files')"
        [routerLink]="['/files/insuffisance-cardiaque',currentLang]"
        routerLinkActive="text-rose-500 hover:text-rose-500"
        [routerLinkActiveOptions]="{exact: true}"
